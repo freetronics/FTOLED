@@ -58,11 +58,12 @@ void OLED::initialiseDisplay() {
   //setDisplayClock(DISPLAY_CLOCK_DIV_1, 15); // "approx 90fps" ?
   //setMultiPlexRatio(0x7F);		  // 1/128 Duty (0x0F~0x7F)
   //setDisplayOffset(0);
-  setStartRow(0);
+  setStartRow(32);
   setRemapFormat(REMAP_HORIZONTAL_INCREMENT
                  | REMAP_COLUMNS_LEFT_TO_RIGHT
                  | REMAP_ORDER_RGB
                  | REMAP_SCAN_UP_TO_DOWN
+                 | REMAP_COM_SPLIT_ODD_EVEN
                  | REMAP_COLOR_RGB565);
   setColorContrasts(0xC8,0x80,0xC8);
   setMasterContrast(0x0F);
@@ -73,7 +74,7 @@ void OLED::initialiseDisplay() {
   // TODO: Work out what this is, command B2h undocumented in datasheet
   //Set_Display_Enhancement(0xA4);		// Enhance Display Performance 
   //setPrechargePeriod(1); // Commented as this seems short, think maybe it goes w/ prev command
-  setDisplayOffset(DISPLAY_NORMAL);
+  //setDisplayOffset(DISPLAY_NORMAL);
 
   releaseCS();
 
