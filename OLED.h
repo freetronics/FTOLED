@@ -58,6 +58,10 @@ const Colour WHITE = { 31, 63, 31 };
 const Colour RED = { 31, 0, 0 };
 const Colour GREEN = { 0, 63, 0 };
 const Colour BLUE = { 0, 0, 31 };
+
+const byte MAX_RED = 31;
+const byte MAX_GREEN = 63;
+const byte MAX_BLUE = 31;
 // TODO: add more colours!
 
 // Display clock divisor, pass to setDisplayClock
