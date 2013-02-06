@@ -54,10 +54,10 @@ void OLED::initialiseDisplay() {
 
   assertCS();
 
-  // TODO: add unlock
-  setDisplayClock(DISPLAY_CLOCK_DIV_2, 15); // approx 90fps
-  setMultiPlexRatio(0x7F);		  // 1/128 Duty (0x0F~0x7F)
-  setDisplayOffset(0);
+  //setLockBits(0); // unlock all commands(!)
+  //setDisplayClock(DISPLAY_CLOCK_DIV_1, 15); // "approx 90fps" ?
+  //setMultiPlexRatio(0x7F);		  // 1/128 Duty (0x0F~0x7F)
+  //setDisplayOffset(0);
   setStartRow(0);
   setRemapFormat(REMAP_HORIZONTAL_INCREMENT
                  | REMAP_COLUMNS_LEFT_TO_RIGHT
@@ -67,8 +67,8 @@ void OLED::initialiseDisplay() {
   setColorContrasts(0xC8,0x80,0xC8);
   setMasterContrast(0x0F);
   setGrayscaleTableDefaults();
-  setPhaseLength(0x32);			// Set Phase 1 as 5 Clocks & Phase 2 as 3 Clocks
-  setPrechargeVoltage(0x17);		// Default precharge voltage, VCC/2
+  //setPhaseLength(0x32);			// Set Phase 1 as 5 Clocks & Phase 2 as 3 Clocks
+  //setPrechargeVoltage(0x17);		// Default precharge voltage, VCC/2
   
   // TODO: Work out what this is, command B2h undocumented in datasheet
   //Set_Display_Enhancement(0xA4);		// Enhance Display Performance 

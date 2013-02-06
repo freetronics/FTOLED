@@ -332,6 +332,11 @@ class OLED
   inline void setDisplayMode(OLED_Display_Mode mode) {
     writeCommand(0xA4+(byte)mode);
   }
+
+  /* Set lock bits. Reset means 0x12, 0x16? means nothing works except reset and another unlock? */
+  inline void setLockBits(byte lock_bits) {
+    writeCommand(0xFD, lock_bits);
+  }
 };
 
 #endif
