@@ -39,6 +39,7 @@
 #include <avr/pgmspace.h>
 #include <SPI.h>
 #include <SD.h>
+#include <digitalWriteFast.h>
 
 #define ROWS 128
 #define COLUMNS 128
@@ -122,11 +123,14 @@ class OLED
   void initialiseDisplay();
 
   // Set the colour of a single pixel
-  void setPixel(const byte x, const byte y, const Colour);
+  void setPixel(const byte x, const byte y, const Colour colour);
 
   // Fill the screen with a single solid colour
   void fillScreen(const Colour);
   void clearScreen() { fillScreen(BLACK); }
+
+  // Turn the display on or off
+  void setDisplayOn(bool on);
 
   // Scroll the display by (dX,dY), filling the exposed area with the selected colour
   void scrollDisplay(int dX, int dy, Colour fill_colour);
@@ -163,30 +167,31 @@ class OLED
 
   BMP_Status displayBMP(File &source, const int x, const int y);
 
-
- private:
+ protected:
   byte pin_cs;
   byte pin_dc;
   byte pin_reset;
   byte remap_flags;
 
+  inline void assertCS() { digitalWriteFast(pin_cs, LOW); }
+  inline void releaseCS() { digitalWriteFast(pin_cs, HIGH); }
+
+  /* These protected methods are for implementing basic OLED commands.
+     They all assume that the CS is asserted before they've been called
+  */
   inline void writeCommand(byte command)
   {
-    digitalWrite(pin_cs, LOW);
     digitalWrite(pin_dc, LOW);
     SPI.transfer(command);
-    digitalWrite(pin_cs, HIGH);
+    digitalWrite(pin_dc, HIGH);
   }
 
   inline void writeData(byte data)
   {
-    digitalWrite(pin_cs, LOW);
-    digitalWrite(pin_dc, HIGH);
     SPI.transfer(data);
-    digitalWrite(pin_cs, HIGH);
   }
 
-  inline void writeData(const Colour colour)
+  inline void writeData(Colour colour)
   {
     writeData((colour.green>>3)|(colour.red<<3));
     writeData((colour.green<<5)|(colour.blue));
@@ -225,21 +230,16 @@ class OLED
   {
     byte remap = this->remap_flags & ~(REMAP_HORIZONTAL_INCREMENT|REMAP_VERTICAL_INCREMENT);
     remap = remap | (direction & (REMAP_VERTICAL_INCREMENT|REMAP_HORIZONTAL_INCREMENT));
-    setRemapFormat(remap);
+    writeCommand(0xA0, remap);
+    this->remap_flags = remap;
   }
 
+  inline void _setPixel(const byte x, const byte y, const Colour);
+
   // Direct commands to the module
- public:
-  // Set command lock
   inline void setCommandLock(OLED_Command_Lock lock_command)
   {
     writeCommand(0xFD, (byte)lock_command);
-  }
-
-  // Turn the display on or off
-  inline void setDisplayOn(bool on)
-  {
-    writeCommand(on ? 0xAF : 0xAE);
   }
 
   /* set display refresh clock
@@ -315,7 +315,7 @@ class OLED
   inline void setPhaseLength(byte phase) {
     writeCommand(0xB1, phase);
   }
-  
+
   /* Set precharge voltage, level is a proportion of Vcc where 0x00=0.2 0x1F=0.60,
      Default of 0x17 is 0.50 */
   inline void setPrechargeVoltage(byte level) {

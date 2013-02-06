@@ -12,6 +12,14 @@ template<typename T> inline void ensureOrder(T &a, T &b)
   if(b<a) swap(a,b);
 }
 
+// I don't know why, but although spi.transfer() is declared
+// inline it won't inline, but this method will... they're both available at link time?!?
+static inline byte _spi_transfer(byte _data) {
+  SPDR = _data;
+  while (!(SPSR & _BV(SPIF)))
+    ;
+  return SPDR;
+}
 
 OLED::OLED(byte pin_cs, byte pin_dc, byte pin_reset, bool initialise_display) :
   pin_cs(pin_cs),
@@ -27,6 +35,7 @@ OLED::OLED(byte pin_cs, byte pin_dc, byte pin_reset, bool initialise_display) :
   pinMode(pin_cs, OUTPUT);
   digitalWrite(pin_cs, HIGH);
   pinMode(pin_dc, OUTPUT);
+  digitalWrite(pin_dc, HIGH);
   pinMode(pin_reset, OUTPUT);
   digitalWrite(pin_reset, HIGH);
 
@@ -42,6 +51,9 @@ void OLED::initialiseDisplay() {
   digitalWrite(pin_reset, HIGH);
 
   setDisplayOn(false);
+
+  assertCS();
+
   // TODO: add unlock
   setDisplayClock(DISPLAY_CLOCK_DIV_2, 15); // approx 90fps
   setMultiPlexRatio(0x7F);		  // 1/128 Duty (0x0F~0x7F)
@@ -61,14 +73,24 @@ void OLED::initialiseDisplay() {
   // TODO: Work out what this is, command B2h undocumented in datasheet
   //Set_Display_Enhancement(0xA4);		// Enhance Display Performance 
   //setPrechargePeriod(1); // Commented as this seems short, think maybe it goes w/ prev command
-  
   setDisplayOffset(DISPLAY_NORMAL);
-  clearScreen();
+
+  releaseCS();
+
+  // these are public methods so they manage CS on their own:
+  clearScreen(); 
   setDisplayOn(true);
 }
 
-
+// setPixel has two methods, public method asserts/deasserts CS protected method doesn't
 void OLED::setPixel(const byte x, const byte y, const Colour colour)
+{
+  digitalWrite(pin_cs, LOW);
+  _setPixel(x,y,colour);
+  digitalWrite(pin_cs, HIGH);
+}
+
+inline void OLED::_setPixel(const byte x, const byte y, const Colour colour)
 {
   setColumn(x,x);
   setRow(y,y);
@@ -76,14 +98,25 @@ void OLED::setPixel(const byte x, const byte y, const Colour colour)
   writeData(colour);
 }
 
+void OLED::setDisplayOn(bool on)
+{
+  assertCS();
+  writeCommand(on ? 0xAF : 0xAE);
+  releaseCS();
+}
+
 void OLED::fillScreen(const Colour colour)
 {
+  digitalWrite(pin_cs, LOW);
   setColumn(0,COLUMN_MASK);
   setRow(0, ROW_MASK);
   setWriteRam();
+
   for(int p = 0; p < ROWS*COLUMNS; p++) {
-    writeData(colour);
+    _spi_transfer((colour.green>>3)|(colour.red<<3));
+    _spi_transfer((colour.green<<5)|(colour.blue));
   }
+  digitalWrite(pin_cs, HIGH);
 }
 
 void OLED::scrollDisplay(int dX, int dy, Colour fill_colour)
@@ -135,7 +168,7 @@ void OLED::drawLine( int x1, int y1, int x2, int y2, Colour colour )
     dy <<= 1;			// dy is now 2*dy
     dx <<= 1;			// dx is now 2*dx
 
-    setPixel(x1, y1, colour);
+    _setPixel(x1, y1, colour);
     if (dx > dy) {
 	    int fraction = dy - (dx >> 1);	// same as 2*dy - dx
 	    while (x1 != x2) {
@@ -207,6 +240,8 @@ void OLED::drawFilledBox( int x1, int y1, int x2, int y2, Colour fillColour, int
   ensureOrder(x1,x2);
   ensureOrder(y1,y2);
 
+  assertCS();
+
   setColumn(x1,x2);
   setRow(y1,y2);
   setIncrementDirection(REMAP_VERTICAL_INCREMENT);
@@ -220,6 +255,8 @@ void OLED::drawFilledBox( int x1, int y1, int x2, int y2, Colour fillColour, int
         writeData(fillColour);
     }
   }
+
+  releaseCS();
 }
 
 void OLED::drawCircle( int xCenter, int yCenter, int radius, int edgeWidth, Colour colour)
