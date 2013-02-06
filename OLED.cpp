@@ -127,6 +127,7 @@ void OLED::scrollDisplay(int dX, int dy, Colour fill_colour)
 void OLED::drawLine( int x1, int y1, int x2, int y2, Colour colour )
 {
   // Shortcuts for horizontal and vertical lines, many fewer writes
+  assertCS();
   if(x1==x2) {
     setColumn(x1,x2);
     ensureOrder(y1,y2);
@@ -179,7 +180,7 @@ void OLED::drawLine( int x1, int y1, int x2, int y2, Colour colour )
 	        }
 	        x1 += stepx;
 	        fraction += dy;	// same as fraction -= 2*dy
-	        setPixel(x1, y1, colour);
+	        _setPixel(x1, y1, colour);
 	    }
     } else {
 	    int fraction = dx - (dy >> 1);
@@ -190,10 +191,11 @@ void OLED::drawLine( int x1, int y1, int x2, int y2, Colour colour )
 	        }
 	        y1 += stepy;
 	        fraction += dx;
-	        setPixel(x1, y1, colour);
+	        _setPixel(x1, y1, colour);
 	    }
     }
   }
+  releaseCS();
 }
 
 void OLED::drawBox( int x1, int y1, int x2, int y2, int edgeWidth, Colour colour)
@@ -201,6 +203,8 @@ void OLED::drawBox( int x1, int y1, int x2, int y2, int edgeWidth, Colour colour
   // Make sure (x1,y1) is always the top left corner
   ensureOrder(x1,x2);
   ensureOrder(y1,y2);
+
+  assertCS();
 
   // Left side
   setColumn(x1,x1+edgeWidth-1);
@@ -233,6 +237,8 @@ void OLED::drawBox( int x1, int y1, int x2, int y2, int edgeWidth, Colour colour
   for(int n=0;n<(1+y2-y1)*edgeWidth;n++) {
     writeData(colour);
   }
+
+  releaseCS();
 }
 
 void OLED::drawFilledBox( int x1, int y1, int x2, int y2, Colour fillColour, int edgeWidth, Colour edgeColour)
@@ -266,15 +272,17 @@ void OLED::drawCircle( int xCenter, int yCenter, int radius, int edgeWidth, Colo
   int x = -radius;
   int y = 0;
   int error = 2-2*radius;
+  assertCS();
   while(x < 0) {
-    setPixel(xCenter-x, yCenter+y, colour);
-    setPixel(xCenter-y, yCenter-x, colour);
-    setPixel(xCenter+x, yCenter-y, colour);
-    setPixel(xCenter+y, yCenter+x, colour);
+    _setPixel(xCenter-x, yCenter+y, colour);
+    _setPixel(xCenter-y, yCenter-x, colour);
+    _setPixel(xCenter+x, yCenter-y, colour);
+    _setPixel(xCenter+y, yCenter+x, colour);
     radius = error;
     if (radius <= y) error += ++y*2+1;
     if (radius > x || error > y) error += ++x*2+1;
   }
+  releaseCS();
 }
 
 void OLED::drawFilledCircle( int xCenter, int yCenter, int radius, Colour fillColour)

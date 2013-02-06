@@ -58,6 +58,8 @@ const Colour WHITE = { 31, 63, 31 };
 const Colour RED = { 31, 0, 0 };
 const Colour GREEN = { 0, 63, 0 };
 const Colour BLUE = { 0, 0, 31 };
+const Colour YELLOW = {31, 63, 0};
+const Colour VIOLET = {31, 0, 31};
 
 const byte MAX_RED = 31;
 const byte MAX_GREEN = 63;
