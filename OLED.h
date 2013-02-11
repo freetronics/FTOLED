@@ -173,6 +173,17 @@ class OLED
 
   BMP_Status displayBMP(File &source, const int x, const int y);
 
+  void setGrayscaleTableSystemDefaults();
+  void setBrightGrayscaleTable();
+  void setDimGrayscaleTable();
+
+  /* Set a custom sized grayscale table. "table" must be address of a
+     PROGMEM table holding 64 grayscale level values (GS0..GS63), which must be
+     strictly incrementing (see section 8.8 in the datasheet.) Values
+     in the table can have values 0-180.
+  */
+  inline void setGrayscaleTable_P(byte *table);
+
  protected:
   byte pin_cs;
   byte pin_dc;
@@ -297,24 +308,6 @@ class OLED
   inline void setMasterContrast(byte contrast)
   {
     writeCommand(0xC7, contrast & 0x0F);
-  }
-
-  /* Set grayscale lookup table to default (linear) values */
-  inline void setGrayscaleTableDefaults()
-  {
-    writeCommand(0xB9);
-  }
-
-  /* Set a custom sized grayscale table. "table" must be address of a
-     PROGMEM table holding 63 grayscale level values (GS1..GS63), which must be
-     strictly incrementing (see section 8.8 in the datasheet.) Values
-     in the table can have values 0-180.
-  */
-  inline void setGrayscaleTable_P(byte *table)
-  {
-    writeCommand(0xB8);
-    for(int gs = 0; gs < 63; gs++)
-      writeData(pgm_read_byte_near(table+gs));
   }
 
   /* See the datasheet documentation for the phase length command */

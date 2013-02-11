@@ -333,7 +333,41 @@ void OLED::drawFilledCircle( int xCenter, int yCenter, int radius, Colour fillCo
   }
 }
 
+void OLED::setGrayscaleTableSystemDefaults()
+{
+  assertCS();
+  writeCommand(0xB9);
+  releaseCS();
+}
 
+void OLED::setBrightGrayscaleTable()
+{
+  byte PROGMEM table[64] = { 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+                             12, 13, 14, 15, 16, 17, 18, 19, 21,
+                             23, 25, 27, 29, 31, 33, 35, 37, 39,
+                             42, 45, 48, 51, 54, 57, 60, 63, 66,
+                             69, 72, 76, 80, 84, 88, 92, 96, 100,
+                             104, 108, 112, 116, 120, 125, 130,
+                             135, 140, 145, 150, 155, 160, 165,
+                             170, 175, 180 };
+  setGrayscaleTable_P(table);
+}
 
+void OLED::setDimGrayscaleTable()
+{
+  byte PROGMEM table[64] = {0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6,
+                            6, 7, 7, 8, 8, 9, 9, 10, 11, 12, 13,
+                            14, 15, 16, 17, 18, 19, 21, 22, 24,
+                            25, 27, 28, 30, 31, 33, 34, 36, 38,
+                            40, 42, 44, 46, 48, 50, 52, 54, 56,
+                            58, 60, 62, 65, 67, 70, 72, 75, 77,
+                            80, 82, 85, 87, 90 };
+  setGrayscaleTable_P(table);
+}
 
-
+void OLED::setGrayscaleTable_P(byte *table)
+{
+  writeCommand(0xB8);
+  for(int gs = 0; gs < 63; gs++)
+    writeData(pgm_read_byte_near(table+gs));
+}
