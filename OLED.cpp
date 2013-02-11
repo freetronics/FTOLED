@@ -45,19 +45,20 @@ OLED::OLED(byte pin_cs, byte pin_dc, byte pin_reset, bool initialise_display) :
 
 void OLED::initialiseDisplay() {
   digitalWrite(pin_reset, HIGH);
-  delay(100);
+  delay(1);
   digitalWrite(pin_reset, LOW);
-  delay(200);
+  delay(1);
   digitalWrite(pin_reset, HIGH);
+  delay(1);
 
   setDisplayOn(false);
 
   assertCS();
 
-  //setLockBits(0); // unlock all commands(!)
-  //setDisplayClock(DISPLAY_CLOCK_DIV_1, 15); // "approx 90fps" ?
-  //setMultiPlexRatio(0x7F);		  // 1/128 Duty (0x0F~0x7F)
-  //setDisplayOffset(0);
+  setLockBits(0x12); // enter unlocked state
+  setLockBits(0xB1); // allow all commands
+
+  setDisplayClock(DISPLAY_CLOCK_DIV_2, 15); // "approx 90fps" ?
   setStartRow(32);
   setRemapFormat(REMAP_HORIZONTAL_INCREMENT
                  | REMAP_COLUMNS_LEFT_TO_RIGHT
@@ -65,16 +66,33 @@ void OLED::initialiseDisplay() {
                  | REMAP_SCAN_UP_TO_DOWN
                  | REMAP_COM_SPLIT_ODD_EVEN
                  | REMAP_COLOR_RGB565);
+
   setColorContrasts(0xC8,0x80,0xC8);
   setMasterContrast(0x0F);
-  setGrayscaleTableDefaults();
-  //setPhaseLength(0x32);			// Set Phase 1 as 5 Clocks & Phase 2 as 3 Clocks
-  //setPrechargeVoltage(0x17);		// Default precharge voltage, VCC/2
+  setPhaseLength(0x32);			// Set Phase 1 as 5 Clocks & Phase 2 as 3 Clocks
   
-  // TODO: Work out what this is, command B2h undocumented in datasheet
-  //Set_Display_Enhancement(0xA4);		// Enhance Display Performance 
-  //setPrechargePeriod(1); // Commented as this seems short, think maybe it goes w/ prev command
-  //setDisplayOffset(DISPLAY_NORMAL);
+  releaseCS();
+
+  setGrayscaleTableSystemDefaults();
+
+  assertCS();
+
+  // // // TODO: Work out what this is, command B2h undocumented in datasheet
+  // // //Set_Display_Enhancement(0xA4);		// Enhance Display Performance "Enhance Driving Scheme Capability"
+  // // writeCommand(0xB2);			// Display Enhancement
+  // // writeData(0xA4);				//   Default => 0x00 (Normal)
+  // // writeData(0x00);
+  // // writeData(0x00);
+
+  // // setPrechargeVoltage(0x17);		// Default precharge voltage, VCC/2
+  // // setPrechargePeriod(1); // Commented as this seems short, think maybe it goes w/ prev command
+
+  // // // Set VCOMH
+  // // writeCommand(0xBE, 0x05);
+
+  // // setDisplayMode(DISPLAY_NORMAL);
+
+  setMultiPlexRatio(0x7F);		  // 1/128 Duty (0x0F~0x7F)
 
   releaseCS();
 
