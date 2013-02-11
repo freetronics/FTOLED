@@ -119,9 +119,22 @@ inline void OLED::_setPixel(const byte x, const byte y, const Colour colour)
 
 void OLED::setDisplayOn(bool on)
 {
+  // temporary VCC controls: TODO, make a GPIO from the module itself
+  const byte pin_vcc = 5; // TODO: make this a GPIO from the module itself
+  pinMode(pin_vcc, OUTPUT);
+
+  if(on) {
+    digitalWrite(pin_vcc, HIGH);
+    delay(100);
+  }
   assertCS();
   writeCommand(on ? 0xAF : 0xAE);
   releaseCS();
+
+  if(!on) {
+    digitalWrite(pin_vcc, LOW);
+    delay(100);
+  }
 }
 
 void OLED::fillScreen(const Colour colour)
