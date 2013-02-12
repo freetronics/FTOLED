@@ -91,55 +91,75 @@ BMP_Status OLED::displayBMP(File &f, const int x, const int y)
   // but don't have much choice as seeking back and forth on SD is painfully slow
   Colour *palette;
   if(bpp != 16) {
-    uint8_t palette_size = 1<<(bpp-1);
+    uint8_t palette_size = 1<<bpp;
     palette = (Colour *)malloc(sizeof(Colour)*palette_size);
     f.seek(OFFS_DIB_HEADER + dib_headersize);
-    Serial.println(bpp);
     for(int i = 0; i < palette_size; i++) {
-      palette[i].blue = f.read() >> 3;
-      palette[i].green = f.read() >> 2;
-      palette[i].red = f.read() >> 3;
+      uint8_t pal[3];
+      f.read(pal, 3);
+      palette[i].blue = pal[0] >> 3;
+      palette[i].green = pal[1] >> 2;
+      palette[i].red = pal[2] >> 3;
+      /*
+      Serial.print(i);
+      Serial.print(" ");
+      Serial.print(palette[i].red);
+      Serial.print(" ");
+      Serial.print(palette[i].green);
+      Serial.print(" ");
+      Serial.println(palette[i].blue);
+      */
     }
   }
 
   for(byte row = 0; row < height; row++) {
     f.seek(data_offs + row*row_bytes);
-    uint8_t latest; // temp variable for storing latest pixel index byte (used for 4-bit ops)
-    for(uint16_t col = 0; col < out_width; col++) {
-      Colour pixel;
-      if(bpp == 16) { // pixels stored as BGR555 in BMP, read as RGB565
-        uint16_t bgr555  = readShort(f);
-        pixel.blue = bgr555 & 0x3F;
-        pixel.green = ((bgr555 << 5) & 0x3F) << 1;
-        pixel.red = (bgr555 << 10) & 0x3F;
-      } else {
-        // Pixel data is an index into the palette table
-        uint8_t idx;
-        switch(bpp) {
-        case 8:
-          idx = f.read();
-          break;
-        case 4:
-          if(col % 2 == 0) {
-            latest = f.read();
-            idx = latest >> 4; // most significant nibble has first pixel
-          } else {
-            idx = latest & 0x0F;
-          }
-          break;
-        case 1:
-          if(col % 8 == 0) {
-            latest = f.read();
-          }
-          idx = ( latest & 1<<(7-(col%8)) ) ? 1 : 0; // most significant bit has first pixel
-          break;
-        }
-        pixel = palette[idx];
-      }
-
+    if(bpp == 16) {
+      // TODO
+      /*
+      Colour data[out_width];
+      uint16_t bgr555  = readShort(f);
+      data[col].blue = bgr555 & 0x3F;
+      data[col].green = ((bgr555 << 5) & 0x3F) << 1;
+      data[col].red = (bgr555 << 10) & 0x3F;
+      */
+    }
+    else if(bpp == 8) {
+      uint8_t buf[out_width];
+      f.read(&buf, sizeof(buf));
       assertCS();
-      writeData(pixel);
+      for(uint16_t col = 0; col < out_width; col++) {
+        writeData(palette[buf[col]]);
+      }
       releaseCS();
+    }
+    else if(bpp == 4) {
+      uint8_t buf[(out_width+1)/2];
+      f.read(&buf, sizeof(buf));
+      assertCS();
+      for(uint16_t col = 0; col < out_width/2; col++) {
+        writeData(palette[buf[col] >> 4]);
+        writeData(palette[buf[col] & 0x0F]);
+      }
+      if(out_width % 2) { // Odd width, last pixel comes from here
+        writeData(palette[buf[sizeof(buf)-1] >> 4]);
+      }
+      releaseCS();
+    }
+    else if(bpp == 1) {
+      uint8_t buf[(out_width+7)/8];
+      f.read(&buf, sizeof(buf));
+      assertCS();
+      uint8_t bit = 1<<7;
+      uint8_t byte = 0;
+      for(uint16_t col = 0; col < out_width; col++) {
+        writeData(byte & bit ? palette[1] : palette[0]);
+        bit >>= 1;
+        if(bit == 0) {
+          bit = 1<<7;
+          byte++;
+        }
+      }
     }
   }
 
