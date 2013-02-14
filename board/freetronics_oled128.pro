@@ -1,4 +1,4 @@
-update=Thu 14 Feb 2013 11:48:17 EST
+update=Thu 14 Feb 2013 15:51:18 EST
 version=1
 last_client=eeschema
 [cvpcb]
@@ -102,3 +102,4 @@ LibName29=contrib
 LibName30=valves
 LibName31=OLED128_UG2828
 LibName32=TPS61040
+LibName33=LP2985-33
