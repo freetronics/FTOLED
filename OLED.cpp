@@ -30,7 +30,7 @@ OLED::OLED(byte pin_cs, byte pin_dc, byte pin_reset, bool initialise_display) :
   SPI.begin();
   SPI.setBitOrder(MSBFIRST);
   SPI.setDataMode(SPI_MODE3);
-  SPI.setClockDivider(SPI_CLOCK_DIV2); // Was DIV4, going for super-slow for now
+  SPI.setClockDivider(SPI_CLOCK_DIV2);
 
   pinMode(pin_cs, OUTPUT);
   digitalWrite(pin_cs, HIGH);
@@ -58,7 +58,7 @@ void OLED::initialiseDisplay() {
   setLockBits(0x12); // enter unlocked state
   setLockBits(0xB1); // allow all commands
 
-  setDisplayClock(DISPLAY_CLOCK_DIV_2, 15); // "approx 90fps" ?
+  setDisplayClock(DISPLAY_CLOCK_DIV_1, 15); // "approx 90fps" ?
   setStartRow(32);
   setRemapFormat(REMAP_HORIZONTAL_INCREMENT
                  | REMAP_COLUMNS_LEFT_TO_RIGHT
