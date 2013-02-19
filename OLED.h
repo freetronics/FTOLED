@@ -113,6 +113,12 @@ enum OLED_Command_Lock {
   DISPLAY_COMMAND_ALLOW_SPECIAL = 0xB1, // Allow "special" commands when unlocked
 };
 
+enum OLED_GPIO_Mode {
+  OLED_HIZ = 0,
+  OLED_LOW = 2,
+  OLED_HIGH = 3,
+};
+
 enum BMP_Status {
   BMP_OK = 0,
   BMP_INVALID_FORMAT = 1,
@@ -184,6 +190,9 @@ class OLED
      in the table can have values 0-180.
   */
   inline void setGrayscaleTable_P(byte *table);
+
+  // TODO: gpio1 will probably end up being VCC
+  void setGPIO(OLED_GPIO_Mode gpio0, OLED_GPIO_Mode gpio1);
 
  protected:
   byte pin_cs;

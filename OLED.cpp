@@ -371,3 +371,10 @@ void OLED::setGrayscaleTable_P(byte *table)
   for(int gs = 0; gs < 63; gs++)
     writeData(pgm_read_byte_near(table+gs));
 }
+
+void OLED::setGPIO(OLED_GPIO_Mode gpio0, OLED_GPIO_Mode gpio1)
+{
+  assertCS();
+  writeCommand(0xB5, (uint8_t)gpio0 | (uint8_t)gpio1 << 2);
+  releaseCS();
+}
