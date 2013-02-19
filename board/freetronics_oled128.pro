@@ -1,4 +1,4 @@
-update=Thu 14 Feb 2013 15:51:18 EST
+update=Tue 19 Feb 2013 16:02:27 EST
 version=1
 last_client=eeschema
 [cvpcb]
@@ -40,7 +40,7 @@ LibName11=valves
 version=1
 [eeschema]
 version=1
-LibDir=library
+LibDir=library;/home/gus/dev/Opendous_KiCad_Libraries/library
 NetFmt=1
 HPGLSpd=20
 HPGLDm=15
@@ -103,3 +103,4 @@ LibName30=valves
 LibName31=OLED128_UG2828
 LibName32=TPS61040
 LibName33=LP2985-33
+LibName34=2n7002
