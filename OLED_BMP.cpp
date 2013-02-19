@@ -49,8 +49,6 @@ BMP_Status OLED::displayBMP(File &f, const int x, const int y)
     return BMP_UNSUPPORTED_HEADER; // TODO: Support 40-byte modern BMP headers
   }
 
-  Serial.println(bpp);
-
   // Verify image properties from header
   if(bpp > 16)
     return BMP_TOO_MANY_COLOURS;
@@ -100,15 +98,6 @@ BMP_Status OLED::displayBMP(File &f, const int x, const int y)
       palette[i].blue = pal[0] >> 3;
       palette[i].green = pal[1] >> 2;
       palette[i].red = pal[2] >> 3;
-      /*
-      Serial.print(i);
-      Serial.print(" ");
-      Serial.print(palette[i].red);
-      Serial.print(" ");
-      Serial.print(palette[i].green);
-      Serial.print(" ");
-      Serial.println(palette[i].blue);
-      */
     }
   }
 
