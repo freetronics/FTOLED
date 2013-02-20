@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Tue 19 Feb 2013 16:08:20 EST
+EESchema Schematic File Version 2  date Wed 20 Feb 2013 12:42:43 EST
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -29,10 +29,7 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:OLED128_UG2828
-LIBS:TPS61040
-LIBS:LP2985-33
-LIBS:2n7002
+LIBS:freetronics_kicad_sch_lib
 LIBS:freetronics_oled128-cache
 EELAYER 25  0
 EELAYER END

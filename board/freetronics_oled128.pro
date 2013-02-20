@@ -1,4 +1,4 @@
-update=Tue 19 Feb 2013 16:02:27 EST
+update=Wed 20 Feb 2013 12:32:17 EST
 version=1
 last_client=eeschema
 [cvpcb]
@@ -6,6 +6,8 @@ version=1
 NetIExt=net
 [cvpcb/libraries]
 EquName1=devcms
+[general]
+version=1
 [pcbnew]
 version=1
 PadDrlX=320
@@ -36,11 +38,9 @@ LibName8=led
 LibName9=dip_sockets
 LibName10=pga_sockets
 LibName11=valves
-[general]
-version=1
 [eeschema]
 version=1
-LibDir=library;/home/gus/dev/Opendous_KiCad_Libraries/library
+LibDir=library
 NetFmt=1
 HPGLSpd=20
 HPGLDm=15
@@ -100,7 +100,4 @@ LibName27=opto
 LibName28=atmel
 LibName29=contrib
 LibName30=valves
-LibName31=OLED128_UG2828
-LibName32=TPS61040
-LibName33=LP2985-33
-LibName34=2n7002
+LibName31=freetronics_kicad_sch_lib
