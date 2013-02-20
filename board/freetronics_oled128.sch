@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Wed 20 Feb 2013 17:22:50 EST
+EESchema Schematic File Version 2  date Wed 20 Feb 2013 17:49:20 EST
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -599,7 +599,7 @@ Angus Gratton
 Text Notes 8900 7400 0    120  ~ 24
 Freetronics OLED128
 Text Notes 1400 5550 0    80   ~ 0
-OLED VCC Supply 13.5V DC
+OLED VCC Supply 15V DC
 Text Notes 1400 3950 0    80   ~ 0
 3.3v Supply
 $Comp
@@ -654,7 +654,7 @@ F 1 "GND" H 600 1380 30  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Notes 5100 6000 0    60   ~ 0
-OLED VCC = 13.5V\nMax current draw <50mA
+OLED VCC = 15V\nMax current draw <50mA
 $Comp
 L +5V #PWR05
 U 1 1 511C60E2
@@ -763,7 +763,7 @@ L C C6
 U 1 1 511C3723
 P 4150 6250
 F 0 "C6" H 4200 6350 50  0000 L CNN
-F 1 "10pF" H 4200 6150 50  0000 L CNN
+F 1 "22pF" H 4200 6150 50  0000 L CNN
 	1    4150 6250
 	1    0    0    -1  
 $EndComp
@@ -781,7 +781,7 @@ L R R3
 U 1 1 511C36A1
 P 3750 6750
 F 0 "R3" V 3830 6750 50  0000 C CNN
-F 1 "91K 1%" V 3650 6750 50  0000 C CNN
+F 1 "82K 1%" V 3650 6750 50  0000 C CNN
 	1    3750 6750
 	1    0    0    -1  
 $EndComp
@@ -877,7 +877,7 @@ L INDUCTOR L1
 U 1 1 511C32D5
 P 2500 5800
 F 0 "L1" V 2450 5800 40  0000 C CNN
-F 1 "8.2uH" V 2600 5800 40  0000 C CNN
+F 1 "6.8uH" V 2600 5800 40  0000 C CNN
 	1    2500 5800
 	0    -1   -1   0   
 $EndComp
