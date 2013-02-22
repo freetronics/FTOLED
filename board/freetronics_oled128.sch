@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Thu 21 Feb 2013 14:56:19 EST
+EESchema Schematic File Version 2  date Fri 22 Feb 2013 14:07:41 EST
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -30,7 +30,6 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:freetronics_kicad_sch_lib
-LIBS:freetronics-master-v1.1
 LIBS:freetronics_oled128-cache
 EELAYER 25  0
 EELAYER END
@@ -38,7 +37,7 @@ $Descr A4 11700 8267
 encoding utf-8
 Sheet 1 1
 Title ""
-Date "21 feb 2013"
+Date "22 feb 2013"
 Rev ""
 Comp ""
 Comment1 ""
@@ -397,11 +396,11 @@ F 1 "CONN_10" V 1650 1750 60  0000 C CNN
 	1    1600 1750
 	1    0    0    -1  
 $EndComp
-Text Label 750  2200 0    60   ~ 0
+Text Label 750  1600 0    60   ~ 0
 uSD_CD
-Text Label 750  2100 0    60   ~ 0
-uSD_nCS
 Text Label 750  1500 0    60   ~ 0
+uSD_nCS
+Text Label 750  1700 0    60   ~ 0
 MISO
 Text Notes 9300 900  0    80   ~ 0
 MicroSD Slot
@@ -646,15 +645,15 @@ NoConn ~ 5200 2200
 NoConn ~ 6900 2200
 NoConn ~ 4600 2200
 NoConn ~ 6500 2200
-Text Label 750  2000 0    60   ~ 0
+Text Label 750  2200 0    60   ~ 0
 OLED_RST
-Text Label 750  1900 0    60   ~ 0
+Text Label 750  2100 0    60   ~ 0
 OLED_DNC
-Text Label 750  1800 0    60   ~ 0
+Text Label 750  2000 0    60   ~ 0
 OLED_nCS
-Text Label 750  1700 0    60   ~ 0
+Text Label 750  1900 0    60   ~ 0
 SCK
-Text Label 750  1600 0    60   ~ 0
+Text Label 750  1800 0    60   ~ 0
 MOSI
 $Comp
 L +5V #PWR016
