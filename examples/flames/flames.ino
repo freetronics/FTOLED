@@ -6,7 +6,7 @@
  * http://opengameart.org/content/animated-sprites-and-textures (thanks Spiney!)
  *
  */
-#include <OLED.h>
+#include <OLED128.h>
 #include <SD.h>
 
 const byte pin_cs = 2;

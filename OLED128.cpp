@@ -1,4 +1,4 @@
-#include <OLED.h>
+#include <OLED128.h>
 
 // Swap A & B "in place" (well, with a temp variable!)
 template<typename T> inline void swap(T &a, T &b)
@@ -70,7 +70,7 @@ void OLED::initialiseDisplay() {
   setColorContrasts(0xC8,0x80,0xC8);
   setMasterContrast(0x0F);
   setPhaseLength(0x32);			// Set Phase 1 as 5 Clocks & Phase 2 as 3 Clocks
-  
+
   releaseCS();
 
   setGrayscaleTableSystemDefaults();
@@ -97,7 +97,7 @@ void OLED::initialiseDisplay() {
   releaseCS();
 
   // these are public methods so they manage CS on their own:
-  clearScreen(); 
+  clearScreen();
   setDisplayOn(true);
 }
 

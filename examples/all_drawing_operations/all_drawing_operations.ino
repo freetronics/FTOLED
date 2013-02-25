@@ -1,7 +1,7 @@
 /*
  * A very simple sketch showing all the possible drawing operations you can do
  */
-#include <OLED.h>
+#include <OLED128.h>
 
 const byte pin_cs = 2;
 const byte pin_dc = 3;
