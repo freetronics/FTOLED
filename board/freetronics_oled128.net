@@ -1,0 +1,436 @@
+# EESchema Netlist Version 1.1 created  Tue 26 Feb 2013 11:59:29 EST
+(
+ ( /511C4FBC 0603 C1 1uF
+  ( 1 +5V )
+  ( 2 GND )
+ )
+ ( /511C35BB 0603 C2 4.7uF__25V
+  ( 1 +5V )
+  ( 2 GND )
+ )
+ ( /511C35C6 0603 C3 100nF
+  ( 1 +5V )
+  ( 2 GND )
+ )
+ ( /511C2AFC 1206 C4 4.7uF_25V_TANT
+  ( 1 N-000018 )
+  ( 2 GND )
+ )
+ ( /511C2B46 0603 C5 1uF
+  ( 1 +3.3V )
+  ( 2 GND )
+ )
+ ( /511C3723 0603 C6 22pF
+  ( 1 /OLED_VCC )
+  ( 2 N-000005 )
+ )
+ ( /511C3732 0603 C7 4.7uF__25V
+  ( 1 /OLED_VCC )
+  ( 2 GND )
+ )
+ ( /511C3738 0603 C8 100nF
+  ( 1 /OLED_VCC )
+  ( 2 GND )
+ )
+ ( /511C314C 0603 C9 1uF
+  ( 1 N-000023 )
+  ( 2 GND )
+ )
+ ( /511C318C 0603 C10 4.7uF
+  ( 1 +3.3V )
+  ( 2 GND )
+ )
+ ( /511C3191 0603 C11 100nF
+  ( 1 +3.3V )
+  ( 2 GND )
+ )
+ ( /512436E0 0603 C12 100nF
+  ( 1 +3.3V )
+  ( 2 GND )
+ )
+ ( /511C32E9 SOD-123 D1 MBR0540
+  ( 1 N-000024 )
+  ( 2 /OLED_VCC )
+ )
+ ( /511C358E SOT23-5 IC1 TPS61040
+  ( 1 N-000024 )
+  ( 2 GND )
+  ( 3 N-000005 )
+  ( 4 /VCC_ON )
+  ( 5 +5V )
+ )
+ ( /51246B91 PIN_ARRAY_1 JP1 GPIO1
+  ( 1 N-000030 )
+ )
+ ( /511C32D5 1210 L1 6.8uH
+  ( 1 +5V )
+  ( 2 N-000024 )
+ )
+ ( /511C2906 OLED-128X128-FPC-TOP OLED1 OLED128_UG2828
+  ( 1 GND )
+  ( 2 /OLED_VCC )
+  ( 3 N-000018 )
+  ( 4 +3.3V )
+  ( 5 N-000019 )
+  ( 6 ? )
+  ( 7 GND )
+  ( 8 GND )
+  ( 9 GND )
+  ( 10 GND )
+  ( 11 GND )
+  ( 12 ? )
+  ( 13 /MOSI_3v3 )
+  ( 14 /SCK_3v3 )
+  ( 15 GND )
+  ( 16 GND )
+  ( 17 GND )
+  ( 18 GND )
+  ( 19 N-000017 )
+  ( 20 N-000032 )
+  ( 21 N-000028 )
+  ( 22 N-000022 )
+  ( 23 N-000030 )
+  ( 24 /VCC_ON )
+  ( 25 ? )
+  ( 26 N-000023 )
+  ( 27 +3.3V )
+  ( 28 GND )
+  ( 29 ? )
+  ( 30 GND )
+ )
+ ( /51243D0A SIL-10 P1 CONN_10
+  ( 1 +5V )
+  ( 2 GND )
+  ( 3 /uSD_nCS )
+  ( 4 /uSD_CD )
+  ( 5 /MISO )
+  ( 6 /MOSI )
+  ( 7 /SCK )
+  ( 8 /OLED_nCS )
+  ( 9 /OLED_DNC )
+  ( 10 /OLED_RST )
+ )
+ ( /51259AC5 MICRO-SD-SOCKET-PP P2 MICROSD
+  ( 1 ? )
+  ( 2 N-000027 )
+  ( 3 /MOSI_3v3 )
+  ( 4 +3.3V )
+  ( 5 /SCK_3v3 )
+  ( 6 GND )
+  ( 7 /MISO_3v3 )
+  ( 8 ? )
+  ( CD1 /uSD_CD )
+  ( CD2 GND )
+  ( GND1 GND )
+  ( GND2 GND )
+ )
+ ( /5123076C SOT23 Q1 2N7002
+  ( 1 GND )
+  ( 2 /OLED_nCS )
+  ( 3 N-000017 )
+ )
+ ( /512438C2 SOT23 Q2 2N7002
+  ( 1 GND )
+  ( 2 /uSD_nCS )
+  ( 3 N-000027 )
+ )
+ ( /511C3956 0603 R1 10K
+  ( 1 /VCC_ON )
+  ( 2 GND )
+ )
+ ( /511C2CAD 0603 R2 1K5
+  ( 1 /MOSI )
+  ( 2 /MOSI_3v3 )
+ )
+ ( /511C2D49 0603 R3 1K5
+  ( 1 /SCK )
+  ( 2 /SCK_3v3 )
+ )
+ ( /5124357A 0603 R4 1K5
+  ( 1 /MISO )
+  ( 2 /MISO_3v3 )
+ )
+ ( /511C2DCF 0603 R5 2K7
+  ( 1 /MOSI_3v3 )
+  ( 2 GND )
+ )
+ ( /511C2DD9 0603 R6 2K7
+  ( 1 /SCK_3v3 )
+  ( 2 GND )
+ )
+ ( /51243579 0603 R7 2K7
+  ( 1 /MISO_3v3 )
+  ( 2 GND )
+ )
+ ( /511C368F 0603 R8 910K_1%
+  ( 1 /OLED_VCC )
+  ( 2 N-000005 )
+ )
+ ( /511C36A1 0603 R9 82K_1%
+  ( 1 N-000005 )
+  ( 2 GND )
+ )
+ ( /511C2B8F 1206 R10 47R__1/4W
+  ( 1 N-000019 )
+  ( 2 N-000020 )
+ )
+ ( /512307A5 0603 R11 4K7
+  ( 1 +3.3V )
+  ( 2 N-000017 )
+ )
+ ( /5123083C 0603 R12 10K
+  ( 1 /OLED_nCS )
+  ( 2 GND )
+ )
+ ( /511C2D4F 0603 R13 1K5
+  ( 1 /OLED_DNC )
+  ( 2 N-000032 )
+ )
+ ( /511C2D63 0603 R14 1K5
+  ( 1 /OLED_RST )
+  ( 2 N-000028 )
+ )
+ ( /511C2E02 0603 R15 2K7
+  ( 1 N-000032 )
+  ( 2 GND )
+ )
+ ( /511C2F28 0603 R16 2K7
+  ( 1 N-000028 )
+  ( 2 GND )
+ )
+ ( /511C3079 0603 R17 560K
+  ( 1 N-000022 )
+  ( 2 GND )
+ )
+ ( /512438D5 0603 R18 4K7
+  ( 1 N-000027 )
+  ( 2 +3.3V )
+ )
+ ( /512438C1 0603 R19 10K
+  ( 1 /uSD_nCS )
+  ( 2 GND )
+ )
+ ( /511C4F2C SOT23-5 REG1 LP2985-33
+  ( 1 +5V )
+  ( 2 GND )
+  ( 3 +5V )
+  ( 4 ? )
+  ( 5 +3.3V )
+ )
+ ( /511C2BA1 SOD-123 Z1 2V4
+  ( 1 GND )
+  ( 2 N-000020 )
+ )
+)
+*
+{ Allowed footprints by component:
+$component C1
+ SM*
+ C?
+ C1-1
+$endlist
+$component C2
+ SM*
+ C?
+ C1-1
+$endlist
+$component C3
+ SM*
+ C?
+ C1-1
+$endlist
+$component C4
+ SM*
+ C?
+ C1-1
+$endlist
+$component C5
+ SM*
+ C?
+ C1-1
+$endlist
+$component C6
+ SM*
+ C?
+ C1-1
+$endlist
+$component C7
+ SM*
+ C?
+ C1-1
+$endlist
+$component C8
+ SM*
+ C?
+ C1-1
+$endlist
+$component C9
+ SM*
+ C?
+ C1-1
+$endlist
+$component C10
+ SM*
+ C?
+ C1-1
+$endlist
+$component C11
+ SM*
+ C?
+ C1-1
+$endlist
+$component C12
+ SM*
+ C?
+ C1-1
+$endlist
+$component D1
+ D?
+ S*
+$endlist
+$component Q1
+ SOT23*
+$endlist
+$component Q2
+ SOT23*
+$endlist
+$component R1
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R2
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R3
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R4
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R5
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R6
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R7
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R8
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R9
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R10
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R11
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R12
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R13
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R14
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R15
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R16
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R17
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R18
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R19
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component Z1
+ D?
+ SO*
+ SM*
+$endlist
+$endfootprintlist
+}
