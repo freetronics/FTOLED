@@ -18,7 +18,8 @@ OLED oled(pin_cs, pin_dc, pin_reset, false);
 
 const char *ARIAL_BLACK_16 = "Arial Black 16";
 const char *ARIAL_14 = "Arial 14";
-const char *SYSTEM_5_7 = "System 5x7";
+const char *SYSTEM_5_7 = "System 5x7\nOn Two Lines";
+const char *DS_36 = "DS 36";
 
 void setup() {
   Serial.begin(115200);
@@ -32,16 +33,12 @@ void setup() {
   oled.drawString(10,32,ARIAL_BLACK_16,strlen(ARIAL_BLACK_16),WHITE,BLACK);
 
   oled.selectFont(System5x7);
-  oled.drawString(10,54,SYSTEM_5_7,strlen(SYSTEM_5_7),RED,BLACK);
+  oled.drawString(10,64,SYSTEM_5_7,strlen(SYSTEM_5_7),RED,BLACK);
 
   oled.selectFont(Droid_Sans_36);
-  oled.drawString(10,72,"DS 36",strlen("DS 36"),GREEN,BLACK);
+  oled.drawString(10,72,DS_36,strlen(DS_36),GREEN,BLACK);
 }
 
 void loop() {
-  return;
-  for(int i = 0; i < 128; i++) {
-    oled.drawString(i,i,"Hello World",strlen("Hello World"),WHITE,BLACK);
-    oled.drawLine(i,i,i+80,i,BLACK);
-  }
+     // Do nothing, we're finished!
 }

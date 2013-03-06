@@ -151,6 +151,11 @@ void OLED::drawString(int x, int y, const char *bChars, byte length, Colour fore
       this->drawLine(x-1 , y, x-1 , y + header.height, background);
 
     for (int i = 0; i < length; i++) {
+      if(bChars[i] == '\n') { // Newline
+        strWidth = 0;
+        y = y - header.height - 1;
+        continue;
+      }
       int charWide = this->drawChar(x+strWidth, y, bChars[i], foreground, background);
       if (charWide > 0) {
         strWidth += charWide ;
