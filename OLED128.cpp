@@ -1,5 +1,18 @@
 #include <OLED128.h>
 
+// Clamp a value between two limits
+template<typename T> inline void clamp(T &value, T lower, T upper) {
+  if(value < lower)
+    value = lower;
+  else if(value > upper)
+    value = upper;
+}
+
+inline void clampXY(int &x, int &y) {
+  clamp(x, 0, COLUMNS-1);
+  clamp(y, 0, ROWS-1);
+}
+
 // Swap A & B "in place" (well, with a temp variable!)
 template<typename T> inline void swap(T &a, T &b)
 {
@@ -157,6 +170,12 @@ void OLED::scrollDisplay(int dX, int dy, Colour fill_colour)
 
 void OLED::drawLine( int x1, int y1, int x2, int y2, Colour colour )
 {
+  // Note: hard clamping here means that diagonal lines that exceed the
+  // limits of the display will be drawn with different angles to if they
+  // were really drawn to those limits
+  clampXY(x1, y1);
+  clampXY(x2, y2);
+
   // Shortcuts for horizontal and vertical lines, many fewer writes
   assertCS();
   if(x1==x2) {
@@ -231,6 +250,9 @@ void OLED::drawLine( int x1, int y1, int x2, int y2, Colour colour )
 
 void OLED::drawBox( int x1, int y1, int x2, int y2, int edgeWidth, Colour colour)
 {
+  clampXY(x1, y1);
+  clampXY(x2, y2);
+
   // Make sure (x1,y1) is always the top left corner
   ensureOrder(x1,x2);
   ensureOrder(y1,y2);
@@ -274,6 +296,9 @@ void OLED::drawBox( int x1, int y1, int x2, int y2, int edgeWidth, Colour colour
 
 void OLED::drawFilledBox( int x1, int y1, int x2, int y2, Colour fillColour, int edgeWidth, Colour edgeColour)
 {
+  clampXY(x1, y1);
+  clampXY(x2, y2);
+
   // Make sure (x1,y1) is always the top left corner
   ensureOrder(x1,x2);
   ensureOrder(y1,y2);
