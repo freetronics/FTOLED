@@ -168,10 +168,13 @@ class OLED
   void selectFont(const uint8_t* font);
 
   //Draw a single character
-  int drawChar(const int x, const int y, const char letter, const Colour);
+  int drawChar(const int x, const int y, const char letter, const Colour colour, const Colour background);
 
   //Find the width of a character
   int charWidth(const char letter);
+
+  // Draw a full string
+  void drawString(int x, int y, const char *bChars, byte length, Colour foreground, Colour background);
 
   //Draw a scrolling string
   void drawMarquee( const char* bChars, byte length, int left, int top);
@@ -199,6 +202,8 @@ class OLED
   byte pin_dc;
   byte pin_reset;
   byte remap_flags;
+
+  uint16_t font;
 
   inline void assertCS() { digitalWriteFast(pin_cs, LOW); }
   inline void releaseCS() { digitalWriteFast(pin_cs, HIGH); }
@@ -314,7 +319,7 @@ class OLED
     writeData(c);
   }
 
-  /* Set Master contrast, value 0-15 */ 
+  /* Set Master contrast, value 0-15 */
   inline void setMasterContrast(byte contrast)
   {
     writeCommand(0xC7, contrast & 0x0F);
@@ -336,7 +341,7 @@ class OLED
     clocks = clocks & 0x0F;
     writeCommand(0xB6, clocks ? clocks : 8);
   }
-  
+
   /* Set display mode. See enum OLED_Display_Mode, above. */
   inline void setDisplayMode(OLED_Display_Mode mode) {
     writeCommand(0xA4+(byte)mode);
