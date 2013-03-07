@@ -1,0 +1,124 @@
+/* OLED128 TextBox implementation
+ *
+ * Allows a simple scrolling text box that implements the Arduino Print
+ * interface, so you can write to it like a serial port or character
+ * LCD display.
+ */
+#include "OLED128.h"
+
+OLED_TextBox::OLED_TextBox(OLED &oled, int left, int bottom, int width, int height) :
+  oled(oled),
+  left(left),
+  bottom(bottom),
+  width(width),
+  height(height),
+  cur_x(0),
+  cur_y(height),
+  buf_sz(8),
+  foreground(WHITE),
+  background(BLACK)
+{
+  this->buffer = (char *)malloc(this->buf_sz);
+  memset(this->buffer, 0, this->buf_sz);
+}
+
+size_t OLED_TextBox::write(uint8_t character) {
+  struct FontHeader header;
+  memcpy_PF(&header, this->oled.font, sizeof(FontHeader));
+  uint8_t rowHeight = header.height+1;
+
+  uint8_t char_width = oled.charWidth(character);
+  while((cur_x > 0 && cur_x + char_width > this->width) || pending_newline) { // Need to wrap to new line
+    if(cur_y >= rowHeight*2) { // No need to scroll
+      cur_y -= rowHeight;
+      cur_x = 0;
+    } else { // Need to scroll
+      scroll(rowHeight);
+    }
+    pending_newline = false;
+  }
+  pending_newline = (character == '\n');
+
+  oled.drawChar(cur_x+left,cur_y+bottom-rowHeight,character,this->foreground,this->background);
+  cur_x += char_width;
+
+  // Check the buffer has enough space for this new character, grow it if not
+  uint16_t old_len = strlen(this->buffer);
+  if(old_len > this->buf_sz - 2) {
+    this->buf_sz += 8;
+    this->buffer = (char *)realloc(this->buffer, this->buf_sz);
+  }
+  this->buffer[old_len] = character;
+  this->buffer[old_len+1] = 0;
+}
+
+void OLED_TextBox::scroll(uint8_t rowHeight) {
+  // Find the end of the first line in the buffer
+  uint8_t linewidth = 0;
+  char *eol = this->buffer;
+  while(*eol && *eol != '\n') {
+    uint8_t charwidth = oled.charWidth(*eol);
+    if(linewidth + charwidth > this->width) {
+      eol--;
+      break;
+    }
+    linewidth += charwidth;
+    eol++;
+  }
+  if(*eol == 0) return; // shouldn't happen unless textbox is too small
+
+  // Erase the first line from the buffer, move rest of buffer back
+  // (NB: we could possibly use a ringbuffer here for a small saving, but I don't know if worth the code complexity.)
+  eol++;
+  char *target = this->buffer;
+  while(*eol)
+    *target++ = *eol++;
+  *target = 0;
+
+  // Play back the remaining buffer onto the OLED
+  cur_x = 0;
+  cur_y = height;
+
+  char *replay = this->buffer;
+  while(*replay) {
+    uint8_t char_width = oled.charWidth(*replay);
+    if(cur_x + char_width > this->width || *replay == '\n') { // EOL
+      if(linewidth > cur_x) {
+        // Clear any remnant of the line that was here, that we haven't drawn text over
+        oled.drawFilledBox(cur_x+left,cur_y+bottom-1,linewidth+left,cur_y+bottom-rowHeight, this->background);
+      }
+      linewidth = cur_x;
+      // Move down
+      cur_y -= rowHeight;
+      cur_x = 0;
+    }
+
+    oled.drawChar(cur_x+left,cur_y+bottom-rowHeight,*replay,this->foreground,this->background);
+    cur_x += char_width;
+    replay++;
+  }
+
+  // Blank out remainder of the last line we were writing on
+  oled.drawFilledBox(left+cur_x,cur_y+bottom-1,left+width,cur_y+bottom-rowHeight,this->background);
+  // Blank out anything remaining underneath that
+  oled.drawFilledBox(left,bottom,left+width,cur_y+bottom-rowHeight-1,this->background);
+}
+
+void OLED_TextBox::clear() {
+  memset(this->buffer, 0, this->buf_sz);
+  oled.drawFilledBox(left,bottom,left+width,bottom+height,this->background);
+  cur_x = 0;
+  cur_y = height;
+  pending_newline = false;
+}
+
+void OLED_TextBox::setForegroundColour(Colour colour)
+{
+  this->foreground = colour;
+}
+
+void OLED_TextBox::setBackgroundColour(Colour colour)
+{
+  this->background = colour;
+}
+

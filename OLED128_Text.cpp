@@ -4,17 +4,6 @@
  */
 #include <OLED128.h>
 
-// Six byte header at beginning of FontCreator font structure in PROGMEM
-
-__attribute__((packed))
-struct FontHeader {
-  uint16_t size;
-  uint8_t fixedWidth;
-  uint8_t height;
-  uint8_t firstChar;
-  uint8_t charCount;
-};
-
 void OLED::selectFont(const uint8_t * font)
 {
   this->font = (uint16_t) font;
@@ -95,7 +84,7 @@ int OLED::drawChar(const int x, const int y, const char letter, const Colour col
         end_bit = (byte_y < bytes-1) ? 0: 7-((header.height-1)%8);
       }
       for(int8_t bit_y = start_bit; bit_y >= end_bit; bit_y--) {
-        if(oy+y < ROWS && ox+x > 0 && oy+y > 0) {
+        if(oy+y < ROWS && ox+x >= 0 && oy+y >= 0) {
           writeData( (data & 1<<bit_y) ? colour : background);
         }
         oy++;

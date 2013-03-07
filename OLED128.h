@@ -40,6 +40,7 @@
 #include <SPI.h>
 #include <SD.h>
 #include <digitalWriteFast.h>
+#include "Print.h"
 
 #define ROWS 128
 #define COLUMNS 128
@@ -57,6 +58,7 @@ const Colour BLACK = { 0, 0, 0 };
 const Colour WHITE = { 31, 63, 31 };
 const Colour RED = { 31, 0, 0 };
 const Colour GREEN = { 0, 63, 0 };
+const Colour DARKGREEN = { 0, 44, 0 };
 const Colour BLUE = { 0, 0, 31 };
 const Colour YELLOW = {31, 63, 0};
 const Colour VIOLET = {31, 0, 31};
@@ -127,9 +129,12 @@ enum BMP_Status {
   BMP_COMPRESSION_NOT_SUPPORTED = 4,
 };
 
+class OLED_TextBox;
+
 class OLED
 {
- public:
+  friend class OLED_TextBox;
+public:
   OLED(byte pin_cs, byte pin_dc, byte pin_reset, bool initialise_display);
   OLED(byte pin_cs, byte pin_dc, byte pin_reset) { OLED(pin_cs, pin_dc, pin_reset, true); }
 
@@ -351,6 +356,44 @@ class OLED
   inline void setLockBits(byte lock_bits) {
     writeCommand(0xFD, lock_bits);
   }
+};
+
+class OLED_TextBox : public Print {
+public:
+  OLED_TextBox(OLED &oled, int left, int bottom, int width, int height);
+  OLED_TextBox(OLED &oled) : OLED_TextBox(oled, 0, 0, COLUMNS, ROWS) { }
+  virtual size_t write(uint8_t);
+  void clear();
+  void setForegroundColour(Colour colour);
+  void setBackgroundColour(Colour colour);
+
+private:
+  OLED &oled;
+  uint8_t left;
+  uint8_t bottom;
+  uint8_t width;
+  uint8_t height;
+  int16_t cur_x;
+  int16_t cur_y;
+  uint8_t max_rows;
+  uint16_t buf_sz;
+  char *buffer;
+  Colour foreground;
+  Colour background;
+  bool pending_newline;
+
+  void scroll(uint8_t fontHeight);
+  void clear_area();
+};
+
+// Six byte header at beginning of FontCreator font structure in PROGMEM
+__attribute__((packed))
+struct FontHeader {
+  uint16_t size;
+  uint8_t fixedWidth;
+  uint8_t height;
+  uint8_t firstChar;
+  uint8_t charCount;
 };
 
 #endif
