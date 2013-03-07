@@ -105,8 +105,12 @@ void OLED_TextBox::scroll(uint8_t rowHeight) {
 }
 
 void OLED_TextBox::clear() {
-  memset(this->buffer, 0, this->buf_sz);
+  this->reset();
   oled.drawFilledBox(left,bottom,left+width,bottom+height,this->background);
+}
+
+void OLED_TextBox::reset() {
+  memset(this->buffer, 0, this->buf_sz);
   cur_x = 0;
   cur_y = height;
   pending_newline = false;

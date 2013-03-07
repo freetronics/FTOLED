@@ -364,6 +364,7 @@ public:
   OLED_TextBox(OLED &oled) : OLED_TextBox(oled, 0, 0, COLUMNS, ROWS) { }
   virtual size_t write(uint8_t);
   void clear();
+  void reset();
   void setForegroundColour(Colour colour);
   void setBackgroundColour(Colour colour);
 
