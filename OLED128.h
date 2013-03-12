@@ -142,9 +142,6 @@ public:
   // Turn the display on or off
   void setDisplayOn(bool on);
 
-  // Scroll the display by (dX,dY), filling the exposed area with the selected colour
-  void scrollDisplay(int dX, int dy, Colour fill_colour);
-
   //Draw a line from x1,y1 to x2,y2
   void drawLine( int x1, int y1, int x2, int y2, Colour colour );
 

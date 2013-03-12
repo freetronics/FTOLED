@@ -164,10 +164,6 @@ void OLED::fillScreen(const Colour colour)
   digitalWrite(pin_cs, HIGH);
 }
 
-void OLED::scrollDisplay(int dX, int dy, Colour fill_colour)
-{
-}
-
 void OLED::drawLine( int x1, int y1, int x2, int y2, Colour colour )
 {
   // Note: hard clamping here means that diagonal lines that exceed the
