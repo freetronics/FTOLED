@@ -24,7 +24,7 @@ void setup()
 
   // Draw a filled circle and then an outline of a circle around it
   oled.drawFilledCircle(64,64,12,CYAN);
-  oled.drawCircle(64,64,18,4,WHITE);
+  oled.drawCircle(64,64,18,WHITE);
 
   // Draw a yellow box in the top-right
   oled.drawFilledBox(90,90,120,120,YELLOW);

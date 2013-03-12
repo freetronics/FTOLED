@@ -318,7 +318,7 @@ void OLED::drawFilledBox( int x1, int y1, int x2, int y2, Colour fillColour, int
   releaseCS();
 }
 
-void OLED::drawCircle( int xCenter, int yCenter, int radius, int edgeWidth, Colour colour)
+void OLED::drawCircle( int xCenter, int yCenter, int radius, Colour colour)
 {
   // Bresenham's circle drawing algorithm
   int x = -radius;

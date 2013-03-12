@@ -60,38 +60,7 @@ const byte MAX_RED = 31;
 const byte MAX_GREEN = 63;
 const byte MAX_BLUE = 31;
 
-// Display clock divisor, pass to setDisplayClock
-#define DISPLAY_CLOCK_DIV_1 0
-#define DISPLAY_CLOCK_DIV_2 1
-#define DISPLAY_CLOCK_DIV_4 2
-#define DISPLAY_CLOCK_DIV_8 3
-#define DISPLAY_CLOCK_DIV_16 4
-#define DISPLAY_CLOCK_DIV_32 5
-#define DISPLAY_CLOCK_DIV_64 6
-#define DISPLAY_CLOCK_DIV_128 7
-#define DISPLAY_CLOCK_DIV_256 8
-#define DISPLAY_CLOCK_DIV_512 9
-#define DISPLAY_CLOCK_DIV_1024 10
-
-// Remap mode specifiers
-#define REMAP_HORIZONTAL_INCREMENT 0
-#define REMAP_VERTICAL_INCREMENT (1<<0)
-
-#define REMAP_COLUMNS_LEFT_TO_RIGHT 0
-#define REMAP_COLUMNS_RIGHT_TO_LEFT (1<<1)
-
-#define REMAP_ORDER_BGR 0
-#define REMAP_ORDER_RGB (1<<2)
-
-#define REMAP_SCAN_UP_TO_DOWN 0
-#define REMAP_SCAN_DOWN_TO_UP (1<<4)
-
-#define REMAP_COM_SPLIT_ODD_EVEN (1<<5)
-
-#define REMAP_COLOR_8BIT 0
-#define REMAP_COLOR_RGB565 (1<<6)
-#define REMAP_COLOR_18BIT (2<<6)
-
+// Display mode argument for setDisplayMode()
 enum OLED_Display_Mode {
   DISPLAY_OFF = 0,                 // No pixels on
   DISPLAY_ALL_PIXELS_FULL = 1,     // All pixels on GS level 63 (ie max brightness)
@@ -99,20 +68,14 @@ enum OLED_Display_Mode {
   DISPLAY_INVERSE = 3,
 };
 
-enum OLED_Command_Lock {
-  DISPLAY_COMMAND_UNLOCK = 0x12,        // Allow commands (default state)
-  DISPLAY_COMMAND_LOCK = 0x16,          // Disallow all commands until/except next UNLOCK
-
-  DISPLAY_COMMAND_LOCK_SPECIAL = 0xB0,  // Lock out "special" commands always (default state)
-  DISPLAY_COMMAND_ALLOW_SPECIAL = 0xB1, // Allow "special" commands when unlocked
-};
-
+// OLED GPIO mode for setGPIO()
 enum OLED_GPIO_Mode {
   OLED_HIZ = 0,
   OLED_LOW = 2,
   OLED_HIGH = 3,
 };
 
+// Status code returned by displayBMP()
 enum BMP_Status {
   BMP_OK = 0,
   BMP_INVALID_FORMAT = 1,
@@ -152,10 +115,10 @@ public:
   void drawFilledBox( int x1, int y1, int x2, int y2, Colour fillColour, int edgeWidth, Colour edgeColour);
   void drawFilledBox( int x1, int y1, int x2, int y2, Colour fillColour) { drawFilledBox(x1,y1,x2,y2,fillColour,0,BLACK); }
 
-  // Draw an outline of a circle of radius r at x,y centre, with sides edgeWidth pixels wide
-  void drawCircle( int xCenter, int yCenter, int radius, int edgeWidth, Colour colour);
+  // Draw an outline of a circle of radius r centred at x,y
+  void drawCircle( int xCenter, int yCenter, int radius, Colour colour);
 
-  // Draw an filled circle of radius r at x,y centre, optionally with sides edgeWidth pixels wide
+  // Draw an filled circle of radius r at x,y centre
   void drawFilledCircle( int xCenter, int yCenter, int radius, Colour fillColour);
 
   //Select a text font
@@ -170,13 +133,12 @@ public:
   // Draw a full string
   void drawString(int x, int y, const char *bChars, byte length, Colour foreground, Colour background);
 
-  //Draw a scrolling string
-  void drawMarquee( const char* bChars, byte length, int left, int top);
-
   // Bitmap stuff
 
+  // Given 'File' containing a BMP image, show it onscreen with bottom left corner at (x,y)
   BMP_Status displayBMP(File &source, const int x, const int y);
 
+  /* Set the grayscale table for pixel brightness to one of these precanned defaults */
   void setGrayscaleTableSystemDefaults();
   void setBrightGrayscaleTable();
   void setDimGrayscaleTable();
@@ -190,6 +152,13 @@ public:
 
   // TODO: gpio1 will probably end up being VCC
   void setGPIO(OLED_GPIO_Mode gpio0, OLED_GPIO_Mode gpio1);
+
+  /* Set display mode. See enum OLED_Display_Mode, above. */
+  inline void setDisplayMode(OLED_Display_Mode mode) {
+    assertCS();
+    writeCommand(0xA4+(byte)mode);
+    releaseCS();
+  }
 
  protected:
   byte pin_cs;
@@ -251,22 +220,34 @@ public:
     writeCommand(0x5C);
   }
 
-// Set the direction to increment
-  inline void setIncrementDirection(byte direction)
-  {
-    byte remap = this->remap_flags & ~(REMAP_HORIZONTAL_INCREMENT|REMAP_VERTICAL_INCREMENT);
-    remap = remap | (direction & (REMAP_VERTICAL_INCREMENT|REMAP_HORIZONTAL_INCREMENT));
-    writeCommand(0xA0, remap);
-    this->remap_flags = remap;
-  }
-
   inline void _setPixel(const byte x, const byte y, const Colour);
+
+  enum OLED_Command_Lock {
+    DISPLAY_COMMAND_UNLOCK = 0x12,        // Allow commands (default state)
+    DISPLAY_COMMAND_LOCK = 0x16,          // Disallow all commands until/except next UNLOCK
+
+    DISPLAY_COMMAND_LOCK_SPECIAL = 0xB0,  // Lock out "special" commands always (default state)
+    DISPLAY_COMMAND_ALLOW_SPECIAL = 0xB1, // Allow "special" commands when unlocked
+  };
 
   // Direct commands to the module
   inline void setCommandLock(OLED_Command_Lock lock_command)
   {
     writeCommand(0xFD, (byte)lock_command);
   }
+
+// Display clock divisor options, used by setDisplayClock
+#define DISPLAY_CLOCK_DIV_1 0
+#define DISPLAY_CLOCK_DIV_2 1
+#define DISPLAY_CLOCK_DIV_4 2
+#define DISPLAY_CLOCK_DIV_8 3
+#define DISPLAY_CLOCK_DIV_16 4
+#define DISPLAY_CLOCK_DIV_32 5
+#define DISPLAY_CLOCK_DIV_64 6
+#define DISPLAY_CLOCK_DIV_128 7
+#define DISPLAY_CLOCK_DIV_256 8
+#define DISPLAY_CLOCK_DIV_512 9
+#define DISPLAY_CLOCK_DIV_1024 10
 
   /* set display refresh clock
    * Args:
@@ -297,12 +278,46 @@ public:
     writeCommand(0xA1, row & ROW_MASK);
   }
 
+  // Flags for setRemapFormat & setIncrementDirection, defined below
+#define REMAP_HORIZONTAL_INCREMENT 0
+#define REMAP_VERTICAL_INCREMENT (1<<0)
+
+#define REMAP_COLUMNS_LEFT_TO_RIGHT 0
+#define REMAP_COLUMNS_RIGHT_TO_LEFT (1<<1)
+
+#define REMAP_ORDER_BGR 0
+#define REMAP_ORDER_RGB (1<<2)
+
+#define REMAP_SCAN_UP_TO_DOWN 0
+#define REMAP_SCAN_DOWN_TO_UP (1<<4)
+
+#define REMAP_COM_SPLIT_ODD_EVEN (1<<5)
+
+#define REMAP_COLOR_8BIT 0
+#define REMAP_COLOR_RGB565 (1<<6)
+#define REMAP_COLOR_18BIT (2<<6)
+
   /* set up address/pixel remap format, see flags REMAP_xxxx_xxxx above */
   inline void setRemapFormat(byte remap_flags)
   {
     writeCommand(0xA0, remap_flags);
     this->remap_flags = remap_flags;
   }
+
+  /* Set the direction to increment when filling in pixel data (horizontal or vertical)
+   *
+   * This is the most commonly set part of the 'remap' format, so this function
+   * sets it without disturbing the other flags.
+   */
+  inline void setIncrementDirection(byte direction)
+  {
+    byte remap = this->remap_flags & ~(REMAP_HORIZONTAL_INCREMENT|REMAP_VERTICAL_INCREMENT);
+    remap = remap | (direction & (REMAP_VERTICAL_INCREMENT|REMAP_HORIZONTAL_INCREMENT));
+    writeCommand(0xA0, remap);
+    this->remap_flags = remap;
+  }
+
+
 
   /* set color channel contrasts. A,B,C are R,G,B values unless REMAP_ORDER_BGR is set */
   inline void setColorContrasts(byte a, byte b, byte c)
@@ -334,11 +349,6 @@ public:
   inline void setPrechargePeriod(byte clocks) {
     clocks = clocks & 0x0F;
     writeCommand(0xB6, clocks ? clocks : 8);
-  }
-
-  /* Set display mode. See enum OLED_Display_Mode, above. */
-  inline void setDisplayMode(OLED_Display_Mode mode) {
-    writeCommand(0xA4+(byte)mode);
   }
 
   /* Set lock bits. Reset means 0x12, 0x16? means nothing works except reset and another unlock? */
