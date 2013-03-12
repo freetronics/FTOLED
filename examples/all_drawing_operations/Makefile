@@ -1,4 +1,4 @@
-BOARD_TAG    = atmega168
+BOARD_TAG    = uno
 ARDUINO_PORT = /dev/ttyUSB0
 ARDUINO_LIBS = SPI OLED128 SD digitalWriteFast
 

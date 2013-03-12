@@ -54,19 +54,11 @@ struct Colour
   byte blue  : 5;
 };
 
-const Colour BLACK = { 0, 0, 0 };
-const Colour WHITE = { 31, 63, 31 };
-const Colour RED = { 31, 0, 0 };
-const Colour GREEN = { 0, 63, 0 };
-const Colour DARKGREEN = { 0, 44, 0 };
-const Colour BLUE = { 0, 0, 31 };
-const Colour YELLOW = {31, 63, 0};
-const Colour VIOLET = {31, 0, 31};
+#include "OLED128_Colours.h"
 
 const byte MAX_RED = 31;
 const byte MAX_GREEN = 63;
 const byte MAX_BLUE = 31;
-// TODO: add more colours!
 
 // Display clock divisor, pass to setDisplayClock
 #define DISPLAY_CLOCK_DIV_1 0

@@ -17,13 +17,13 @@ void setup()
   oled.fillScreen({10,0,0});
 
   // Horizontal blue line from (30,30) to (90,30)
-  oled.drawLine(30,30,90,30,BLUE);
+  oled.drawLine(30,30,90,30,ROYALBLUE);
 
   // Diagonal black line across the screen
   oled.drawLine(0,127,127,0,BLACK);
 
   // Draw a filled circle and then an outline of a circle around it
-  oled.drawFilledCircle(64,64,12,GREEN);
+  oled.drawFilledCircle(64,64,12,CYAN);
   oled.drawCircle(64,64,18,4,WHITE);
 
   // Draw a yellow box in the top-right

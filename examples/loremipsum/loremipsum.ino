@@ -86,7 +86,7 @@ static const char IPSUM[] PROGMEM  =
 void setup() {
   oled.initialiseDisplay();
   oled.selectFont(System5x7);
-  box.setForegroundColour(WHITE);
+  box.setForegroundColour(OLDLACE);
 }
 
 void loop() {
