@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2012-apr-16-27)-stable date = Mon 18 Mar 2013 09:59:35 EST
+Cmp-Mod V01 Created by CvPcb (2012-apr-16-27)-stable date = Tue 19 Mar 2013 09:13:13 EST
 
 BeginCmp
 TimeStamp = /511C4FBC;
@@ -85,7 +85,7 @@ IdModule  = 0603;
 EndCmp
 
 BeginCmp
-TimeStamp = /511C32E9;
+TimeStamp = /51479152;
 Reference = D1;
 ValeurCmp = MBR0540;
 IdModule  = SOD-123;
