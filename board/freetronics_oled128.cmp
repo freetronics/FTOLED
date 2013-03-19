@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2012-apr-16-27)-stable date = Tue 19 Mar 2013 09:13:13 EST
+Cmp-Mod V01 Created by CvPcb (2012-apr-16-27)-stable date = Tue 19 Mar 2013 15:15:13 EST
 
 BeginCmp
 TimeStamp = /511C4FBC;
@@ -85,7 +85,7 @@ IdModule  = 0603;
 EndCmp
 
 BeginCmp
-TimeStamp = /51479152;
+TimeStamp = /514791C6;
 Reference = D1;
 ValeurCmp = MBR0540;
 IdModule  = SOD-123;
@@ -113,6 +113,20 @@ IdModule  = 1210;
 EndCmp
 
 BeginCmp
+TimeStamp = /51479FB3;
+Reference = LED1;
+ValeurCmp = LED;
+IdModule  = LED3MM;
+EndCmp
+
+BeginCmp
+TimeStamp = /5147A6F3;
+Reference = LED2;
+ValeurCmp = LED;
+IdModule  = LED3MM;
+EndCmp
+
+BeginCmp
 TimeStamp = /511C2906;
 Reference = OLED1;
 ValeurCmp = OLED128_UG2828;
@@ -131,6 +145,20 @@ TimeStamp = /51259AC5;
 Reference = P2;
 ValeurCmp = MICROSD;
 IdModule  = MICRO-SD-SOCKET-PP;
+EndCmp
+
+BeginCmp
+TimeStamp = /5147E550;
+Reference = P3;
+ValeurCmp = M02X02;
+IdModule  = PIN_ARRAY_2X2;
+EndCmp
+
+BeginCmp
+TimeStamp = /5147E589;
+Reference = P4;
+ValeurCmp = M02X02;
+IdModule  = PIN_ARRAY_2X2;
 EndCmp
 
 BeginCmp
@@ -281,10 +309,38 @@ IdModule  = 0603;
 EndCmp
 
 BeginCmp
+TimeStamp = /5147A51E;
+Reference = R20;
+ValeurCmp = 470;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /5147A6EF;
+Reference = R21;
+ValeurCmp = 470;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
 TimeStamp = /511C4F2C;
 Reference = REG1;
 ValeurCmp = LP2985-33;
 IdModule  = SOT23-5;
+EndCmp
+
+BeginCmp
+TimeStamp = /5147A082;
+Reference = SW1;
+ValeurCmp = SW_PUSHBUTTON;
+IdModule  = SW_TC0122;
+EndCmp
+
+BeginCmp
+TimeStamp = /5147A6F1;
+Reference = SW2;
+ValeurCmp = SW_PUSHBUTTON;
+IdModule  = SW_TC0122;
 EndCmp
 
 BeginCmp
