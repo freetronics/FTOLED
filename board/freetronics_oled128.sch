@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Tue 19 Mar 2013 15:12:32 EST
+EESchema Schematic File Version 2  date Thu 21 Mar 2013 10:43:25 EST
 LIBS:freetronics_kicad_sch_lib
 LIBS:power
 LIBS:device
@@ -37,7 +37,7 @@ $Descr A4 11700 8267
 encoding utf-8
 Sheet 1 1
 Title "Freetronics OLED128              http://www.freetronics.com/oled128"
-Date "19 mar 2013"
+Date "20 mar 2013"
 Rev "0.9"
 Comp "(C)2013 Freetronics Pty Ltd"
 Comment1 "Released under TAPR Open Hardware License www.tapr.org/ohl"
@@ -1029,6 +1029,7 @@ U 1 1 511C32D5
 P 2400 5650
 F 0 "L1" H 2250 5600 40  0000 C CNN
 F 1 "6.8uH" H 2500 5600 40  0000 C CNN
+F 3 "6.8uH 1210 NLCV32T-6R8M-PF" H 2400 5650 60  0001 C CNN
 	1    2400 5650
 	1    0    0    -1  
 $EndComp
