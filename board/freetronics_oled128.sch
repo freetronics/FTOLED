@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Fri 19 Apr 2013 11:31:42 EST
+EESchema Schematic File Version 2  date Fri 19 Apr 2013 15:56:54 EST
 LIBS:freetronics_kicad_sch_lib
 LIBS:power
 LIBS:device
@@ -38,7 +38,7 @@ encoding utf-8
 Sheet 1 1
 Title "Freetronics OLED128              http://www.freetronics.com/oled128"
 Date "28 mar 2013"
-Rev "1.1"
+Rev "1.2"
 Comp "(C)2013 Freetronics Pty Ltd"
 Comment1 "Released under TAPR Open Hardware License www.tapr.org/ohl"
 Comment2 "SKU: OLED128"

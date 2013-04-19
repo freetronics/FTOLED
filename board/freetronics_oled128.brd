@@ -1,4 +1,4 @@
-PCBNEW-BOARD Version 2 date Fri 19 Apr 2013 15:27:26 EST
+PCBNEW-BOARD Version 2 date Fri 19 Apr 2013 15:57:04 EST
 
 # Created by Pcbnew(2013-mar-13)-testing
 
@@ -2734,7 +2734,7 @@ $EndTEXTPCB
 $TEXTPCB
 Te "128x128 OLED Module"
 nl "SKU: OLED128"
-nl "V1.1"
+nl "V1.2"
 Po 39.9415 24.8285 0.762 0.762 0.1905 900
 De 21 1 0 Normal R C
 $EndTEXTPCB
