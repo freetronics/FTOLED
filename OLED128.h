@@ -150,7 +150,7 @@ public:
   */
   inline void setGrayscaleTable_P(byte *table);
 
-  // TODO: gpio1 will probably end up being VCC
+  // TODO: gpio0 is OLED_VCC
   void setGPIO(OLED_GPIO_Mode gpio0, OLED_GPIO_Mode gpio1);
 
   /* Set display mode. See enum OLED_Display_Mode, above. */
@@ -168,8 +168,8 @@ public:
 
   uint16_t font;
 
-  inline void assertCS() { digitalWriteFast(pin_cs, LOW); }
-  inline void releaseCS() { digitalWriteFast(pin_cs, HIGH); }
+  inline void assertCS() { digitalWriteFast(pin_cs, HIGH); }
+  inline void releaseCS() { digitalWriteFast(pin_cs, LOW); }
 
   /* These protected methods are for implementing basic OLED commands.
      They all assume that the CS is asserted before they've been called

@@ -46,7 +46,7 @@ OLED::OLED(byte pin_cs, byte pin_dc, byte pin_reset, bool initialise_display) :
   SPI.setClockDivider(SPI_CLOCK_DIV2);
 
   pinMode(pin_cs, OUTPUT);
-  digitalWrite(pin_cs, HIGH);
+  digitalWrite(pin_cs, LOW);
   pinMode(pin_dc, OUTPUT);
   digitalWrite(pin_dc, HIGH);
   pinMode(pin_reset, OUTPUT);
@@ -117,9 +117,9 @@ void OLED::initialiseDisplay() {
 // setPixel has two methods, public method asserts/deasserts CS protected method doesn't
 void OLED::setPixel(const byte x, const byte y, const Colour colour)
 {
-  digitalWrite(pin_cs, LOW);
+  assertCS();
   _setPixel(x,y,colour);
-  digitalWrite(pin_cs, HIGH);
+  releaseCS();
 }
 
 inline void OLED::_setPixel(const byte x, const byte y, const Colour colour)
@@ -132,27 +132,26 @@ inline void OLED::_setPixel(const byte x, const byte y, const Colour colour)
 
 void OLED::setDisplayOn(bool on)
 {
-  // temporary VCC controls: TODO, make a GPIO from the module itself
-  const byte pin_vcc = 5; // TODO: make this a GPIO from the module itself
-  pinMode(pin_vcc, OUTPUT);
+  // GPIO0 drives OLED_VCC, driving it high turns on the boost converter
+  // module, driving it low turns it off.
 
   if(on) {
-    digitalWrite(pin_vcc, HIGH);
+    setGPIO(OLED_HIGH, OLED_HIZ);
     delay(100);
   }
-  assertCS();
+  assertCS(); 
   writeCommand(on ? 0xAF : 0xAE);
   releaseCS();
 
   if(!on) {
-    digitalWrite(pin_vcc, LOW);
+    setGPIO(OLED_LOW, OLED_HIZ);
     delay(100);
   }
 }
 
 void OLED::fillScreen(const Colour colour)
 {
-  digitalWrite(pin_cs, LOW);
+  assertCS();
   setColumn(0,COLUMN_MASK);
   setRow(0, ROW_MASK);
   setWriteRam();
@@ -161,7 +160,7 @@ void OLED::fillScreen(const Colour colour)
     _spi_transfer((colour.green>>3)|(colour.red<<3));
     _spi_transfer((colour.green<<5)|(colour.blue));
   }
-  digitalWrite(pin_cs, HIGH);
+  releaseCS();
 }
 
 void OLED::drawLine( int x1, int y1, int x2, int y2, Colour colour )
