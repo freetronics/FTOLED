@@ -6,25 +6,41 @@
  */
 #include "OLED128.h"
 
+OLED_TextBox::OLED_TextBox(OLED &oled)
+  :
+  oled(oled),
+  left(left),
+  bottom(bottom),
+  width(width),
+  height(height)
+{
+  initialise();
+}
+
 OLED_TextBox::OLED_TextBox(OLED &oled, int left, int bottom, int width, int height) :
   oled(oled),
   left(left),
   bottom(bottom),
   width(width),
-  height(height),
-  cur_x(0),
-  cur_y(height),
-  buf_sz(8),
-  foreground(WHITE),
-  background(BLACK)
+  height(height)
 {
+  initialise();
+}
+
+void OLED_TextBox::initialise()
+{
+  cur_x = 0;
+  cur_y = this->height;
+  buf_sz = 8;
+  foreground = WHITE;
+  background = BLACK;
   this->buffer = (char *)malloc(this->buf_sz);
   memset(this->buffer, 0, this->buf_sz);
 }
 
 size_t OLED_TextBox::write(uint8_t character) {
   struct FontHeader header;
-  memcpy_PF(&header, this->oled.font, sizeof(FontHeader));
+  memcpy_P(&header, (void *)this->oled.font, sizeof(FontHeader));
   uint8_t rowHeight = header.height+1;
 
   uint8_t char_width = oled.charWidth(character);

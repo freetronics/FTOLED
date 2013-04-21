@@ -14,7 +14,7 @@ int OLED::drawChar(const int x, const int y, const char letter, const Colour col
   if (x <0 || y < 0 || x >= COLUMNS || y >= ROWS) return -1;
 
   struct FontHeader header;
-  memcpy_PF(&header, this->font, sizeof(FontHeader));
+  memcpy_P(&header, (void*)this->font, sizeof(FontHeader));
 
   char c = letter;
   if (c == ' ') {
@@ -105,7 +105,7 @@ int OLED::charWidth(const char letter)
   uint8_t width = 0;
 
   struct FontHeader header;
-  memcpy_PF(&header, this->font, sizeof(FontHeader));
+  memcpy_P(&header, (void*)this->font, sizeof(FontHeader));
 
   uint16_t index = 0;
 
@@ -130,7 +130,7 @@ void OLED::drawString(int x, int y, const char *bChars, byte length, Colour fore
 	return;
 
     struct FontHeader header;
-    memcpy_PF(&header, this->font, sizeof(FontHeader));
+    memcpy_P(&header, (void*)this->font, sizeof(FontHeader));
 
     if (y+header.height<0)
       return;

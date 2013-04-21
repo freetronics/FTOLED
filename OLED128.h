@@ -39,7 +39,6 @@
 #include <avr/pgmspace.h>
 #include <SPI.h>
 #include <SD.h>
-#include <digitalWriteFast.h>
 #include "Print.h"
 
 #define ROWS 128
@@ -168,8 +167,8 @@ public:
 
   uint16_t font;
 
-  inline void assertCS() { digitalWriteFast(pin_cs, HIGH); }
-  inline void releaseCS() { digitalWriteFast(pin_cs, LOW); }
+  inline void assertCS() { digitalWrite(pin_cs, HIGH); }
+  inline void releaseCS() { digitalWrite(pin_cs, LOW); }
 
   /* These protected methods are for implementing basic OLED commands.
      They all assume that the CS is asserted before they've been called
@@ -360,7 +359,7 @@ public:
 class OLED_TextBox : public Print {
 public:
   OLED_TextBox(OLED &oled, int left, int bottom, int width, int height);
-  OLED_TextBox(OLED &oled) : OLED_TextBox(oled, 0, 0, COLUMNS, ROWS) { }
+  OLED_TextBox(OLED &oled);
   virtual size_t write(uint8_t);
   void clear();
   void reset();
@@ -382,6 +381,7 @@ private:
   Colour background;
   bool pending_newline;
 
+  void initialise();
   void scroll(uint8_t fontHeight);
   void clear_area();
 };
