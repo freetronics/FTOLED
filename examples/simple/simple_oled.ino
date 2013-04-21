@@ -1,3 +1,5 @@
+#include <SPI.h>
+#include <SD.h>
 #include <OLED.h>
 
 const byte pin_cs = 2;

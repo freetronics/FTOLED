@@ -3,6 +3,8 @@
  * keeping a solid 100% saturation value,
  * simulating slowly circling the HSV colour wheel.
  */
+#include <SPI.h>
+#include <SD.h>
 #include <OLED128.h>
 
 const byte pin_cs = 2;

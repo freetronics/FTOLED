@@ -1,6 +1,8 @@
 /*
  * A very simple sketch showing all the possible drawing operations you can do
  */
+#include <SPI.h>
+#include <SD.h>
 #include <OLED128.h>
 
 const byte pin_cs = 2;

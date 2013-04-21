@@ -1,3 +1,5 @@
+#include <SPI.h>
+#include <SD.h>
 #include <OLED128.h>
 #include <fonts/SystemFont5x7.h>
 
