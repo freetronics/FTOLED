@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Fri 19 Apr 2013 15:56:54 EST
+EESchema Schematic File Version 2  date Fri 03 May 2013 18:40:34 EST
 LIBS:freetronics_kicad_sch_lib
 LIBS:power
 LIBS:device
@@ -37,7 +37,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "Freetronics OLED128              http://www.freetronics.com/oled128"
-Date "28 mar 2013"
+Date "3 may 2013"
 Rev "1.2"
 Comp "(C)2013 Freetronics Pty Ltd"
 Comment1 "Released under TAPR Open Hardware License www.tapr.org/ohl"
@@ -134,19 +134,13 @@ Wire Wire Line
 Wire Wire Line
 	1200 4400 900  4400
 Wire Wire Line
-	1550 2100 1050 2100
+	2050 1600 1550 1600
 Wire Wire Line
-	1550 2000 1050 2000
+	2050 1500 1550 1500
 Wire Wire Line
-	1550 1900 1050 1900
+	2050 1400 1550 1400
 Wire Wire Line
-	1550 1800 1050 1800
-Wire Wire Line
-	1550 1700 1050 1700
-Wire Wire Line
-	1550 1600 1050 1600
-Wire Wire Line
-	1550 1500 1050 1500
+	2050 1300 1550 1300
 Connection ~ 9600 6450
 Wire Wire Line
 	9600 6450 10200 6450
@@ -174,11 +168,9 @@ Wire Wire Line
 	9250 2350 9700 2350
 Connection ~ 3100 1150
 Wire Wire Line
-	1700 1150 1700 1200
+	600  1150 600  1200
 Wire Wire Line
 	9700 3850 9650 3850
-Wire Wire Line
-	1700 1200 1050 1200
 Connection ~ 900  4650
 Wire Wire Line
 	750  4650 900  4650
@@ -300,9 +292,9 @@ Connection ~ 900  4250
 Wire Wire Line
 	9650 4050 9700 4050
 Wire Wire Line
-	1050 1300 1700 1300
+	1550 1200 2200 1200
 Wire Wire Line
-	1700 1300 1700 1350
+	2200 1200 2200 1250
 Wire Wire Line
 	3100 1300 3100 1150
 Wire Wire Line
@@ -322,8 +314,6 @@ Wire Wire Line
 Wire Wire Line
 	9600 6550 10200 6550
 Connection ~ 9600 6550
-Wire Wire Line
-	1550 1400 1050 1400
 Wire Wire Line
 	900  4400 900  4150
 Wire Wire Line
@@ -523,12 +513,12 @@ $EndComp
 $Comp
 L PWR_FLAG #FLG02
 U 1 1 5125963B
-P 1050 1200
-F 0 "#FLG02" H 1050 1295 30  0001 C CNN
-F 1 "PWR_FLAG" H 1050 1380 30  0000 C CNN
-F 2 "" H 1050 1200 60  0001 C CNN
-F 3 "" H 1050 1200 60  0001 C CNN
-	1    1050 1200
+P 900 1200
+F 0 "#FLG02" H 900 1295 30  0001 C CNN
+F 1 "PWR_FLAG" H 900 1380 30  0000 C CNN
+F 2 "" H 900 1200 60  0001 C CNN
+F 3 "" H 900 1200 60  0001 C CNN
+	1    900  1200
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -553,22 +543,11 @@ F 3 "" H 8950 3950 60  0001 C CNN
 	1    8950 3950
 	0    1    1    0   
 $EndComp
-$Comp
-L CONN_10 P1
-U 1 1 51243D0A
-P 700 1650
-F 0 "P1" V 650 1650 60  0000 C CNN
-F 1 "CONN_10" V 750 1650 60  0000 C CNN
-F 2 "" H 700 1650 60  0001 C CNN
-F 3 "" H 700 1650 60  0001 C CNN
-	1    700  1650
-	-1   0    0    -1  
-$EndComp
-Text Label 1214 1500 0    60   ~ 0
+Text Label 1714 1300 0    60   ~ 0
 uSD_CD
-Text Label 1162 1400 0    60   ~ 0
+Text Label 600  1300 0    60   ~ 0
 uSD_nCS
-Text Label 1332 1600 0    60   ~ 0
+Text Label 600  1400 0    60   ~ 0
 MISO
 Text Notes 8950 5150 0    80   ~ 0
 MicroSD Slot
@@ -783,7 +762,7 @@ F 3 "" H 7350 1950 60  0001 C CNN
 	1    7350 1950
 	1    0    0    -1  
 $EndComp
-Text Notes 1250 750  0    80   ~ 0
+Text Notes 850  750  0    80   ~ 0
 MCU Connector
 Text Notes 9050 700  0    80   ~ 0
 OLED Connector
@@ -807,36 +786,36 @@ NoConn ~ 9700 2250
 NoConn ~ 9700 3950
 NoConn ~ 9700 1650
 NoConn ~ 9700 3550
-Text Label 1116 2100 0    60   ~ 0
+Text Label 1616 1600 0    60   ~ 0
 OLED_RST
-Text Label 1096 2000 0    60   ~ 0
+Text Label 600  1600 0    60   ~ 0
 OLED_DNC
-Text Label 1108 1900 0    60   ~ 0
+Text Label 1608 1500 0    60   ~ 0
 OLED_CS
-Text Label 1374 1800 0    60   ~ 0
+Text Label 600  1500 0    60   ~ 0
 SCK
-Text Label 1332 1700 0    60   ~ 0
+Text Label 1832 1400 0    60   ~ 0
 MOSI
 $Comp
 L +5V #PWR014
 U 1 1 511C6AA9
-P 1700 1150
-F 0 "#PWR014" H 1700 1240 20  0001 C CNN
-F 1 "+5V" H 1700 1240 30  0000 C CNN
-F 2 "" H 1700 1150 60  0001 C CNN
-F 3 "" H 1700 1150 60  0001 C CNN
-	1    1700 1150
+P 600 1150
+F 0 "#PWR014" H 600 1240 20  0001 C CNN
+F 1 "+5V" H 600 1240 30  0000 C CNN
+F 2 "" H 600 1150 60  0001 C CNN
+F 3 "" H 600 1150 60  0001 C CNN
+	1    600  1150
 	-1   0    0    -1  
 $EndComp
 $Comp
 L GND #PWR015
 U 1 1 511C6A84
-P 1700 1350
-F 0 "#PWR015" H 1700 1350 30  0001 C CNN
-F 1 "GND" H 1700 1280 30  0001 C CNN
-F 2 "" H 1700 1350 60  0001 C CNN
-F 3 "" H 1700 1350 60  0001 C CNN
-	1    1700 1350
+P 2200 1250
+F 0 "#PWR015" H 2200 1250 30  0001 C CNN
+F 1 "GND" H 2200 1180 30  0001 C CNN
+F 2 "" H 2200 1250 60  0001 C CNN
+F 3 "" H 2200 1250 60  0001 C CNN
+	1    2200 1250
 	-1   0    0    -1  
 $EndComp
 Text Notes 5000 5850 0    60   ~ 0
@@ -1465,4 +1444,26 @@ F 4 "SSD1351" H 10450 2600 50  0001 C CNN "Controller"
 	1    10450 2600
 	1    0    0    -1  
 $EndComp
+$Comp
+L M02X05 P1
+U 1 1 5183782F
+P 1350 1200
+F 0 "P1" H 1250 1300 50  0000 C CNN
+F 1 "M02X05" H 1300 700 40  0000 C CNN
+F 2 "" H 1350 1200 60  0000 C CNN
+F 3 "" H 1350 1200 60  0000 C CNN
+	1    1350 1200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	600  1200 1050 1200
+Wire Wire Line
+	1050 1300 600  1300
+Wire Wire Line
+	1050 1400 600  1400
+Wire Wire Line
+	1050 1500 600  1500
+Wire Wire Line
+	1050 1600 600  1600
+Connection ~ 900  1200
 $EndSCHEMATC
