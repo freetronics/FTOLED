@@ -1,150 +1,10 @@
-Cmp-Mod V01 Created by CvPcb (2012-apr-16-27)-stable date = Wed 27 Mar 2013 17:46:41 EST
+Cmp-Mod V01 Created by CvPcb (2013-mar-13)-testing date = Tue 07 May 2013 12:13:58 EST
 
 BeginCmp
-TimeStamp = /511C4FBC;
-Reference = C1;
-ValeurCmp = 1uF;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /511C35BB;
-Reference = C2;
-ValeurCmp = 4.7uF__25V;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /511C35C6;
-Reference = C3;
-ValeurCmp = 100nF;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /511C2AFC;
-Reference = C4;
-ValeurCmp = 4.7uF_25V_TANT;
-IdModule  = 1206;
-EndCmp
-
-BeginCmp
-TimeStamp = /511C2B46;
-Reference = C5;
-ValeurCmp = 1uF;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /511C3723;
-Reference = C6;
-ValeurCmp = 22pF;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /511C3732;
-Reference = C7;
-ValeurCmp = 4.7uF__25V;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /511C3738;
-Reference = C8;
-ValeurCmp = 100nF;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /511C314C;
-Reference = C9;
-ValeurCmp = 1uF;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /511C318C;
-Reference = C10;
-ValeurCmp = 4.7uF;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /511C3191;
-Reference = C11;
-ValeurCmp = 100nF;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /512436E0;
-Reference = C12;
-ValeurCmp = 100nF;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /514791C6;
-Reference = D1;
-ValeurCmp = MBR0540;
-IdModule  = SOD-123;
-EndCmp
-
-BeginCmp
-TimeStamp = /511C358E;
-Reference = IC1;
-ValeurCmp = TPS61040;
-IdModule  = SOT23-5;
-EndCmp
-
-BeginCmp
-TimeStamp = /51246B91;
-Reference = JP1;
-ValeurCmp = GPIO1;
-IdModule  = 1X01;
-EndCmp
-
-BeginCmp
-TimeStamp = /511C32D5;
-Reference = L1;
-ValeurCmp = 6.8uH;
-IdModule  = 1210;
-EndCmp
-
-BeginCmp
-TimeStamp = /51479FB3;
-Reference = LED1;
-ValeurCmp = LED;
-IdModule  = LED3MM;
-EndCmp
-
-BeginCmp
-TimeStamp = /5147A6F3;
-Reference = LED2;
-ValeurCmp = LED;
-IdModule  = LED3MM;
-EndCmp
-
-BeginCmp
-TimeStamp = /511C2906;
-Reference = OLED1;
-ValeurCmp = OLED128_UG2828;
-IdModule  = OLED-128X128-FPC-TOP;
-EndCmp
-
-BeginCmp
-TimeStamp = /51243D0A;
-Reference = P1;
-ValeurCmp = CONN_10;
-IdModule  = DIL10;
-EndCmp
-
-BeginCmp
-TimeStamp = /51259AC5;
-Reference = P2;
-ValeurCmp = MICROSD;
-IdModule  = MICRO-SD-SOCKET-PP;
+TimeStamp = /5147E589;
+Reference = P4;
+ValeurCmp = M02X02;
+IdModule  = PIN_ARRAY_2X2;
 EndCmp
 
 BeginCmp
@@ -155,93 +15,72 @@ IdModule  = PIN_ARRAY_2X2;
 EndCmp
 
 BeginCmp
-TimeStamp = /5147E589;
-Reference = P4;
-ValeurCmp = M02X02;
-IdModule  = PIN_ARRAY_2X2;
+TimeStamp = /5147A6F3;
+Reference = LED2;
+ValeurCmp = LED;
+IdModule  = LED3MM;
 EndCmp
 
 BeginCmp
-TimeStamp = /5123076C;
-Reference = Q1;
-ValeurCmp = 2N7002;
-IdModule  = SOT23;
+TimeStamp = /5147A6F1;
+Reference = SW2;
+ValeurCmp = SW_PUSHBUTTON;
+IdModule  = SW_TC0122;
 EndCmp
 
 BeginCmp
-TimeStamp = /511C3956;
-Reference = R1;
-ValeurCmp = 10K;
-IdModule  = 0603;
+TimeStamp = /5147A6EF;
+Reference = R21;
+ValeurCmp = 470;
+IdModule  = R3;
 EndCmp
 
 BeginCmp
-TimeStamp = /511C2CAD;
-Reference = R2;
-ValeurCmp = 1K5;
-IdModule  = 0603;
+TimeStamp = /5147A51E;
+Reference = R20;
+ValeurCmp = 470;
+IdModule  = R3;
 EndCmp
 
 BeginCmp
-TimeStamp = /511C2D49;
-Reference = R3;
-ValeurCmp = 1K5;
-IdModule  = 0603;
+TimeStamp = /5147A082;
+Reference = SW1;
+ValeurCmp = SW_PUSHBUTTON;
+IdModule  = SW_TC0122;
 EndCmp
 
 BeginCmp
-TimeStamp = /5124357A;
-Reference = R4;
-ValeurCmp = 1K5;
-IdModule  = 0603;
+TimeStamp = /51479FB3;
+Reference = LED1;
+ValeurCmp = LED;
+IdModule  = LED3MM;
 EndCmp
 
 BeginCmp
-TimeStamp = /511C2DCF;
-Reference = R5;
-ValeurCmp = 2K7;
-IdModule  = 0603;
+TimeStamp = /514791C6;
+Reference = D1;
+ValeurCmp = MBR0540;
+IdModule  = SOD-123;
 EndCmp
 
 BeginCmp
-TimeStamp = /511C2DD9;
-Reference = R6;
-ValeurCmp = 2K7;
-IdModule  = 0603;
+TimeStamp = /51259AC5;
+Reference = P2;
+ValeurCmp = MICROSD;
+IdModule  = MICRO-SD-SOCKET-PP;
 EndCmp
 
 BeginCmp
-TimeStamp = /51243579;
-Reference = R7;
-ValeurCmp = 2K7;
-IdModule  = 0603;
+TimeStamp = /51246B91;
+Reference = JP1;
+ValeurCmp = GPIO1;
+IdModule  = 1X01;
 EndCmp
 
 BeginCmp
-TimeStamp = /511C368F;
-Reference = R8;
-ValeurCmp = 910K_1%;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /511C36A1;
-Reference = R9;
-ValeurCmp = 82K_1%;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /511C2B8F;
-Reference = R10;
-ValeurCmp = 47R__1/4W;
-IdModule  = 1206;
-EndCmp
-
-BeginCmp
-TimeStamp = /512307A5;
-Reference = R11;
-ValeurCmp = 4K7;
+TimeStamp = /512436E0;
+Reference = C12;
+ValeurCmp = 100nF;
 IdModule  = 0603;
 EndCmp
 
@@ -253,30 +92,121 @@ IdModule  = 0603;
 EndCmp
 
 BeginCmp
-TimeStamp = /511C2D4F;
-Reference = R13;
-ValeurCmp = 1K5;
+TimeStamp = /512307A5;
+Reference = R11;
+ValeurCmp = 4K7;
 IdModule  = 0603;
 EndCmp
 
 BeginCmp
-TimeStamp = /511C2D63;
-Reference = R14;
-ValeurCmp = 1K5;
+TimeStamp = /5123076C;
+Reference = Q1;
+ValeurCmp = 2N7002;
+IdModule  = SOT23;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C4FBC;
+Reference = C1;
+ValeurCmp = 1uF;
 IdModule  = 0603;
 EndCmp
 
 BeginCmp
-TimeStamp = /511C2E02;
-Reference = R15;
-ValeurCmp = 2K7;
+TimeStamp = /511C4F2C;
+Reference = REG1;
+ValeurCmp = LP2985-33;
+IdModule  = MODULE;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C3956;
+Reference = R1;
+ValeurCmp = 10K;
 IdModule  = 0603;
 EndCmp
 
 BeginCmp
-TimeStamp = /511C2F28;
-Reference = R16;
-ValeurCmp = 2K7;
+TimeStamp = /511C3738;
+Reference = C8;
+ValeurCmp = 100nF;
+IdModule  = 0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C3732;
+Reference = C7;
+ValeurCmp = 4.7uF  25V;
+IdModule  = 0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C3723;
+Reference = C6;
+ValeurCmp = 22pF;
+IdModule  = 0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C36A1;
+Reference = R9;
+ValeurCmp = 82K 1%;
+IdModule  = 0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C368F;
+Reference = R8;
+ValeurCmp = 910K 1%;
+IdModule  = 0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C35C6;
+Reference = C3;
+ValeurCmp = 100nF;
+IdModule  = 0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C35BB;
+Reference = C2;
+ValeurCmp = 4.7uF  25V;
+IdModule  = 0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C358E;
+Reference = IC1;
+ValeurCmp = TPS61040;
+IdModule  = SOT23-5;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C32D5;
+Reference = L1;
+ValeurCmp = 6.8uH;
+IdModule  = 1210;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C3191;
+Reference = C11;
+ValeurCmp = 100nF;
+IdModule  = 0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C318C;
+Reference = C10;
+ValeurCmp = 4.7uF;
+IdModule  = 0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C314C;
+Reference = C9;
+ValeurCmp = 1uF;
 IdModule  = 0603;
 EndCmp
 
@@ -288,59 +218,52 @@ IdModule  = 0603;
 EndCmp
 
 BeginCmp
-TimeStamp = /512438D5;
-Reference = R18;
-ValeurCmp = 1K5;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /512438C1;
-Reference = R19;
-ValeurCmp = 2K7;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /5147A51E;
-Reference = R20;
-ValeurCmp = 470;
-IdModule  = R3;
-EndCmp
-
-BeginCmp
-TimeStamp = /5147A6EF;
-Reference = R21;
-ValeurCmp = 470;
-IdModule  = R3;
-EndCmp
-
-BeginCmp
-TimeStamp = /511C4F2C;
-Reference = REG1;
-ValeurCmp = LP2985-33;
-IdModule  = SOT23-5;
-EndCmp
-
-BeginCmp
-TimeStamp = /5147A082;
-Reference = SW1;
-ValeurCmp = SW_PUSHBUTTON;
-IdModule  = SW_TC0122;
-EndCmp
-
-BeginCmp
-TimeStamp = /5147A6F1;
-Reference = SW2;
-ValeurCmp = SW_PUSHBUTTON;
-IdModule  = SW_TC0122;
-EndCmp
-
-BeginCmp
 TimeStamp = /511C2BA1;
 Reference = Z1;
 ValeurCmp = 2V4;
 IdModule  = SOD-123;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C2B8F;
+Reference = R10;
+ValeurCmp = 47R  1/4W;
+IdModule  = 1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C2B46;
+Reference = C5;
+ValeurCmp = 1uF;
+IdModule  = 0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C2AFC;
+Reference = C4;
+ValeurCmp = 4.7uF 25V TANT;
+IdModule  = 1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /511C2906;
+Reference = OLED1;
+ValeurCmp = OLED128_UG2828;
+IdModule  = OLED-128X128-FPC-TOP;
+EndCmp
+
+BeginCmp
+TimeStamp = /5183782F;
+Reference = P1;
+ValeurCmp = M02X05;
+IdModule  = DIL10;
+EndCmp
+
+BeginCmp
+TimeStamp = /518868F2;
+Reference = U1;
+ValeurCmp = MC74VHCT50A;
+IdModule  = SOIC14;
 EndCmp
 
 EndListe

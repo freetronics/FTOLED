@@ -1,684 +1,646 @@
-# EESchema Netlist Version 1.1 created  Thu 28 Mar 2013 11:28:06 EST
-(
- ( /5147E589 $noname  P4 M02X02 {Lib=M02X02}
-  (    1 N-000035 )
-  (    2 N-000039 )
-  (    3 N-000034 )
-  (    4 N-000038 )
- )
- ( /5147E550 $noname  P3 M02X02 {Lib=M02X02}
-  (    1 N-000031 )
-  (    2 N-000037 )
-  (    3 N-000033 )
-  (    4 N-000032 )
- )
- ( /5147A6F3 $noname  LED2 LED {Lib=LED}
-  (    A N-000039 )
-  (    K N-000036 )
- )
- ( /5147A6F1 $noname  SW2 SW_PUSHBUTTON {Lib=SW_PUSHBUTTON}
-  (    1 N-000038 )
-  (    2 N-000034 )
- )
- ( /5147A6EF $noname  R21 470 {Lib=R}
-  (    1 N-000036 )
-  (    2 N-000035 )
- )
- ( /5147A51E $noname  R20 470 {Lib=R}
-  (    1 N-000040 )
-  (    2 N-000031 )
- )
- ( /5147A082 $noname  SW1 SW_PUSHBUTTON {Lib=SW_PUSHBUTTON}
-  (    1 N-000032 )
-  (    2 N-000033 )
- )
- ( /51479FB3 $noname  LED1 LED {Lib=LED}
-  (    A N-000037 )
-  (    K N-000040 )
- )
- ( /514791C6 $noname  D1 MBR0540 {Lib=DIODE}
-  (    A N-000044 )
-  (    K /OLED_VCC )
- )
- ( /51259AC5 $noname  P2 MICROSD {Lib=MICROSD}
-  (    1 ? )
-  (    2 N-000013 )
-  (    3 /MOSI_3v3 )
-  (    4 +3.3V )
-  (    5 /SCK_3v3 )
-  (    6 GND )
-  (    7 /MISO_3v3 )
-  (    8 ? )
-  (  CD1 /uSD_CD )
-  (  CD2 GND )
-  ( GND1 GND )
-  ( GND2 GND )
- )
- ( /51246B91 $noname  JP1 GPIO1 {Lib=M01}
-  (    1 N-000024 )
- )
- ( /51243D0A $noname  P1 CONN_10 {Lib=CONN_10}
-  (    1 +5V )
-  (    2 GND )
-  (    3 /uSD_nCS )
-  (    4 /uSD_CD )
-  (    5 /MISO )
-  (    6 /MOSI )
-  (    7 /SCK )
-  (    8 /OLED_CS )
-  (    9 /OLED_DNC )
-  (   10 /OLED_RST )
- )
- ( /512438D5 $noname  R18 1K5 {Lib=R}
-  (    1 N-000013 )
-  (    2 /uSD_nCS )
- )
- ( /512438C1 $noname  R19 2K7 {Lib=R}
-  (    1 N-000013 )
-  (    2 GND )
- )
- ( /512436E0 $noname  C12 100nF {Lib=C}
-  (    1 +3.3V )
-  (    2 GND )
- )
- ( /5124357A $noname  R4 1K5 {Lib=R}
-  (    1 /MISO )
-  (    2 /MISO_3v3 )
- )
- ( /51243579 $noname  R7 2K7 {Lib=R}
-  (    1 /MISO_3v3 )
-  (    2 GND )
- )
- ( /5123083C $noname  R12 10K {Lib=R}
-  (    1 /OLED_CS )
-  (    2 GND )
- )
- ( /512307A5 $noname  R11 4K7 {Lib=R}
-  (    1 +3.3V )
-  (    2 N-000007 )
- )
- ( /5123076C SOT23  Q1 2N7002 {Lib=2N7002}
-  (    1 /OLED_CS )
-  (    2 GND )
-  (    3 N-000007 )
- )
- ( /511C4FBC $noname  C1 1uF {Lib=C}
-  (    1 +5V )
-  (    2 GND )
- )
- ( /511C4F2C MODULE  REG1 LP2985-33 {Lib=LP2985-33}
-  (    1 +5V )
-  (    2 GND )
-  (    3 +5V )
-  (    4 ? )
-  (    5 +3.3V )
- )
- ( /511C3956 $noname  R1 10K {Lib=R}
-  (    1 /VCC_ON )
-  (    2 GND )
- )
- ( /511C3738 $noname  C8 100nF {Lib=C}
-  (    1 /OLED_VCC )
-  (    2 GND )
- )
- ( /511C3732 $noname  C7 4.7uF__25V {Lib=C}
-  (    1 /OLED_VCC )
-  (    2 GND )
- )
- ( /511C3723 $noname  C6 22pF {Lib=C}
-  (    1 /OLED_VCC )
-  (    2 N-000008 )
- )
- ( /511C36A1 $noname  R9 82K_1% {Lib=R}
-  (    1 N-000008 )
-  (    2 GND )
- )
- ( /511C368F $noname  R8 910K_1% {Lib=R}
-  (    1 /OLED_VCC )
-  (    2 N-000008 )
- )
- ( /511C35C6 $noname  C3 100nF {Lib=C}
-  (    1 +5V )
-  (    2 GND )
- )
- ( /511C35BB $noname  C2 4.7uF__25V {Lib=C}
-  (    1 +5V )
-  (    2 GND )
- )
- ( /511C358E MODULE  IC1 TPS61040 {Lib=TPS61040}
-  (    1 N-000044 )
-  (    2 GND )
-  (    3 N-000008 )
-  (    4 /VCC_ON )
-  (    5 +5V )
- )
- ( /511C32D5 $noname  L1 6.8uH {Lib=INDUCTOR}
-  (    1 +5V )
-  (    2 N-000044 )
- )
- ( /511C3191 $noname  C11 100nF {Lib=C}
-  (    1 +3.3V )
-  (    2 GND )
- )
- ( /511C318C $noname  C10 4.7uF {Lib=C}
-  (    1 +3.3V )
-  (    2 GND )
- )
- ( /511C314C $noname  C9 1uF {Lib=C}
-  (    1 N-000027 )
-  (    2 GND )
- )
- ( /511C3079 $noname  R17 560K {Lib=R}
-  (    1 GND )
-  (    2 N-000029 )
- )
- ( /511C2F28 $noname  R16 2K7 {Lib=R}
-  (    1 N-000028 )
-  (    2 GND )
- )
- ( /511C2E02 $noname  R15 2K7 {Lib=R}
-  (    1 N-000025 )
-  (    2 GND )
- )
- ( /511C2DD9 $noname  R6 2K7 {Lib=R}
-  (    1 /SCK_3v3 )
-  (    2 GND )
- )
- ( /511C2DCF $noname  R5 2K7 {Lib=R}
-  (    1 /MOSI_3v3 )
-  (    2 GND )
- )
- ( /511C2D63 $noname  R14 1K5 {Lib=R}
-  (    1 /OLED_RST )
-  (    2 N-000028 )
- )
- ( /511C2D4F $noname  R13 1K5 {Lib=R}
-  (    1 /OLED_DNC )
-  (    2 N-000025 )
- )
- ( /511C2D49 $noname  R3 1K5 {Lib=R}
-  (    1 /SCK )
-  (    2 /SCK_3v3 )
- )
- ( /511C2CAD $noname  R2 1K5 {Lib=R}
-  (    1 /MOSI )
-  (    2 /MOSI_3v3 )
- )
- ( /511C2BA1 $noname  Z1 2V4 {Lib=ZENER}
-  (    A GND )
-  (    K N-000022 )
- )
- ( /511C2B8F $noname  R10 47R__1/4W {Lib=R}
-  (    1 N-000026 )
-  (    2 N-000022 )
- )
- ( /511C2B46 $noname  C5 1uF {Lib=C}
-  (    1 +3.3V )
-  (    2 GND )
- )
- ( /511C2AFC $noname  C4 4.7uF_25V_TANT {Lib=C}
-  (    1 N-000021 )
-  (    2 GND )
- )
- ( /511C2906 MODULE  OLED1 OLED128_UG2828 {Lib=OLED128_UG2828}
-  (    1 GND )
-  (    2 /OLED_VCC )
-  (    3 N-000021 )
-  (    4 +3.3V )
-  (    5 N-000026 )
-  (    6 ? )
-  (    7 GND )
-  (    8 GND )
-  (    9 GND )
-  (   10 GND )
-  (   11 GND )
-  (   12 ? )
-  (   13 /MOSI_3v3 )
-  (   14 /SCK_3v3 )
-  (   15 GND )
-  (   16 GND )
-  (   17 GND )
-  (   18 GND )
-  (   19 N-000007 )
-  (   20 N-000025 )
-  (   21 N-000028 )
-  (   22 N-000029 )
-  (   23 N-000024 )
-  (   24 /VCC_ON )
-  (   25 ? )
-  (   26 N-000027 )
-  (   27 +3.3V )
-  (   28 GND )
-  (   29 ? )
-  (   30 GND )
- )
-)
-*
-{ Allowed footprints by component:
-$component LED2
- LED-3MM
- LED-5MM
- LED-10MM
- LED-0603
- LED-0805
- LED-1206
- LEDV
-$endlist
-$component R21
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component R20
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component LED1
- LED-3MM
- LED-5MM
- LED-10MM
- LED-0603
- LED-0805
- LED-1206
- LEDV
-$endlist
-$component D1
- D?
- S*
-$endlist
-$component R18
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component R19
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component C12
- SM*
- C?
- C1-1
-$endlist
-$component R4
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component R7
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component R12
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component R11
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component Q1
- SOT23*
-$endlist
-$component C1
- SM*
- C?
- C1-1
-$endlist
-$component R1
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component C8
- SM*
- C?
- C1-1
-$endlist
-$component C7
- SM*
- C?
- C1-1
-$endlist
-$component C6
- SM*
- C?
- C1-1
-$endlist
-$component R9
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component R8
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component C3
- SM*
- C?
- C1-1
-$endlist
-$component C2
- SM*
- C?
- C1-1
-$endlist
-$component C11
- SM*
- C?
- C1-1
-$endlist
-$component C10
- SM*
- C?
- C1-1
-$endlist
-$component C9
- SM*
- C?
- C1-1
-$endlist
-$component R17
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component R16
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component R15
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component R6
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component R5
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component R14
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component R13
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component R3
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component R2
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component Z1
- D?
- SO*
- SM*
-$endlist
-$component R10
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component C5
- SM*
- C?
- C1-1
-$endlist
-$component C4
- SM*
- C?
- C1-1
-$endlist
-$endfootprintlist
-}
-{ Pin List by Nets
-Net 1 "GND" "GND"
- R7 2
- R16 2
- R15 2
- OLED1 1
- R6 2
- C4 2
- R12 2
- P1 2
- R17 1
- P2 6
- C10 2
- OLED1 9
- OLED1 28
- OLED1 18
- OLED1 17
- OLED1 16
- OLED1 15
- C11 2
- C9 2
- OLED1 11
- OLED1 30
- OLED1 10
- Z1 A
- R5 2
- C5 2
- C3 2
- C2 2
- IC1 2
- OLED1 7
- OLED1 8
- C7 2
- R9 2
- C1 2
- REG1 2
- R19 2
- P2 GND2
- P2 GND1
- P2 CD2
- C8 2
- R1 2
- Q1 2
- C12 2
-Net 7 "" ""
- Q1 3
- OLED1 19
- R11 2
-Net 8 "" ""
- C6 2
- R9 1
- IC1 3
- R8 2
-Net 9 "/OLED_VCC" "OLED_VCC"
- OLED1 2
- R8 1
- C8 1
- D1 K
- C7 1
- C6 1
-Net 10 "/VCC_ON" "VCC_ON"
- R1 1
- IC1 4
- OLED1 24
-Net 11 "+3.3V" "+3.3V"
- OLED1 27
- C12 1
- REG1 5
- C5 1
- P2 4
- C11 1
- C10 1
- OLED1 4
- R11 1
-Net 12 "/uSD_nCS" "uSD_nCS"
- P1 3
- R18 2
-Net 13 "" ""
- R18 1
- P2 2
- R19 1
-Net 14 "/OLED_RST" "OLED_RST"
- R14 1
- P1 10
-Net 15 "/OLED_DNC" "OLED_DNC"
- R13 1
- P1 9
-Net 16 "/OLED_CS" "OLED_CS"
- R12 1
- Q1 1
- P1 8
-Net 17 "/SCK" "SCK"
- R3 1
- P1 7
-Net 18 "/MOSI" "MOSI"
- P1 6
- R2 1
-Net 19 "/MISO" "MISO"
- R4 1
- P1 5
-Net 20 "/MISO_3v3" "MISO_3v3"
- R7 1
- R4 2
- P2 7
-Net 21 "" ""
- C4 1
- OLED1 3
-Net 22 "" ""
- R10 2
- Z1 K
-Net 23 "/SCK_3v3" "SCK_3v3"
- P2 5
- R6 1
- R3 2
- OLED1 14
-Net 24 "" ""
- OLED1 23
- JP1 1
-Net 25 "" ""
- OLED1 20
- R15 1
- R13 2
-Net 26 "" ""
- R10 1
- OLED1 5
-Net 27 "" ""
- OLED1 26
- C9 1
-Net 28 "" ""
- OLED1 21
- R14 2
- R16 1
-Net 29 "" ""
- OLED1 22
- R17 2
-Net 30 "/MOSI_3v3" "MOSI_3v3"
- R2 2
- OLED1 13
- P2 3
- R5 1
-Net 31 "" ""
- R20 2
- P3 1
-Net 32 "" ""
- SW1 1
- P3 4
-Net 33 "" ""
- P3 3
- SW1 2
-Net 34 "" ""
- P4 3
- SW2 2
-Net 35 "" ""
- R21 2
- P4 1
-Net 36 "" ""
- LED2 K
- R21 1
-Net 37 "" ""
- LED1 A
- P3 2
-Net 38 "" ""
- SW2 1
- P4 4
-Net 39 "" ""
- LED2 A
- P4 2
-Net 40 "" ""
- LED1 K
- R20 1
-Net 41 "/uSD_CD" "uSD_CD"
- P1 4
- P2 CD1
-Net 44 "" ""
- L1 2
- D1 A
- IC1 1
-Net 45 "+5V" "+5V"
- REG1 3
- C1 1
- REG1 1
- IC1 5
- L1 1
- C2 1
- C3 1
- P1 1
-}
-#End
+(export (version D)
+  (design
+    (source /home/gus/ft/oled/OLED128/board/freetronics_oled128.sch)
+    (date "Tue 07 May 2013 15:15:32 EST")
+    (tool "eeschema (2013-mar-13)-testing"))
+  (components
+    (comp (ref P4)
+      (value M02X02)
+      (libsource (lib freetronics_kicad_sch_lib) (part M02X02))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 5147E589))
+    (comp (ref P3)
+      (value M02X02)
+      (libsource (lib freetronics_kicad_sch_lib) (part M02X02))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 5147E550))
+    (comp (ref LED2)
+      (value LED)
+      (libsource (lib freetronics_kicad_sch_lib) (part LED))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 5147A6F3))
+    (comp (ref SW2)
+      (value SW_PUSHBUTTON)
+      (libsource (lib freetronics_kicad_sch_lib) (part SW_PUSHBUTTON))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 5147A6F1))
+    (comp (ref R21)
+      (value 470)
+      (libsource (lib device) (part R))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 5147A6EF))
+    (comp (ref R20)
+      (value 470)
+      (libsource (lib device) (part R))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 5147A51E))
+    (comp (ref SW1)
+      (value SW_PUSHBUTTON)
+      (libsource (lib freetronics_kicad_sch_lib) (part SW_PUSHBUTTON))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 5147A082))
+    (comp (ref LED1)
+      (value LED)
+      (libsource (lib freetronics_kicad_sch_lib) (part LED))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 51479FB3))
+    (comp (ref D1)
+      (value MBR0540)
+      (libsource (lib freetronics_kicad_sch_lib) (part DIODE))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 514791C6))
+    (comp (ref P2)
+      (value MICROSD)
+      (libsource (lib freetronics_kicad_sch_lib) (part MICROSD))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 51259AC5))
+    (comp (ref JP1)
+      (value GPIO1)
+      (libsource (lib freetronics_kicad_sch_lib) (part M01))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 51246B91))
+    (comp (ref C12)
+      (value 100nF)
+      (libsource (lib device) (part C))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 512436E0))
+    (comp (ref R12)
+      (value 10K)
+      (libsource (lib device) (part R))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 5123083C))
+    (comp (ref R11)
+      (value 4K7)
+      (libsource (lib device) (part R))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 512307A5))
+    (comp (ref Q1)
+      (value 2N7002)
+      (footprint SOT23)
+      (libsource (lib freetronics_kicad_sch_lib) (part 2N7002))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 5123076C))
+    (comp (ref C1)
+      (value 1uF)
+      (libsource (lib device) (part C))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C4FBC))
+    (comp (ref REG1)
+      (value LP2985-33)
+      (footprint MODULE)
+      (datasheet DOCUMENTATION)
+      (libsource (lib freetronics_kicad_sch_lib) (part LP2985-33))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C4F2C))
+    (comp (ref R1)
+      (value 10K)
+      (libsource (lib device) (part R))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C3956))
+    (comp (ref C8)
+      (value 100nF)
+      (libsource (lib device) (part C))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C3738))
+    (comp (ref C7)
+      (value "4.7uF  25V")
+      (libsource (lib device) (part C))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C3732))
+    (comp (ref C6)
+      (value 22pF)
+      (libsource (lib device) (part C))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C3723))
+    (comp (ref R9)
+      (value "82K 1%")
+      (libsource (lib device) (part R))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C36A1))
+    (comp (ref R8)
+      (value "910K 1%")
+      (libsource (lib device) (part R))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C368F))
+    (comp (ref C3)
+      (value 100nF)
+      (libsource (lib device) (part C))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C35C6))
+    (comp (ref C2)
+      (value "4.7uF  25V")
+      (libsource (lib device) (part C))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C35BB))
+    (comp (ref IC1)
+      (value TPS61040)
+      (footprint MODULE)
+      (datasheet DOCUMENTATION)
+      (libsource (lib freetronics_kicad_sch_lib) (part TPS61040))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C358E))
+    (comp (ref L1)
+      (value 6.8uH)
+      (datasheet "6.8uH 1210 NLCV32T-6R8M-PF")
+      (libsource (lib freetronics_kicad_sch_lib) (part INDUCTOR))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C32D5))
+    (comp (ref C11)
+      (value 100nF)
+      (libsource (lib device) (part C))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C3191))
+    (comp (ref C10)
+      (value 4.7uF)
+      (libsource (lib device) (part C))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C318C))
+    (comp (ref C9)
+      (value 1uF)
+      (libsource (lib device) (part C))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C314C))
+    (comp (ref R17)
+      (value 560K)
+      (libsource (lib device) (part R))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C3079))
+    (comp (ref Z1)
+      (value 2V4)
+      (libsource (lib freetronics_kicad_sch_lib) (part ZENER))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C2BA1))
+    (comp (ref R10)
+      (value "47R  1/4W")
+      (libsource (lib device) (part R))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C2B8F))
+    (comp (ref C5)
+      (value 1uF)
+      (libsource (lib device) (part C))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C2B46))
+    (comp (ref C4)
+      (value "4.7uF 25V TANT")
+      (libsource (lib device) (part C))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C2AFC))
+    (comp (ref OLED1)
+      (value OLED128_UG2828)
+      (footprint MODULE)
+      (datasheet DOCUMENTATION)
+      (fields
+        (field (name Controller) SSD1351))
+      (libsource (lib freetronics_kicad_sch_lib) (part OLED128_UG2828))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 511C2906))
+    (comp (ref P1)
+      (value M02X05)
+      (libsource (lib freetronics_kicad_sch_lib) (part M02X05))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 5183782F))
+    (comp (ref U1)
+      (value MC74VHCT50A)
+      (libsource (lib freetronics_kicad_sch_lib) (part MC74VHCT50A))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 518868F2)))
+  (libparts
+    (libpart (lib freetronics_kicad_sch_lib) (part 2N7002)
+      (footprints
+        (fp SOT23*))
+      (fields
+        (field (name Reference) Q)
+        (field (name Value) 2N7002)
+        (field (name Footprint) SOT23)
+        (field (name Datasheet) ~))
+      (pins
+        (pin (num 1) (name G) (type input))
+        (pin (num 2) (name S) (type passive))
+        (pin (num 3) (name D) (type passive))))
+    (libpart (lib freetronics_kicad_sch_lib) (part DIODE)
+      (footprints
+        (fp D?)
+        (fp S*))
+      (fields
+        (field (name Reference) D)
+        (field (name Value) DIODE)
+        (field (name Footprint) ~)
+        (field (name Datasheet) ~))
+      (pins
+        (pin (num A) (name A) (type passive))
+        (pin (num K) (name K) (type passive))))
+    (libpart (lib freetronics_kicad_sch_lib) (part INDUCTOR)
+      (fields
+        (field (name Reference) L)
+        (field (name Value) INDUCTOR)
+        (field (name Footprint) ~)
+        (field (name Datasheet) ~))
+      (pins
+        (pin (num 1) (name 1) (type passive))
+        (pin (num 2) (name 2) (type passive))))
+    (libpart (lib freetronics_kicad_sch_lib) (part LED)
+      (footprints
+        (fp LED-3MM)
+        (fp LED-5MM)
+        (fp LED-10MM)
+        (fp LED-0603)
+        (fp LED-0805)
+        (fp LED-1206)
+        (fp LEDV))
+      (fields
+        (field (name Reference) LED)
+        (field (name Value) LED)
+        (field (name Footprint) ~)
+        (field (name Datasheet) ~))
+      (pins
+        (pin (num A) (name A) (type passive))
+        (pin (num K) (name K) (type passive))))
+    (libpart (lib freetronics_kicad_sch_lib) (part LP2985-33)
+      (fields
+        (field (name Reference) REG)
+        (field (name Value) LP2985-33)
+        (field (name Footprint) MODULE)
+        (field (name Datasheet) DOCUMENTATION))
+      (pins
+        (pin (num 1) (name VIN) (type power_in))
+        (pin (num 2) (name GND) (type power_in))
+        (pin (num 3) (name ONOFF) (type input))
+        (pin (num 4) (name BYPASS) (type power_out))
+        (pin (num 5) (name VOUT) (type input))))
+    (libpart (lib freetronics_kicad_sch_lib) (part M01)
+      (fields
+        (field (name Reference) JP)
+        (field (name Value) M01)
+        (field (name Footprint) ~)
+        (field (name Datasheet) ~))
+      (pins
+        (pin (num 1) (name 1) (type passive))))
+    (libpart (lib freetronics_kicad_sch_lib) (part M02X02)
+      (fields
+        (field (name Reference) JP)
+        (field (name Value) M02X02)
+        (field (name Footprint) ~)
+        (field (name Datasheet) ~))
+      (pins
+        (pin (num 1) (name 1) (type passive))
+        (pin (num 2) (name 2) (type passive))
+        (pin (num 3) (name 3) (type passive))
+        (pin (num 4) (name 4) (type passive))))
+    (libpart (lib freetronics_kicad_sch_lib) (part M02X05)
+      (fields
+        (field (name Reference) JP)
+        (field (name Value) M02X05)
+        (field (name Footprint) ~)
+        (field (name Datasheet) ~))
+      (pins
+        (pin (num 1) (name 1) (type passive))
+        (pin (num 2) (name 2) (type passive))
+        (pin (num 3) (name 3) (type passive))
+        (pin (num 4) (name 4) (type passive))
+        (pin (num 5) (name 5) (type passive))
+        (pin (num 6) (name 6) (type passive))
+        (pin (num 7) (name 7) (type passive))
+        (pin (num 8) (name 8) (type passive))
+        (pin (num 9) (name 9) (type passive))
+        (pin (num 10) (name 10) (type passive))))
+    (libpart (lib freetronics_kicad_sch_lib) (part MC74VHCT50A)
+      (description "Hex noninverting buffer / CMOS Logic Level Shifter")
+      (footprints
+        (fp SOIC14)
+        (fp TSSOP14))
+      (fields
+        (field (name Reference) U)
+        (field (name Value) MC74VHCT50A)
+        (field (name Footprint) ~)
+        (field (name Datasheet) ~))
+      (pins
+        (pin (num 1) (name 1A) (type input))
+        (pin (num 2) (name 1Y) (type output))
+        (pin (num 3) (name 2A) (type input))
+        (pin (num 4) (name 2Y) (type output))
+        (pin (num 5) (name 3A) (type input))
+        (pin (num 6) (name 3Y) (type output))
+        (pin (num 7) (name GND) (type power_in))
+        (pin (num 8) (name 4Y) (type output))
+        (pin (num 9) (name 4A) (type input))
+        (pin (num 10) (name 5Y) (type output))
+        (pin (num 11) (name 5A) (type input))
+        (pin (num 12) (name 6Y) (type output))
+        (pin (num 13) (name 6A) (type input))
+        (pin (num 14) (name VCC) (type power_in))))
+    (libpart (lib freetronics_kicad_sch_lib) (part MICROSD)
+      (fields
+        (field (name Reference) P)
+        (field (name Value) MICROSD)
+        (field (name Footprint) ~)
+        (field (name Datasheet) ~))
+      (pins
+        (pin (num 1) (name NC) (type NotConnected))
+        (pin (num 2) (name CS#) (type input))
+        (pin (num 3) (name DI) (type input))
+        (pin (num 4) (name VCC) (type power_in))
+        (pin (num 5) (name SCK) (type input))
+        (pin (num 6) (name GND) (type power_in))
+        (pin (num 7) (name DO) (type output))
+        (pin (num 8) (name RSV) (type NotConnected))
+        (pin (num CD1) (name CD1) (type input))
+        (pin (num CD2) (name CD2) (type input))
+        (pin (num GND1) (name GND1) (type power_in))
+        (pin (num GND2) (name GND2) (type power_in))))
+    (libpart (lib freetronics_kicad_sch_lib) (part OLED128_UG2828)
+      (fields
+        (field (name Reference) U)
+        (field (name Value) OLED128_UG2828)
+        (field (name Footprint) MODULE)
+        (field (name Datasheet) DOCUMENTATION)
+        (field (name Controller) SSD1351))
+      (pins
+        (pin (num 1) (name "NC(GND)") (type power_in))
+        (pin (num 2) (name VCC) (type power_in))
+        (pin (num 3) (name VCOMH) (type power_out))
+        (pin (num 4) (name VDDIO) (type power_out))
+        (pin (num 5) (name VSL) (type power_out))
+        (pin (num 6) (name NC1) (type NotConnected))
+        (pin (num 7) (name D7) (type input))
+        (pin (num 8) (name D6) (type input))
+        (pin (num 9) (name D5) (type input))
+        (pin (num 10) (name D4) (type input))
+        (pin (num 11) (name D3) (type input))
+        (pin (num 12) (name D2) (type input))
+        (pin (num 13) (name D1) (type input))
+        (pin (num 14) (name D0) (type input))
+        (pin (num 15) (name E/RD#) (type input))
+        (pin (num 16) (name R/W#) (type input))
+        (pin (num 17) (name BS0) (type input))
+        (pin (num 18) (name BS1) (type input))
+        (pin (num 19) (name CS#) (type input))
+        (pin (num 20) (name D/C#) (type input))
+        (pin (num 21) (name RES#) (type input))
+        (pin (num 22) (name IREF) (type input))
+        (pin (num 23) (name GPIO1) (type BiDi))
+        (pin (num 24) (name GPIO0) (type BiDi))
+        (pin (num 25) (name NC2) (type NotConnected))
+        (pin (num 26) (name VDD) (type power_out))
+        (pin (num 27) (name VCI) (type power_in))
+        (pin (num 28) (name VSS) (type power_out))
+        (pin (num 29) (name NC3) (type NotConnected))
+        (pin (num 30) (name "NC(GND)") (type power_in))))
+    (libpart (lib freetronics_kicad_sch_lib) (part SW_PUSHBUTTON)
+      (fields
+        (field (name Reference) SW)
+        (field (name Value) SW_PUSHBUTTON)
+        (field (name Footprint) ~)
+        (field (name Datasheet) ~))
+      (pins
+        (pin (num 1) (name 1) (type passive))
+        (pin (num 2) (name 2) (type passive))))
+    (libpart (lib freetronics_kicad_sch_lib) (part TPS61040)
+      (fields
+        (field (name Reference) IC)
+        (field (name Value) TPS61040)
+        (field (name Footprint) MODULE)
+        (field (name Datasheet) DOCUMENTATION))
+      (pins
+        (pin (num 1) (name SW) (type power_out))
+        (pin (num 2) (name GND) (type power_in))
+        (pin (num 3) (name FB) (type input))
+        (pin (num 4) (name EN) (type input))
+        (pin (num 5) (name VIN) (type power_in))))
+    (libpart (lib freetronics_kicad_sch_lib) (part ZENER)
+      (footprints
+        (fp D?)
+        (fp SO*)
+        (fp SM*))
+      (fields
+        (field (name Reference) Z)
+        (field (name Value) ZENER)
+        (field (name Footprint) ~)
+        (field (name Datasheet) ~))
+      (pins
+        (pin (num A) (name A) (type passive))
+        (pin (num K) (name K) (type passive))))
+    (libpart (lib device) (part C)
+      (description "Condensateur non polarise")
+      (footprints
+        (fp SM*)
+        (fp C?)
+        (fp C1-1))
+      (fields
+        (field (name Reference) C)
+        (field (name Value) C)
+        (field (name Footprint) ~)
+        (field (name Datasheet) ~))
+      (pins
+        (pin (num 1) (name ~) (type passive))
+        (pin (num 2) (name ~) (type passive))))
+    (libpart (lib device) (part R)
+      (description Resistance)
+      (footprints
+        (fp R?)
+        (fp SM0603)
+        (fp SM0805)
+        (fp R?-*)
+        (fp SM1206))
+      (fields
+        (field (name Reference) R)
+        (field (name Value) R)
+        (field (name Footprint) ~)
+        (field (name Datasheet) ~))
+      (pins
+        (pin (num 1) (name ~) (type passive))
+        (pin (num 2) (name ~) (type passive)))))
+  (libraries
+    (library (logical freetronics_kicad_sch_lib)
+      (uri library/freetronics_kicad_sch_lib.lib))
+    (library (logical device)
+      (uri /usr/share/kicad/library/device.lib)))
+  (nets
+    (net (code 1) (name "")
+      (node (ref IC1) (pin 1))
+      (node (ref D1) (pin A))
+      (node (ref L1) (pin 2)))
+    (net (code 2) (name "")
+      (node (ref IC1) (pin 3))
+      (node (ref C6) (pin 2))
+      (node (ref R8) (pin 2))
+      (node (ref R9) (pin 1)))
+    (net (code 3) (name /SCK)
+      (node (ref U1) (pin 5))
+      (node (ref P1) (pin 7)))
+    (net (code 4) (name "")
+      (node (ref OLED1) (pin 22))
+      (node (ref R17) (pin 2)))
+    (net (code 5) (name +3.3V)
+      (node (ref R11) (pin 1))
+      (node (ref REG1) (pin 5))
+      (node (ref P2) (pin 4))
+      (node (ref C10) (pin 1))
+      (node (ref OLED1) (pin 27))
+      (node (ref C11) (pin 1))
+      (node (ref OLED1) (pin 4))
+      (node (ref C12) (pin 1))
+      (node (ref C5) (pin 1)))
+    (net (code 6) (name "")
+      (node (ref OLED1) (pin 29)))
+    (net (code 7) (name "")
+      (node (ref OLED1) (pin 25)))
+    (net (code 8) (name "")
+      (node (ref OLED1) (pin 6)))
+    (net (code 9) (name "")
+      (node (ref OLED1) (pin 12)))
+    (net (code 10) (name "")
+      (node (ref REG1) (pin 4)))
+    (net (code 11) (name "")
+      (node (ref OLED1) (pin 19))
+      (node (ref R11) (pin 2))
+      (node (ref Q1) (pin 3)))
+    (net (code 12) (name /OLED_CS)
+      (node (ref P1) (pin 8))
+      (node (ref R12) (pin 1))
+      (node (ref Q1) (pin 1)))
+    (net (code 13) (name /OLED_VCC)
+      (node (ref R8) (pin 1))
+      (node (ref OLED1) (pin 2))
+      (node (ref D1) (pin K))
+      (node (ref C6) (pin 1))
+      (node (ref C7) (pin 1))
+      (node (ref C8) (pin 1)))
+    (net (code 14) (name "")
+      (node (ref R10) (pin 2))
+      (node (ref Z1) (pin K)))
+    (net (code 15) (name /VCC_ON)
+      (node (ref OLED1) (pin 24))
+      (node (ref IC1) (pin 4))
+      (node (ref R1) (pin 1)))
+    (net (code 16) (name /MISO_3v3)
+      (node (ref U1) (pin 3))
+      (node (ref P2) (pin 7)))
+    (net (code 17) (name /uSD_nCS)
+      (node (ref U1) (pin 1))
+      (node (ref P1) (pin 3)))
+    (net (code 18) (name /MOSI)
+      (node (ref P1) (pin 6))
+      (node (ref U1) (pin 13)))
+    (net (code 19) (name /MOSI_3v3)
+      (node (ref U1) (pin 12))
+      (node (ref P2) (pin 3))
+      (node (ref OLED1) (pin 13)))
+    (net (code 20) (name /OLED_DNC)
+      (node (ref P1) (pin 9))
+      (node (ref U1) (pin 11)))
+    (net (code 21) (name /OLED_DNC_3v3)
+      (node (ref OLED1) (pin 20))
+      (node (ref U1) (pin 10)))
+    (net (code 22) (name /OLED_RST)
+      (node (ref U1) (pin 9))
+      (node (ref P1) (pin 10)))
+    (net (code 23) (name /OLED_RST_3v3)
+      (node (ref U1) (pin 8))
+      (node (ref OLED1) (pin 21)))
+    (net (code 24) (name /MISO)
+      (node (ref P1) (pin 5))
+      (node (ref U1) (pin 4)))
+    (net (code 25) (name /uSD_nCS_3v3)
+      (node (ref P2) (pin 2))
+      (node (ref U1) (pin 2)))
+    (net (code 26) (name GND)
+      (node (ref P2) (pin GND1))
+      (node (ref C12) (pin 2))
+      (node (ref P2) (pin 6))
+      (node (ref P2) (pin CD2))
+      (node (ref P2) (pin GND2))
+      (node (ref C9) (pin 2))
+      (node (ref C10) (pin 2))
+      (node (ref C11) (pin 2))
+      (node (ref Q1) (pin 2))
+      (node (ref R12) (pin 2))
+      (node (ref C7) (pin 2))
+      (node (ref C8) (pin 2))
+      (node (ref R1) (pin 2))
+      (node (ref IC1) (pin 2))
+      (node (ref C2) (pin 2))
+      (node (ref C3) (pin 2))
+      (node (ref REG1) (pin 2))
+      (node (ref Z1) (pin A))
+      (node (ref R9) (pin 2))
+      (node (ref R17) (pin 1))
+      (node (ref OLED1) (pin 9))
+      (node (ref OLED1) (pin 8))
+      (node (ref OLED1) (pin 7))
+      (node (ref C4) (pin 2))
+      (node (ref C5) (pin 2))
+      (node (ref OLED1) (pin 10))
+      (node (ref OLED1) (pin 28))
+      (node (ref P1) (pin 2))
+      (node (ref OLED1) (pin 18))
+      (node (ref OLED1) (pin 17))
+      (node (ref OLED1) (pin 16))
+      (node (ref OLED1) (pin 15))
+      (node (ref C1) (pin 2))
+      (node (ref U1) (pin 7))
+      (node (ref OLED1) (pin 1))
+      (node (ref OLED1) (pin 11))
+      (node (ref OLED1) (pin 30)))
+    (net (code 27) (name "")
+      (node (ref R10) (pin 1))
+      (node (ref OLED1) (pin 5)))
+    (net (code 28) (name "")
+      (node (ref OLED1) (pin 3))
+      (node (ref C4) (pin 1)))
+    (net (code 29) (name VCC)
+      (node (ref P1) (pin 1))
+      (node (ref C2) (pin 1))
+      (node (ref L1) (pin 1))
+      (node (ref IC1) (pin 5))
+      (node (ref C3) (pin 1))
+      (node (ref C1) (pin 1))
+      (node (ref REG1) (pin 3))
+      (node (ref REG1) (pin 1))
+      (node (ref U1) (pin 14)))
+    (net (code 30) (name "")
+      (node (ref C9) (pin 1))
+      (node (ref OLED1) (pin 26)))
+    (net (code 31) (name "")
+      (node (ref P3) (pin 1))
+      (node (ref R20) (pin 2)))
+    (net (code 32) (name "")
+      (node (ref P3) (pin 4))
+      (node (ref SW1) (pin 1)))
+    (net (code 33) (name "")
+      (node (ref SW1) (pin 2))
+      (node (ref P3) (pin 3)))
+    (net (code 34) (name "")
+      (node (ref SW2) (pin 2))
+      (node (ref P4) (pin 3)))
+    (net (code 35) (name "")
+      (node (ref P2) (pin 8)))
+    (net (code 36) (name "")
+      (node (ref P2) (pin 1)))
+    (net (code 37) (name "")
+      (node (ref R20) (pin 1))
+      (node (ref LED1) (pin K)))
+    (net (code 38) (name "")
+      (node (ref R21) (pin 1))
+      (node (ref LED2) (pin K)))
+    (net (code 39) (name /SCK_3v3)
+      (node (ref P2) (pin 5))
+      (node (ref U1) (pin 6))
+      (node (ref OLED1) (pin 14)))
+    (net (code 40) (name /uSD_CD)
+      (node (ref P2) (pin CD1))
+      (node (ref P1) (pin 4)))
+    (net (code 41) (name "")
+      (node (ref OLED1) (pin 23))
+      (node (ref JP1) (pin 1)))
+    (net (code 42) (name "")
+      (node (ref LED1) (pin A))
+      (node (ref P3) (pin 2)))
+    (net (code 43) (name "")
+      (node (ref SW2) (pin 1))
+      (node (ref P4) (pin 4)))
+    (net (code 44) (name "")
+      (node (ref LED2) (pin A))
+      (node (ref P4) (pin 2)))
+    (net (code 45) (name "")
+      (node (ref R21) (pin 2))
+      (node (ref P4) (pin 1)))))
