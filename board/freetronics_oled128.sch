@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Fri 03 May 2013 18:40:34 EST
+EESchema Schematic File Version 2  date Tue 07 May 2013 09:59:45 EST
 LIBS:freetronics_kicad_sch_lib
 LIBS:power
 LIBS:device
@@ -37,7 +37,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "Freetronics OLED128              http://www.freetronics.com/oled128"
-Date "3 may 2013"
+Date "6 may 2013"
 Rev "1.2"
 Comp "(C)2013 Freetronics Pty Ltd"
 Comment1 "Released under TAPR Open Hardware License www.tapr.org/ohl"
@@ -1466,4 +1466,11 @@ Wire Wire Line
 Wire Wire Line
 	1050 1600 600  1600
 Connection ~ 900  1200
+Connection ~ 3100 3000
+Connection ~ 3100 2100
+Connection ~ 9400 5550
+Connection ~ 8700 5350
+Connection ~ 9700 2150
+Connection ~ 9700 2550
+Connection ~ 9700 2750
 $EndSCHEMATC
