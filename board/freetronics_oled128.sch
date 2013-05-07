@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Tue 07 May 2013 15:14:32 EST
+EESchema Schematic File Version 2  date Tue 07 May 2013 16:04:23 EST
 LIBS:freetronics_kicad_sch_lib
 LIBS:power
 LIBS:device
@@ -562,17 +562,13 @@ F 3 "" H 9600 6050 60  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 Text Label 9800 5850 0    60   ~ 0
-MISO_3v3
+MISO
 Text Label 9818 5650 0    60   ~ 0
 SCK_3v3
 Text Label 9800 5450 0    60   ~ 0
 MOSI_3v3
 Text Notes 1350 3350 0    80   ~ 0
 SPI Level Shifting
-Text Label 2250 3950 0    60   ~ 0
-MISO
-Text Label 1450 3950 2    60   ~ 0
-MISO_3v3
 Text Label 2250 4050 0    60   ~ 0
 SCK_3v3
 Text Label 9250 2450 0    60   ~ 0
@@ -1069,7 +1065,7 @@ Text Label 1450 4250 2    60   ~ 0
 OLED_DNC
 Text Label 1450 4050 2    60   ~ 0
 SCK
-Text Label 1450 4350 2    60   ~ 0
+Text Label 1450 3950 2    60   ~ 0
 MOSI
 $Comp
 L GND #PWR030
@@ -1221,14 +1217,12 @@ F 3 "~" H 1850 4050 60  0000 C CNN
 	1    1850 4050
 	1    0    0    -1  
 $EndComp
-Text Label 2250 4350 0    60   ~ 0
+Text Label 2250 3950 0    60   ~ 0
 MOSI_3v3
 Wire Wire Line
 	1450 3750 1100 3750
 Wire Wire Line
 	1450 3850 1100 3850
-Wire Wire Line
-	1450 3950 1100 3950
 Wire Wire Line
 	1450 4050 1100 4050
 Wire Wire Line
@@ -1236,21 +1230,15 @@ Wire Wire Line
 Wire Wire Line
 	1450 4250 1100 4250
 Wire Wire Line
-	1450 4350 1100 4350
-Wire Wire Line
 	2250 3750 3050 3750
 Wire Wire Line
 	2250 3850 2600 3850
-Wire Wire Line
-	2250 3950 2600 3950
 Wire Wire Line
 	2250 4050 2600 4050
 Wire Wire Line
 	2250 4150 2600 4150
 Wire Wire Line
 	2250 4250 2600 4250
-Wire Wire Line
-	2250 4350 2600 4350
 Text Label 10200 5350 2    60   ~ 0
 uSD_nCS_3v3
 Wire Wire Line
@@ -1306,4 +1294,10 @@ F 3 "" H 3050 3850 60  0000 C CNN
 	1    3050 3850
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	2250 3950 2600 3950
+Wire Wire Line
+	1450 3950 1100 3950
+NoConn ~ 2250 4350
+NoConn ~ 1450 4350
 $EndSCHEMATC
