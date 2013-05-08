@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Tue 07 May 2013 16:04:23 EST
+EESchema Schematic File Version 2  date Wed 08 May 2013 09:40:02 EST
 LIBS:freetronics_kicad_sch_lib
 LIBS:power
 LIBS:device
@@ -1269,11 +1269,11 @@ F 3 "" H 1000 1650 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VCC #PWR036
+L +3.3V #PWR036
 U 1 1 5188866A
 P 1100 3650
 F 0 "#PWR036" H 1100 3750 30  0001 C CNN
-F 1 "VCC" H 1100 3750 30  0000 C CNN
+F 1 "+3.3V" H 1100 3750 30  0000 C CNN
 F 2 "" H 1100 3650 60  0000 C CNN
 F 3 "" H 1100 3650 60  0000 C CNN
 	1    1100 3650
