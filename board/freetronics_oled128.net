@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/gus/ft/oled/OLED128/board/freetronics_oled128.sch)
-    (date "Wed 08 May 2013 10:12:49 EST")
+    (date "Wed 08 May 2013 10:47:30 EST")
     (tool "eeschema (2013-mar-13)-testing"))
   (components
     (comp (ref P4)
@@ -128,7 +128,7 @@
       (sheetpath (names /) (tstamps /))
       (tstamp 511C35C6))
     (comp (ref C2)
-      (value "4.7uF  25V")
+      (value "10uF  16V")
       (libsource (lib device) (part C))
       (sheetpath (names /) (tstamps /))
       (tstamp 511C35BB))

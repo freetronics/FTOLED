@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Wed 08 May 2013 09:40:02 EST
+EESchema Schematic File Version 2  date Wed 08 May 2013 10:47:16 EST
 LIBS:freetronics_kicad_sch_lib
 LIBS:power
 LIBS:device
@@ -37,7 +37,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "Freetronics OLED128              http://www.freetronics.com/oled128"
-Date "7 may 2013"
+Date "8 may 2013"
 Rev "1.2"
 Comp "(C)2013 Freetronics Pty Ltd"
 Comment1 "Released under TAPR Open Hardware License www.tapr.org/ohl"
@@ -569,7 +569,7 @@ Text Label 9800 5450 0    60   ~ 0
 MOSI_3v3
 Text Notes 1350 3350 0    80   ~ 0
 SPI Level Shifting
-Text Label 2250 4050 0    60   ~ 0
+Text Label 2250 4250 0    60   ~ 0
 SCK_3v3
 Text Label 9250 2450 0    60   ~ 0
 SCK_3v3
@@ -906,7 +906,7 @@ L C C2
 U 1 1 511C35BB
 P 1150 6000
 F 0 "C2" H 1200 6100 50  0000 L CNN
-F 1 "4.7uF  25V" H 900 5900 50  0000 L CNN
+F 1 "10uF  16V" H 900 5900 50  0000 L CNN
 F 2 "" H 1150 6000 60  0001 C CNN
 F 3 "" H 1150 6000 60  0001 C CNN
 	1    1150 6000
@@ -1059,13 +1059,13 @@ F 3 "" H 9550 2650 60  0001 C CNN
 	1    9550 2650
 	1    0    0    -1  
 $EndComp
-Text Label 1450 4150 2    60   ~ 0
-OLED_RST
-Text Label 1450 4250 2    60   ~ 0
-OLED_DNC
-Text Label 1450 4050 2    60   ~ 0
-SCK
 Text Label 1450 3950 2    60   ~ 0
+OLED_RST
+Text Label 1450 4050 2    60   ~ 0
+OLED_DNC
+Text Label 1450 4250 2    60   ~ 0
+SCK
+Text Label 1450 4150 2    60   ~ 0
 MOSI
 $Comp
 L GND #PWR030
@@ -1217,7 +1217,7 @@ F 3 "~" H 1850 4050 60  0000 C CNN
 	1    1850 4050
 	1    0    0    -1  
 $EndComp
-Text Label 2250 3950 0    60   ~ 0
+Text Label 2250 4150 0    60   ~ 0
 MOSI_3v3
 Wire Wire Line
 	1450 3750 1100 3750
@@ -1253,9 +1253,9 @@ Text Label 9700 3050 2    60   ~ 0
 OLED_DNC_3v3
 Text Label 9700 3150 2    60   ~ 0
 OLED_RST_3v3
-Text Label 2250 4250 0    60   ~ 0
+Text Label 2250 4050 0    60   ~ 0
 OLED_DNC_3v3
-Text Label 2250 4150 0    60   ~ 0
+Text Label 2250 3950 0    60   ~ 0
 OLED_RST_3v3
 $Comp
 L VCC #PWR035
