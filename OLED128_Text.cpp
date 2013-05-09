@@ -6,7 +6,7 @@
 
 void OLED::selectFont(const uint8_t * font)
 {
-  this->font = (uint16_t) font;
+  this->font = (uint8_t *)font;
 }
 
 int OLED::drawChar(const int x, const int y, const char letter, const Colour colour, const Colour background)

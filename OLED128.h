@@ -165,7 +165,7 @@ public:
   byte pin_reset;
   byte remap_flags;
 
-  uint16_t font;
+  uint8_t *font;
 
   inline void assertCS() { digitalWrite(pin_cs, HIGH); }
   inline void releaseCS() { digitalWrite(pin_cs, LOW); }
