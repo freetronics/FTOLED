@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Wed 08 May 2013 11:16:51 EST
+EESchema Schematic File Version 2  date Thu 09 May 2013 17:07:11 EST
 LIBS:freetronics_kicad_sch_lib
 LIBS:power
 LIBS:device
@@ -37,7 +37,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "Freetronics OLED128              http://www.freetronics.com/oled128"
-Date "8 may 2013"
+Date "9 may 2013"
 Rev "1.2"
 Comp "(C)2013 Freetronics Pty Ltd"
 Comment1 "Released under TAPR Open Hardware License www.tapr.org/ohl"
@@ -1305,5 +1305,5 @@ Arduino Uno Pins:\nMOSI = 11\nMISO = 12\nSCK = 13
 Text Notes 2250 2050 0    60   ~ 0
 Arduino 6-pin\nICSP/SPI\nheader pins:\nMOSI = 4\nMISO = 1\nSCK = 3\nVCC = 2\nGnd = 6
 Text Notes 950  2600 0    60   ~ 0
-Default pins in example\nsketches (editable):\nOLED_CS = 2\nOLED_DNC = 3\nOLED_RST = 6
+Default pins in example\nsketches (editable):\nOLED_CS = 2\nOLED_DNC = 3\nOLED_RST = 6\nuSD nCS=4 (for sketches using MicroSD)
 $EndSCHEMATC
