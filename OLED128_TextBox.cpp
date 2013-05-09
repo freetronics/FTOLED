@@ -9,10 +9,10 @@
 OLED_TextBox::OLED_TextBox(OLED &oled)
   :
   oled(oled),
-  left(left),
-  bottom(bottom),
-  width(width),
-  height(height)
+  left(0),
+  bottom(0),
+  width(COLUMNS),
+  height(ROWS)
 {
   initialise();
 }
