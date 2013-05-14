@@ -5,8 +5,9 @@
 
 /*
  * This sketch just prints a chunk of the famous "filler text" Lorem
- * Ipsum[1] to the OLED display, scrolling as it goes. The sketch
- * pauses after each word for effect.
+ * Ipsum[1] to the OLED display, scrolling as it goes.
+ *
+ * The sketch pauses after each word for effect.
  *
  * Using the font "SystemFont5x7" and the full screen, the display can
  * show 25 characters across and 16 rows down.
