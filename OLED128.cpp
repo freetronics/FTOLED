@@ -34,12 +34,7 @@ static inline byte _spi_transfer(byte _data) {
   return SPDR;
 }
 
-OLED::OLED(byte pin_cs, byte pin_dc, byte pin_reset, bool initialise_display) :
-  pin_cs(pin_cs),
-  pin_dc(pin_dc),
-  pin_reset(pin_reset)
-{
-  // Initialise SPI port
+void OLED::begin() {
   SPI.begin();
   SPI.setBitOrder(MSBFIRST);
   SPI.setDataMode(SPI_MODE3);
@@ -52,11 +47,6 @@ OLED::OLED(byte pin_cs, byte pin_dc, byte pin_reset, bool initialise_display) :
   pinMode(pin_reset, OUTPUT);
   digitalWrite(pin_reset, HIGH);
 
-  if(initialise_display)
-    initialiseDisplay();
-}
-
-void OLED::initialiseDisplay() {
   digitalWrite(pin_reset, HIGH);
   delay(1);
   digitalWrite(pin_reset, LOW);

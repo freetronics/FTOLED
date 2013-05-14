@@ -16,7 +16,7 @@ const byte pin_cs = 2;
 const byte pin_dc = 3;
 const byte pin_reset = 6;
 
-OLED oled(pin_cs, pin_dc, pin_reset, false);
+OLED oled(pin_cs, pin_dc, pin_reset);
 
 const char *ARIAL_BLACK_16 = "Arial Black 16";
 const char *ARIAL_14 = "Arial 14";
@@ -26,7 +26,7 @@ const char *DS_36 = "DS 36";
 void setup() {
   Serial.begin(115200);
   Serial.print("init...");
-  oled.initialiseDisplay();
+  oled.begin();
 
   oled.selectFont(Arial_14);
   oled.drawString(10,16,ARIAL_14,strlen(ARIAL_14),VIOLET,BLACK);

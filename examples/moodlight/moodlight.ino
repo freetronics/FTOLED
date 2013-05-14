@@ -11,13 +11,13 @@ const byte pin_cs = 2;
 const byte pin_dc = 3;
 const byte pin_reset = 6;
 
-OLED oled(pin_cs, pin_dc, pin_reset, false);
+OLED oled(pin_cs, pin_dc, pin_reset);
 
 float angle;
 
 void setup()
 {
-  oled.initialiseDisplay();
+  oled.begin();
 }
 
 // Translate a hue "angle" -120 to 120 degrees (ie -2PI/3 to 2PI/3) to

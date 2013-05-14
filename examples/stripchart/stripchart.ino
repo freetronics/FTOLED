@@ -12,7 +12,7 @@ const byte pin_reset = 6;
 #include "OLED128.h"
 #include "fonts/SystemFont5x7.h"
 
-OLED oled(pin_cs, pin_dc, pin_reset, false);
+OLED oled(pin_cs, pin_dc, pin_reset);
 // Text box takes up bottom 32 characters of the display (ie 4 rows)
 OLED_TextBox box(oled, 0, 0, 128, 32);
 
@@ -28,7 +28,7 @@ uint8_t cur_sample = 0;
 uint8_t last_y[NUM_CHANNELS];
 
 void setup() {
-  oled.initialiseDisplay();
+  oled.begin();
   oled.selectFont(System5x7);
   box.setForegroundColour(DARKGREEN);
 }

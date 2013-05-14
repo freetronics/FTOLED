@@ -89,10 +89,13 @@ class OLED
 {
   friend class OLED_TextBox;
 public:
-  OLED(byte pin_cs, byte pin_dc, byte pin_reset, bool initialise_display);
-  OLED(byte pin_cs, byte pin_dc, byte pin_reset) { OLED(pin_cs, pin_dc, pin_reset, true); }
+  OLED(byte pin_cs, byte pin_dc, byte pin_reset) :
+    pin_cs(pin_cs),
+    pin_dc(pin_dc),
+    pin_reset(pin_reset)
+  {}
 
-  void initialiseDisplay();
+  void begin();
 
   // Set the colour of a single pixel
   void setPixel(const byte x, const byte y, const Colour colour);

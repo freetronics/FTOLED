@@ -11,7 +11,7 @@ const byte pin_cs = 2;
 const byte pin_dc = 3;
 const byte pin_reset = 6;
 
-OLED oled(pin_cs, pin_dc, pin_reset, false);
+OLED oled(pin_cs, pin_dc, pin_reset);
 OLED_TextBox box(oled);
 
 const int COUNTDOWN_FROM = 12;
@@ -19,7 +19,7 @@ int counter = COUNTDOWN_FROM;
 
 void setup() {
   Serial.begin(115200);
-  oled.initialiseDisplay();
+  oled.begin();
   oled.selectFont(Droid_Sans_24);
   box.setForegroundColour(LIMEGREEN);
 }

@@ -17,7 +17,7 @@ const byte pin_reset = 6;
 
 const byte pin_sd_cs = 4;
 
-OLED oled(pin_cs, pin_dc, pin_reset, false);
+OLED oled(pin_cs, pin_dc, pin_reset);
 
 const int FRAME_COUNT = 64;
 
@@ -25,7 +25,7 @@ const char *MSG_NOSD = "No MicroSD card!";
 
 void setup()
 {
-  oled.initialiseDisplay();
+  oled.begin();
   oled.selectFont(System5x7);
   Serial.begin(115200);
   while(!SD.begin(pin_sd_cs)) {
