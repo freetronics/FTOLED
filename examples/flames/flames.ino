@@ -9,6 +9,7 @@
 #include <SPI.h>
 #include <SD.h>
 #include <OLED128.h>
+#include <fonts/SystemFont5x7.h>
 
 const byte pin_cs = 2;
 const byte pin_dc = 3;
@@ -20,11 +21,17 @@ OLED oled(pin_cs, pin_dc, pin_reset, false);
 
 const int FRAME_COUNT = 64;
 
+const char *MSG_NOSD = "No MicroSD card!";
+
 void setup()
 {
-  Serial.begin(115200);
-  SD.begin(pin_sd_cs);
   oled.initialiseDisplay();
+  oled.selectFont(System5x7);
+  Serial.begin(115200);
+  while(!SD.begin(pin_sd_cs)) {
+    Serial.println("MicroSD card not found");
+    oled.drawString(0,0,MSG_NOSD,strlen(MSG_NOSD),RED,BLACK);
+  }
 }
 
 void loop()
