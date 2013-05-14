@@ -133,7 +133,7 @@ public:
   int charWidth(const char letter);
 
   // Draw a full string
-  void drawString(int x, int y, const char *bChars, byte length, Colour foreground, Colour background);
+  void drawString(int x, int y, const char *bChars, Colour foreground, Colour background);
 
   // Bitmap stuff
 
@@ -361,8 +361,7 @@ public:
 
 class OLED_TextBox : public Print {
 public:
-  OLED_TextBox(OLED &oled, int left, int bottom, int width, int height);
-  OLED_TextBox(OLED &oled);
+  OLED_TextBox(OLED &oled, int left = 0, int bottom = 0, int width = COLUMNS, int height = ROWS);
   virtual size_t write(uint8_t);
   void clear();
   void reset();
@@ -384,7 +383,6 @@ private:
   Colour background;
   bool pending_newline;
 
-  void initialise();
   void scroll(uint8_t fontHeight);
   void clear_area();
 };

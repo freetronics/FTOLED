@@ -19,18 +19,26 @@ const byte pin_sd_cs = 4;
 
 OLED oled(pin_cs, pin_dc, pin_reset);
 
+// Text box is used to display error messages if any frames
+// fail to load
+OLED_TextBox text(oled);
+
 const int FRAME_COUNT = 64;
 
-const char *MSG_NOSD = "No MicroSD card!";
+// Messages are stored in PROGMEM so don't take up RAM
+#define MSG_NOSD F("MicroSD card not found")
+#define MSG_SKIP F("Skipping missing frame ")
 
 void setup()
 {
   oled.begin();
   oled.selectFont(System5x7);
   Serial.begin(115200);
+  text.setForegroundColour(RED);
   while(!SD.begin(pin_sd_cs)) {
-    Serial.println("MicroSD card not found");
-    oled.drawString(0,0,MSG_NOSD,strlen(MSG_NOSD),RED,BLACK);
+    Serial.println(MSG_NOSD);
+    text.println(MSG_NOSD);
+    delay(500);
   }
 }
 
@@ -42,8 +50,11 @@ void loop()
     snprintf(filename, sizeof(filename), "frames/%03d.bmp", i);
     File frame = SD.open(filename);
     if(!frame) {
-      Serial.print("Skipping missing frame ");
+      Serial.print(MSG_SKIP);
       Serial.println(filename);
+      text.clear();
+      text.print(MSG_SKIP);
+      text.println(filename);
     }
     else {
       BMP_Status result = oled.displayBMP(frame, 0, 0);

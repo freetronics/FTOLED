@@ -6,36 +6,18 @@
  */
 #include "OLED128.h"
 
-OLED_TextBox::OLED_TextBox(OLED &oled)
-  :
-  oled(oled),
-  left(0),
-  bottom(0),
-  width(COLUMNS),
-  height(ROWS)
-{
-  initialise();
-}
-
 OLED_TextBox::OLED_TextBox(OLED &oled, int left, int bottom, int width, int height) :
   oled(oled),
   left(left),
   bottom(bottom),
   width(width),
-  height(height)
+  height(height),
+  cur_x(0),
+  cur_y(height),
+  buf_sz(0),
+  foreground(WHITE),
+  background(BLACK)
 {
-  initialise();
-}
-
-void OLED_TextBox::initialise()
-{
-  cur_x = 0;
-  cur_y = this->height;
-  buf_sz = 8;
-  foreground = WHITE;
-  background = BLACK;
-  this->buffer = (char *)malloc(this->buf_sz);
-  memset(this->buffer, 0, this->buf_sz);
 }
 
 size_t OLED_TextBox::write(uint8_t character) {
@@ -59,8 +41,8 @@ size_t OLED_TextBox::write(uint8_t character) {
   cur_x += char_width;
 
   // Check the buffer has enough space for this new character, grow it if not
-  uint16_t old_len = strlen(this->buffer);
-  if(old_len > this->buf_sz - 2) {
+  uint16_t old_len = this->buffer ? strlen(this->buffer) : 0;
+  if(this->buf_sz == 0 || old_len > this->buf_sz - 2) {
     this->buf_sz += 8;
     this->buffer = (char *)realloc(this->buffer, this->buf_sz);
   }

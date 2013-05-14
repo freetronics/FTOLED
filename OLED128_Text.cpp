@@ -124,7 +124,7 @@ int OLED::charWidth(const char letter)
   return width;
 }
 
-void OLED::drawString(int x, int y, const char *bChars, byte length, Colour foreground, Colour background)
+void OLED::drawString(int x, int y, const char *bChars, Colour foreground, Colour background)
 {
     if (x > COLUMNS || y > ROWS)
 	return;
@@ -139,21 +139,23 @@ void OLED::drawString(int x, int y, const char *bChars, byte length, Colour fore
     if(x >= 0)
       this->drawLine(x-1 , y, x-1 , y + header.height, background);
 
-    for (int i = 0; i < length; i++) {
-      if(bChars[i] == '\n') { // Newline
+    while(*bChars) {
+      if(*bChars == '\n') { // Newline
         strWidth = 0;
         y = y - header.height - 1;
-        continue;
       }
-      int charWide = this->drawChar(x+strWidth, y, bChars[i], foreground, background);
-      if (charWide > 0) {
-        strWidth += charWide ;
-        this->drawLine(x + strWidth , y, y + strWidth , y + header.height, background);
-        strWidth++;
-      } else if (charWide < 0) {
-        return;
+      else {
+        int charWide = this->drawChar(x+strWidth, y, *bChars, foreground, background);
+        if (charWide > 0) {
+          strWidth += charWide ;
+          this->drawLine(x + strWidth , y, y + strWidth , y + header.height, background);
+          strWidth++;
+        } else if (charWide < 0) {
+          return;
+        }
+        if (x + strWidth >= COLUMNS)
+          return;
       }
-      if (x + strWidth >= COLUMNS)
-        return;
+      bChars++;
     }
 }
