@@ -1,4 +1,4 @@
-PCBNEW-BOARD Version 2 date Tue 14 May 2013 16:05:30 EST
+PCBNEW-BOARD Version 2 date Tue 14 May 2013 16:07:44 EST
 
 # Created by Pcbnew(2013-mar-13)-testing
 
@@ -2515,7 +2515,7 @@ $EndTEXTPCB
 $TEXTPCB
 Te "+"
 Po 61.5315 24.765 1.524 1.524 0.3048 0
-De 20 1 0 Normal
+De 21 0 0 Normal
 $EndTEXTPCB
 $TEXTPCB
 Te "+"
