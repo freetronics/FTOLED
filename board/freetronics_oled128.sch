@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Tue 14 May 2013 16:39:14 EST
+EESchema Schematic File Version 2  date Mon 20 May 2013 08:44:48 EST
 LIBS:freetronics_kicad_sch_lib
 LIBS:power
 LIBS:device
@@ -37,7 +37,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "Freetronics OLED128              http://www.freetronics.com/oled128"
-Date "14 may 2013"
+Date "19 may 2013"
 Rev "1.2"
 Comp "(C)2013 Freetronics Pty Ltd"
 Comment1 "Released under TAPR Open Hardware License www.tapr.org/ohl"
@@ -655,9 +655,9 @@ NoConn ~ 9700 3950
 NoConn ~ 9700 1650
 NoConn ~ 9700 3550
 Text Label 2016 1750 0    60   ~ 0
-OLED_RST
+OLED_nRST
 Text Label 1000 1750 0    60   ~ 0
-OLED_DNC
+OLED_DnC
 Text Label 2008 1650 0    60   ~ 0
 OLED_CS
 Text Label 1000 1650 0    60   ~ 0
@@ -1060,9 +1060,9 @@ F 3 "" H 9550 2650 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 1450 3950 2    60   ~ 0
-OLED_RST
+OLED_nRST
 Text Label 1450 4050 2    60   ~ 0
-OLED_DNC
+OLED_DnC
 Text Label 1450 4250 2    60   ~ 0
 SCK
 Text Label 1450 4150 2    60   ~ 0
@@ -1250,13 +1250,13 @@ Wire Wire Line
 Wire Wire Line
 	9700 3050 9250 3050
 Text Label 9700 3050 2    60   ~ 0
-OLED_DNC_3v3
+OLED_DnC_3v3
 Text Label 9700 3150 2    60   ~ 0
-OLED_RST_3v3
+OLED_nRST_3v3
 Text Label 2250 4050 0    60   ~ 0
-OLED_DNC_3v3
+OLED_DnC_3v3
 Text Label 2250 3950 0    60   ~ 0
-OLED_RST_3v3
+OLED_nRST_3v3
 $Comp
 L VCC #PWR035
 U 1 1 51887C6C
@@ -1305,5 +1305,5 @@ Arduino Uno Pins:\nMOSI = 11\nMISO = 12\nSCK = 13
 Text Notes 2250 2050 0    60   ~ 0
 Arduino 6-pin\nICSP/SPI\nheader pins:\nMOSI = 4\nMISO = 1\nSCK = 3\nVCC = 2\nGnd = 6
 Text Notes 950  2600 0    60   ~ 0
-Default pins in example\nsketches (editable):\nOLED_CS = 2\nOLED_DNC = 3\nOLED_RST = 6\nuSD nCS=4 (for sketches using MicroSD)
+Default pins in example\nsketches (editable):\nOLED_CS = 2\nOLED_DnC = 3\nOLED_nRST = 6\nuSD nCS=4 (for sketches using MicroSD)
 $EndSCHEMATC
