@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-mar-13)-testing date = Tue 07 May 2013 12:13:58 EST
+Cmp-Mod V01 Created by CvPcb (2013-mar-13)-testing date = Mon 20 May 2013 08:57:07 EST
 
 BeginCmp
 TimeStamp = /5147E589;
@@ -85,27 +85,6 @@ IdModule  = 0603;
 EndCmp
 
 BeginCmp
-TimeStamp = /5123083C;
-Reference = R12;
-ValeurCmp = 10K;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /512307A5;
-Reference = R11;
-ValeurCmp = 4K7;
-IdModule  = 0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /5123076C;
-Reference = Q1;
-ValeurCmp = 2N7002;
-IdModule  = SOT23;
-EndCmp
-
-BeginCmp
 TimeStamp = /511C4FBC;
 Reference = C1;
 ValeurCmp = 1uF;
@@ -129,7 +108,7 @@ EndCmp
 BeginCmp
 TimeStamp = /511C3738;
 Reference = C8;
-ValeurCmp = 100nF;
+ValeurCmp = 100nF 25V;
 IdModule  = 0603;
 EndCmp
 
@@ -143,7 +122,7 @@ EndCmp
 BeginCmp
 TimeStamp = /511C3723;
 Reference = C6;
-ValeurCmp = 22pF;
+ValeurCmp = 22pF 25V;
 IdModule  = 0603;
 EndCmp
 
@@ -171,7 +150,7 @@ EndCmp
 BeginCmp
 TimeStamp = /511C35BB;
 Reference = C2;
-ValeurCmp = 4.7uF  25V;
+ValeurCmp = 10uF  16V;
 IdModule  = 0603;
 EndCmp
 
@@ -264,6 +243,13 @@ TimeStamp = /518868F2;
 Reference = U1;
 ValeurCmp = MC74VHCT50A;
 IdModule  = SOIC14;
+EndCmp
+
+BeginCmp
+TimeStamp = /512307A5;
+Reference = R11;
+ValeurCmp = 4K7;
+IdModule  = 0603;
 EndCmp
 
 EndListe
