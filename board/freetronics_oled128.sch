@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Mon 20 May 2013 09:59:06 EST
+EESchema Schematic File Version 2  date Mon 20 May 2013 10:04:34 EST
 LIBS:freetronics_kicad_sch_lib
 LIBS:power
 LIBS:device
@@ -1246,10 +1246,10 @@ $EndComp
 Wire Wire Line
 	9700 2950 7650 2950
 $Comp
-L +3.3V #PWR?
+L +3.3V #PWR036
 U 1 1 5199876C
 P 7650 2400
-F 0 "#PWR?" H 7650 2360 30  0001 C CNN
+F 0 "#PWR036" H 7650 2360 30  0001 C CNN
 F 1 "+3.3V" H 7650 2510 30  0000 C CNN
 F 2 "" H 7650 2400 60  0000 C CNN
 F 3 "" H 7650 2400 60  0000 C CNN
