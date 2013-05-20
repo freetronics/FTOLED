@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Mon 20 May 2013 10:04:34 EST
+EESchema Schematic File Version 2  date Mon 20 May 2013 16:55:55 EST
 LIBS:freetronics_kicad_sch_lib
 LIBS:power
 LIBS:device
@@ -37,7 +37,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "Freetronics OLED128              http://www.freetronics.com/oled128"
-Date "19 may 2013"
+Date "20 may 2013"
 Rev "1.2"
 Comp "(C)2013 Freetronics Pty Ltd"
 Comment1 "Released under TAPR Open Hardware License www.tapr.org/ohl"
@@ -1221,7 +1221,7 @@ Arduino 6-pin\nICSP/SPI\nheader pins:\nMOSI = 4\nMISO = 1\nSCK = 3\nVCC = 2\nGnd
 Text Notes 950  2600 0    60   ~ 0
 Default pins in example\nsketches (editable):\nOLED_CS = 2\nOLED_DnC = 3\nOLED_nRST = 6\nuSD nCS=4 (for sketches using MicroSD)
 Wire Wire Line
-	1100 4350 1450 4350
+	700  4350 1450 4350
 Wire Wire Line
 	2250 4350 2600 4350
 Text Label 2250 4350 0    60   ~ 0
@@ -1235,27 +1235,27 @@ Wire Wire Line
 $Comp
 L R R11
 U 1 1 51998687
-P 7650 2700
-F 0 "R11" V 7730 2700 40  0000 C CNN
-F 1 "4.7k" V 7657 2701 40  0000 C CNN
-F 2 "~" V 7580 2700 30  0000 C CNN
-F 3 "~" H 7650 2700 30  0000 C CNN
-	1    7650 2700
+P 700 4100
+F 0 "R11" V 780 4100 40  0000 C CNN
+F 1 "4.7k" V 707 4101 40  0000 C CNN
+F 2 "~" V 630 4100 30  0000 C CNN
+F 3 "~" H 700 4100 30  0000 C CNN
+	1    700  4100
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	9700 2950 7650 2950
+	9700 2950 9250 2950
 $Comp
-L +3.3V #PWR036
+L VCC #PWR036
 U 1 1 5199876C
-P 7650 2400
-F 0 "#PWR036" H 7650 2360 30  0001 C CNN
-F 1 "+3.3V" H 7650 2510 30  0000 C CNN
-F 2 "" H 7650 2400 60  0000 C CNN
-F 3 "" H 7650 2400 60  0000 C CNN
-	1    7650 2400
+P 700 3650
+F 0 "#PWR036" H 700 3610 30  0001 C CNN
+F 1 "VCC" H 700 3760 30  0000 C CNN
+F 2 "" H 700 3650 60  0000 C CNN
+F 3 "" H 700 3650 60  0000 C CNN
+	1    700  3650
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7650 2400 7650 2450
+	700  3650 700  3850
 $EndSCHEMATC
