@@ -1,3 +1,0 @@
-[submodule "board/library"]
-	path = board/library
-	url = git@github.com:freetronics/kicad_library.git
