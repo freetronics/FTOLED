@@ -1,10 +1,10 @@
-/* OLED128 TextBox implementation
+/* FTOLED TextBox implementation
  *
  * Allows a simple scrolling text box that implements the Arduino Print
  * interface, so you can write to it like a serial port or character
  * LCD display.
  */
-#include "OLED128.h"
+#include "FTOLED.h"
 
 OLED_TextBox::OLED_TextBox(OLED &oled, int left, int bottom, int width, int height) :
   oled(oled),

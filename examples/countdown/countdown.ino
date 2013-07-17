@@ -1,6 +1,6 @@
 #include <SPI.h>
 #include <SD.h>
-#include <OLED128.h>
+#include <FTOLED.h>
 #include <fonts/Droid_Sans_24.h>
 
 /*

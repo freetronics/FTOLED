@@ -53,7 +53,7 @@ struct Colour
   byte blue  : 5;
 };
 
-#include "OLED128_Colours.h"
+#include "FTOLED_Colours.h"
 
 const byte MAX_RED = 31;
 const byte MAX_GREEN = 63;

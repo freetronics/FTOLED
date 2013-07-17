@@ -8,11 +8,11 @@
  */
 #include <SPI.h>
 #include <SD.h>
-#include <OLED128.h>
+#include <FTOLED.h>
 #include <fonts/SystemFont5x7.h>
 
 const byte pin_cs = 2;
-const byte pin_dc = 3;
+const byte pin_dc = 5;
 const byte pin_reset = 6;
 
 const byte pin_sd_cs = 4;

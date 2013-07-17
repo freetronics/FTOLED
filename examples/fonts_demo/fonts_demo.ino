@@ -1,6 +1,6 @@
 #include <SPI.h>
 #include <SD.h>
-#include <OLED128.h>
+#include <FTOLED.h>
 #include <fonts/SystemFont5x7.h>
 #include <fonts/Arial14.h>
 #include <fonts/Arial_black_16.h>

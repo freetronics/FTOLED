@@ -1,6 +1,6 @@
 BOARD_TAG    = uno
 ARDUINO_PORT = /dev/ttyUSB0
-ARDUINO_LIBS = SPI OLED128 SD digitalWriteFast
+ARDUINO_LIBS = SPI FTOLED SD digitalWriteFast
 
 ARDUINO_DIR ?= /usr/share/arduino
 ARDMK_DIR     ?= /usr

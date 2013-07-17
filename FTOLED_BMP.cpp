@@ -1,8 +1,8 @@
-/* OLED128 BMP parsing and bitmap display routines for BMP files */
+/* FTOLED BMP parsing and bitmap display routines for BMP files */
 
 #include <stdint.h>
 
-#include <OLED128.h>
+#include <FTOLED.h>
 
 // Read a little-endian short word from a stream
 inline uint16_t readShort(Stream &s)

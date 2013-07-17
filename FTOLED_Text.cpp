@@ -1,8 +1,8 @@
-/* OLED128 Text display and font parsing routines
+/* FTOLED Text display and font parsing routines
  *
  * Based on text routines from the DMD LED display modules
  */
-#include <OLED128.h>
+#include <FTOLED.h>
 
 void OLED::selectFont(const uint8_t * font)
 {

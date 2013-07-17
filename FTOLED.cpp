@@ -1,4 +1,4 @@
-#include <OLED128.h>
+#include <FTOLED.h>
 
 // Clamp a value between two limits
 template<typename T> inline void clamp(T &value, T lower, T upper) {

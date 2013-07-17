@@ -9,7 +9,7 @@ const byte pin_reset = 6;
 
 #include <SPI.h>
 #include <SD.h>
-#include "OLED128.h"
+#include "FTOLED.h"
 #include "fonts/SystemFont5x7.h"
 
 OLED oled(pin_cs, pin_dc, pin_reset);
