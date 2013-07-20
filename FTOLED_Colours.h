@@ -124,7 +124,6 @@ const Colour TOMATO               = { 255/8,  99/4,  71/8 };
 const Colour ORANGERED            = { 255/8,  69/4,   0/8 };
 const Colour HOTPINK              = { 255/8, 105/4, 180/8 };
 const Colour DEEPPINK             = { 255/8,  20/4, 147/8 };
-const Colour PINK                 = { 255/8, 192/4, 203/8 };
 const Colour LIGHTPINK            = { 255/8, 182/4, 193/8 };
 const Colour PALEVIOLETRED        = { 219/8, 112/4, 147/8 };
 const Colour MAROON               = { 176/8,  48/4,  96/8 };
