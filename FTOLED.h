@@ -89,8 +89,8 @@ class OLED
 {
   friend class OLED_TextBox;
 public:
-  OLED(byte pin_cs, byte pin_dc, byte pin_reset) :
-    pin_cs(pin_cs),
+  OLED(byte pin_ncs, byte pin_dc, byte pin_reset) :
+    pin_ncs(pin_ncs),
     pin_dc(pin_dc),
     pin_reset(pin_reset)
   {}
@@ -163,15 +163,15 @@ public:
   }
 
  protected:
-  byte pin_cs;
+  byte pin_ncs;
   byte pin_dc;
   byte pin_reset;
   byte remap_flags;
 
   uint8_t *font;
 
-  inline void assertCS() { digitalWrite(pin_cs, HIGH); }
-  inline void releaseCS() { digitalWrite(pin_cs, LOW); }
+  inline void assertCS() { digitalWrite(pin_ncs, LOW); }
+  inline void releaseCS() { digitalWrite(pin_ncs, HIGH); }
 
   /* These protected methods are for implementing basic OLED commands.
      They all assume that the CS is asserted before they've been called
@@ -388,7 +388,6 @@ private:
 };
 
 // Six byte header at beginning of FontCreator font structure in PROGMEM
-__attribute__((packed))
 struct FontHeader {
   uint16_t size;
   uint8_t fixedWidth;

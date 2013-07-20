@@ -40,8 +40,8 @@ void OLED::begin() {
   SPI.setDataMode(SPI_MODE3);
   SPI.setClockDivider(SPI_CLOCK_DIV2);
 
-  pinMode(pin_cs, OUTPUT);
-  digitalWrite(pin_cs, LOW);
+  pinMode(pin_ncs, OUTPUT);
+  digitalWrite(pin_ncs, HIGH);
   pinMode(pin_dc, OUTPUT);
   digitalWrite(pin_dc, HIGH);
   pinMode(pin_reset, OUTPUT);
