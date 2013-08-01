@@ -1,5 +1,9 @@
 #include <FTOLED.h>
 
+#ifndef __AVR__
+#define PROGMEM
+#endif
+
 // Clamp a value between two limits
 template<typename T> inline void clamp(T &value, T lower, T upper) {
   if(value < lower)
@@ -25,6 +29,7 @@ template<typename T> inline void ensureOrder(T &a, T &b)
   if(b<a) swap(a,b);
 }
 
+#ifdef __AVR__
 // I don't know why, but although spi.transfer() is declared
 // inline it won't inline, but this method will... they're both available at link time?!?
 static inline byte _spi_transfer(byte _data) {
@@ -33,12 +38,21 @@ static inline byte _spi_transfer(byte _data) {
     ;
   return SPDR;
 }
+#else
+static inline byte _spi_transfer(byte _data) {
+  return SPI.transfer(_data);
+}
+#endif
 
 void OLED::begin() {
   SPI.begin();
   SPI.setBitOrder(MSBFIRST);
   SPI.setDataMode(SPI_MODE3);
-  SPI.setClockDivider(SPI_CLOCK_DIV2);
+#ifdef __AVR__
+  SPI.setClockDivider(SPI_CLOCK_DIV2); // 8MHz on standard Arduino models
+#else
+  SPI.setClockDivider(5); // 16.8MHz
+#endif
 
   pinMode(pin_ncs, OUTPUT);
   digitalWrite(pin_ncs, HIGH);
@@ -352,7 +366,7 @@ void OLED::setGrayscaleTableSystemDefaults()
 
 void OLED::setBrightGrayscaleTable()
 {
-  byte PROGMEM table[64] = { 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+  const byte PROGMEM table[64] = { 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
                              12, 13, 14, 15, 16, 17, 18, 19, 21,
                              23, 25, 27, 29, 31, 33, 35, 37, 39,
                              42, 45, 48, 51, 54, 57, 60, 63, 66,
@@ -365,7 +379,7 @@ void OLED::setBrightGrayscaleTable()
 
 void OLED::setDimGrayscaleTable()
 {
-  byte PROGMEM table[64] = {0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6,
+  const byte PROGMEM table[64] = {0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6,
                             6, 7, 7, 8, 8, 9, 9, 10, 11, 12, 13,
                             14, 15, 16, 17, 18, 19, 21, 22, 24,
                             25, 27, 28, 30, 31, 33, 34, 36, 38,
@@ -375,11 +389,12 @@ void OLED::setDimGrayscaleTable()
   setGrayscaleTable_P(table);
 }
 
-void OLED::setGrayscaleTable_P(byte *table)
+void OLED::setGrayscaleTable_P(const byte *table)
 {
   writeCommand(0xB8);
-  for(int gs = 0; gs < 63; gs++)
-    writeData(pgm_read_byte_near(table+gs));
+  for(int gs = 0; gs < 63; gs++) {
+    writeData(pgm_read_byte(table+gs));
+  }
 }
 
 void OLED::setGPIO(OLED_GPIO_Mode gpio0, OLED_GPIO_Mode gpio1)

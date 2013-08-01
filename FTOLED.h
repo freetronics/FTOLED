@@ -36,10 +36,18 @@
 #endif
 
 #include "pins_arduino.h"
-#include <avr/pgmspace.h>
 #include <SPI.h>
 #include <SD.h>
 #include "Print.h"
+
+#ifdef __AVR__
+#include <avr/progmem.h>
+#else
+// Stub out some common progmem definitions for ARM processors
+#define memcpy_P memcpy
+static inline uint8_t pgm_read_byte(const uint8_t *addr) { return *addr; }
+#endif
+
 
 #define ROWS 128
 #define COLUMNS 128
@@ -150,7 +158,7 @@ public:
      strictly incrementing (see section 8.8 in the datasheet.) Values
      in the table can have values 0-180.
   */
-  inline void setGrayscaleTable_P(byte *table);
+  inline void setGrayscaleTable_P(const byte *table);
 
   // TODO: gpio0 is OLED_VCC
   void setGPIO(OLED_GPIO_Mode gpio0, OLED_GPIO_Mode gpio1);
@@ -387,7 +395,7 @@ private:
   void clear_area();
 };
 
-// Six byte header at beginning of FontCreator font structure in PROGMEM
+// Six byte header at beginning of FontCreator font structure, stored in PROGMEM
 struct FontHeader {
   uint16_t size;
   uint8_t fixedWidth;

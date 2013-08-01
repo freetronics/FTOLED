@@ -37,7 +37,11 @@
  */
 
 #include <inttypes.h>
+#ifdef __AVR__
 #include <avr/pgmspace.h>
+#else
+#define PROGMEM
+#endif
 
 #ifndef DROID_SANS_36_H
 #define DROID_SANS_36_H

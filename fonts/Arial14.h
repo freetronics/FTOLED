@@ -37,7 +37,11 @@
  */
 
 #include <inttypes.h>
+#ifdef __AVR__
 #include <avr/pgmspace.h>
+#else
+#define PROGMEM
+#endif
 
 #ifndef ARIAL_14_H
 #define ARIAL_14_H
