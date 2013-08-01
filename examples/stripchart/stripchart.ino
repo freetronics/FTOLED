@@ -3,9 +3,9 @@
  * raw numeric values written in text below
  */
 
-const byte pin_cs = 2;
-const byte pin_dc = 3;
-const byte pin_reset = 6;
+const byte pin_cs = 7;
+const byte pin_dc = 2;
+const byte pin_reset = 3;
 
 #include <SPI.h>
 #include <SD.h>

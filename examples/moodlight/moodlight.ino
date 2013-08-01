@@ -7,9 +7,9 @@
 #include <SD.h>
 #include <FTOLED.h>
 
-const byte pin_cs = 2;
-const byte pin_dc = 3;
-const byte pin_reset = 6;
+const byte pin_cs = 7;
+const byte pin_dc = 2;
+const byte pin_reset = 3;
 
 OLED oled(pin_cs, pin_dc, pin_reset);
 

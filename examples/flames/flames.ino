@@ -11,9 +11,9 @@
 #include <FTOLED.h>
 #include <fonts/SystemFont5x7.h>
 
-const byte pin_cs = 2;
+const byte pin_cs = 7;
 const byte pin_dc = 5;
-const byte pin_reset = 6;
+const byte pin_reset = 3;
 
 const byte pin_sd_cs = 4;
 
