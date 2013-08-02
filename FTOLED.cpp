@@ -95,21 +95,6 @@ void OLED::begin() {
 
   assertCS();
 
-  // // // TODO: Work out what this is, command B2h undocumented in datasheet
-  //Set_Display_Enhancement(0xA4);		// Enhance Display Performance "Enhance Driving Scheme Capability"
-  //writeCommand(0xB2);			// Display Enhancement
-  //writeData(0xA4);				//   Default => 0x00 (Normal)
-  //writeData(0x00);
-  //writeData(0x00);
-
-  // // setPrechargeVoltage(0x17);		// Default precharge voltage, VCC/2
-  // // setPrechargePeriod(1); // Commented as this seems short, think maybe it goes w/ prev command
-
-  // // // Set VCOMH, 0x05 is default
-  // // writeCommand(0xBE, 0x05);
-
-  // // setDisplayMode(DISPLAY_NORMAL);
-
   setMultiPlexRatio(0x7F);		  // 1/128 Duty (0x0F~0x7F)
 
   releaseCS();
