@@ -45,7 +45,7 @@
 #else
 // Stub out some common progmem definitions for ARM processors
 #define memcpy_P memcpy
-static inline uint8_t pgm_read_byte(const uint8_t *addr) { return *addr; }
+static inline uint8_t pgm_read_byte(const void *addr) { return *((uint8_t *)addr); }
 #endif
 
 
