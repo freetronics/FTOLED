@@ -91,8 +91,7 @@ void OLED::begin() {
 
   releaseCS();
 
-  //setGrayscaleTableSystemDefaults();
-  setBrightGrayscaleTable();
+  setDefaultGrayscaleTable();
 
   assertCS();
 
@@ -359,7 +358,7 @@ void OLED::drawFilledCircle( int xCenter, int yCenter, int radius, Colour fillCo
   }
 }
 
-void OLED::setGrayscaleTableSystemDefaults()
+void OLED::setDefaultGrayscaleTable()
 {
   assertCS();
   writeCommand(0xB9);
@@ -393,10 +392,12 @@ void OLED::setDimGrayscaleTable()
 
 void OLED::setGrayscaleTable_P(const byte *table)
 {
+  assertCS();
   writeCommand(0xB8);
   for(int gs = 0; gs < 63; gs++) {
     writeData(pgm_read_byte(table+gs));
   }
+  releaseCS();
 }
 
 void OLED::setGPIO(OLED_GPIO_Mode gpio0, OLED_GPIO_Mode gpio1)

@@ -149,7 +149,7 @@ public:
   BMP_Status displayBMP(File &source, const int x, const int y);
 
   /* Set the grayscale table for pixel brightness to one of these precanned defaults */
-  void setGrayscaleTableSystemDefaults();
+  void setDefaultGrayscaleTable();
   void setBrightGrayscaleTable();
   void setDimGrayscaleTable();
 
