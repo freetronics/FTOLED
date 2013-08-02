@@ -41,7 +41,7 @@
 #include "Print.h"
 
 #ifdef __AVR__
-#include <avr/progmem.h>
+#include <avr/pgmspace.h>
 #else
 // Stub out some common progmem definitions for ARM processors
 #define memcpy_P memcpy
@@ -344,9 +344,12 @@ public:
     writeCommand(0xC7, contrast & 0x0F);
   }
 
-  /* See the datasheet documentation for the phase length command */
-  inline void setPhaseLength(byte phase) {
-    writeCommand(0xB1, phase);
+  /* Set the reset (phase 1) and precharge (phase 2) lengths.
+     Reset range is 5-31 DCLK periods (odd values only), precharge is 3-15 DCLK periods
+   */
+  inline void setResetPrechargePeriods(byte resetLength, byte precharge) {
+    resetLength = (resetLength&~1)/2 - 1; // Value we write is 3-15 same as the others
+    writeCommand(0xB1, (resetLength>>8)|(precharge&0x0F));
   }
 
   /* Set precharge voltage, level is a proportion of Vcc where 0x00=0.2 0x1F=0.60,
@@ -355,8 +358,8 @@ public:
     writeCommand(0xBB, level & 0x1F);
   }
 
-  /* Set precharge period as number of DCLK periods 1-15. Default is 8. */
-  inline void setPrechargePeriod(byte clocks) {
+  /* Set second precharge period (phase 3) as number of DCLK periods 1-15. Default is 8. */
+  inline void setSecondPrechargePeriod(byte clocks) {
     clocks = clocks & 0x0F;
     writeCommand(0xB6, clocks ? clocks : 8);
   }

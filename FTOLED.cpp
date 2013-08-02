@@ -84,27 +84,29 @@ void OLED::begin() {
                  | REMAP_COM_SPLIT_ODD_EVEN
                  | REMAP_COLOR_RGB565);
 
-  setColorContrasts(0xC8,0x80,0xC8);
+  setColorContrasts(0xE8,0xA0,0xC8);
   setMasterContrast(0x0F);
-  setPhaseLength(0x32);			// Set Phase 1 as 5 Clocks & Phase 2 as 3 Clocks
+  setResetPrechargePeriods(5,6);
+  setSecondPrechargePeriod(8);
 
   releaseCS();
 
-  setGrayscaleTableSystemDefaults();
+  //setGrayscaleTableSystemDefaults();
+  setBrightGrayscaleTable();
 
   assertCS();
 
   // // // TODO: Work out what this is, command B2h undocumented in datasheet
-  // // //Set_Display_Enhancement(0xA4);		// Enhance Display Performance "Enhance Driving Scheme Capability"
-  // // writeCommand(0xB2);			// Display Enhancement
-  // // writeData(0xA4);				//   Default => 0x00 (Normal)
-  // // writeData(0x00);
-  // // writeData(0x00);
+  //Set_Display_Enhancement(0xA4);		// Enhance Display Performance "Enhance Driving Scheme Capability"
+  //writeCommand(0xB2);			// Display Enhancement
+  //writeData(0xA4);				//   Default => 0x00 (Normal)
+  //writeData(0x00);
+  //writeData(0x00);
 
   // // setPrechargeVoltage(0x17);		// Default precharge voltage, VCC/2
   // // setPrechargePeriod(1); // Commented as this seems short, think maybe it goes w/ prev command
 
-  // // // Set VCOMH
+  // // // Set VCOMH, 0x05 is default
   // // writeCommand(0xBE, 0x05);
 
   // // setDisplayMode(DISPLAY_NORMAL);
