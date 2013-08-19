@@ -12,7 +12,7 @@
 #include <fonts/SystemFont5x7.h>
 
 const byte pin_cs = 7;
-const byte pin_dc = 5;
+const byte pin_dc = 2;
 const byte pin_reset = 3;
 
 const byte pin_sd_cs = 4;
@@ -25,9 +25,14 @@ OLED_TextBox text(oled);
 
 const int FRAME_COUNT = 64;
 
-// Messages are stored in PROGMEM so don't take up RAM
+#ifdef __AVR__
+// On AVR, messages are stored in PROGMEM so don't take up RAM
 #define MSG_NOSD F("MicroSD card not found")
 #define MSG_SKIP F("Skipping missing frame ")
+#else
+#define MSG_NOSD "MicroSD card not found"
+#define MSG_SKIP "Skipping missing frame"
+#endif
 
 void setup()
 {
