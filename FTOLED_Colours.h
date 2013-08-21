@@ -15,8 +15,9 @@
  * will be ignored (none of these colours will be available, but the error
  * will go away.)
  */
-#ifndef _FTOLED_Colours
+#if !defined(_FTOLED_Colours) && !defined(_FTOLED_Colors)
 #define _FTOLED_Colours
+#define _FTOLED_Colors
 const Colour WHITE                = { 255/8, 255/4, 255/8 };
 const Colour BLACK                = {   0/8,   0/4,   0/8 };
 const Colour RED                  = { 255/8,   0/4,   0/8 };

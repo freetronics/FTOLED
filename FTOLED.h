@@ -60,6 +60,7 @@ struct Colour
   byte green : 6;
   byte blue  : 5;
 };
+#define Color Colour
 
 #include "FTOLED_Colours.h"
 
@@ -382,6 +383,8 @@ public:
   void reset();
   void setForegroundColour(Colour colour);
   void setBackgroundColour(Colour colour);
+  inline void setForegroundColor(Colour color) { setForegroundColour(color); }
+  inline void setBackgroundColor(Colour color) { setBackgroundColour(color); }
 
 private:
   OLED &oled;
