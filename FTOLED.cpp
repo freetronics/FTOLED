@@ -31,7 +31,7 @@ template<typename T> inline void ensureOrder(T &a, T &b)
 
 #ifdef __AVR__
 // I don't know why, but although spi.transfer() is declared
-// inline it won't inline, but this method will... they're both available at link time?!?
+// inline it won't inline, but this method will...
 static inline byte _spi_transfer(byte _data) {
   SPDR = _data;
   while (!(SPSR & _BV(SPIF)))
@@ -51,7 +51,7 @@ void OLED::begin() {
 #ifdef __AVR__
   SPI.setClockDivider(SPI_CLOCK_DIV2); // 8MHz on standard Arduino models
 #else
-  SPI.setClockDivider(5); // 16.8MHz
+  SPI.setClockDivider(5); // 16.8MHz on Due
 #endif
 
   pinMode(pin_ncs, OUTPUT);
@@ -126,15 +126,15 @@ void OLED::setDisplayOn(bool on)
   // module, driving it low turns it off.
 
   if(on) {
-    setGPIO(OLED_HIGH, OLED_HIZ);
+    setGPIO0(OLED_HIGH);
     delay(100);
   }
-  assertCS(); 
+  assertCS();
   writeCommand(on ? 0xAF : 0xAE);
   releaseCS();
 
   if(!on) {
-    setGPIO(OLED_LOW, OLED_HIZ);
+    setGPIO0(OLED_LOW);
     delay(100);
   }
 }
@@ -385,9 +385,18 @@ void OLED::setGrayscaleTable_P(const byte *table)
   releaseCS();
 }
 
-void OLED::setGPIO(OLED_GPIO_Mode gpio0, OLED_GPIO_Mode gpio1)
+void OLED::setGPIO0(OLED_GPIO_Mode gpio0)
 {
   assertCS();
-  writeCommand(0xB5, (uint8_t)gpio0 | (uint8_t)gpio1 << 2);
+  gpio_status = (gpio_status & ~0x03) | (uint8_t)gpio0;
+  writeCommand(0xB5, gpio_status);
+  releaseCS();
+}
+
+void OLED::setGPIO1(OLED_GPIO_Mode gpio1)
+{
+  assertCS();
+  gpio_status = (gpio_status & ~0x0C) | (uint8_t)gpio1 << 2;
+  writeCommand(0xB5, gpio_status);
   releaseCS();
 }

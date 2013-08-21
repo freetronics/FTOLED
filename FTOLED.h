@@ -98,9 +98,10 @@ class OLED
   friend class OLED_TextBox;
 public:
   OLED(byte pin_ncs, byte pin_dc, byte pin_reset) :
-    pin_ncs(pin_ncs),
-    pin_dc(pin_dc),
-    pin_reset(pin_reset)
+  pin_ncs(pin_ncs),
+  pin_dc(pin_dc),
+  pin_reset(pin_reset),
+  gpio_status(OLED_HIZ | OLED_HIZ<<2)
   {}
 
   void begin();
@@ -160,8 +161,7 @@ public:
   */
   inline void setGrayscaleTable_P(const byte *table);
 
-  // TODO: gpio0 is OLED_VCC
-  void setGPIO(OLED_GPIO_Mode gpio0, OLED_GPIO_Mode gpio1);
+  void setGPIO1(OLED_GPIO_Mode gpio1);
 
   /* Set display mode. See enum OLED_Display_Mode, above. */
   inline void setDisplayMode(OLED_Display_Mode mode) {
@@ -175,11 +175,15 @@ public:
   byte pin_dc;
   byte pin_reset;
   byte remap_flags;
+  byte gpio_status;
 
   uint8_t *font;
 
   inline void assertCS() { digitalWrite(pin_ncs, LOW); }
   inline void releaseCS() { digitalWrite(pin_ncs, HIGH); }
+
+  // Note: GPIO0 is panel power on OLED128, hence better to use setDisplayOn()
+  void setGPIO0(OLED_GPIO_Mode gpio0);
 
   /* These protected methods are for implementing basic OLED commands.
      They all assume that the CS is asserted before they've been called
