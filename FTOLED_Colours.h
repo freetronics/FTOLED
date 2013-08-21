@@ -4,7 +4,19 @@
  *
  * The numbers shown here before the division sign are the RGB (24-bit)
  * values, divided down to become RGB565.
+ *
+ *
+ * IMPORTANT
+ * The names in this file are very common, and may be repeated elsewhere
+ * in other header files. If you get errors about redefined names, simply
+ * put the line
+ * #define _FTOLED_Colours
+ * above the line "#include <FTOLED.h>" in your sketch, and this file
+ * will be ignored (none of these colours will be available, but the error
+ * will go away.)
  */
+#ifndef _FTOLED_Colours
+#define _FTOLED_Colours
 const Colour WHITE                = { 255/8, 255/4, 255/8 };
 const Colour BLACK                = {   0/8,   0/4,   0/8 };
 const Colour RED                  = { 255/8,   0/4,   0/8 };
@@ -147,3 +159,4 @@ const Colour DARKCYAN             = { 0  /8, 139/4, 139/8 };
 const Colour DARKMAGENTA          = { 139/8,   0/4, 139/8 };
 const Colour DARKRED              = { 139/8,   0/4,   0/8 };
 const Colour LIGHTGREEN           = { 144/8, 238/4,  14/84 };
+#endif
