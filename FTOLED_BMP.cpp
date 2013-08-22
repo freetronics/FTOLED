@@ -1,17 +1,16 @@
-/* FTOLED BMP parsing and bitmap display routines for BMP files */
+* FTOLED BMP parsing and bitmap display routines for BMP files */
 
 #include <stdint.h>
-
 #include <FTOLED.h>
 
 // Read a little-endian short word from a stream
-inline uint16_t readShort(Stream &s)
+template<typename T> inline uint16_t readShort(T &s)
 {
   return (uint16_t)s.read() | (uint16_t)s.read() << 8;
 }
 
 // Read a little-endian long from a stream
-inline uint32_t readLong(Stream &s)
+template<typename T> inline uint32_t readLong(T &s)
 {
   return (uint32_t)readShort(s) | (uint32_t)readShort(s) << 16;
 }
@@ -25,8 +24,54 @@ enum BMP_Compression {
 
 const uint8_t OFFS_DIB_HEADER = 0x0e;
 
-BMP_Status OLED::displayBMP(File &f, const int x, const int y)
+// Simple use of _displayBMP uses the SD File object directly
+BMP_Status OLED::displayBMP(File &source, const int x, const int y) {
+    return _displayBMP(source, x, y);
+}
+
+// In order to support Progmem we have a wrapper class that implements the seek()
+// and read() methods as inline. This allows the _displayBMP template to compile
+// against a PROGMEM stored buffer, using the same source as for a BMP file object!
+//
+// Yes, this is kinda sorta hacky but it means we don't have separate
+// code paths for PROGMEM vs SD stored BMPs. Plus we still have fast code paths for
+// both.
+#ifdef __AVR__
+class _Progmem_wrapper {
+  int base;
+  int current;
+public:
+  inline _Progmem_wrapper(const uint8_t *base) : base((int)base),current((int)base) { }
+  inline uint8_t read() { return pgm_read_byte(current++); }
+  inline void read(void *buf, size_t len) { memcpy_PF(buf, current, len); current += len; }
+  inline boolean seek(uint32_t pos) { current=base+pos; return true; }
+};
+#else
+// ARM version is the same, only we just treat the address like a const uint8_t*
+//
+// Because the ARM isn't Harvard arch this is a little inefficient, in that we're copying
+// memory from one part of the address space to another sometimes. But it's not too bad as
+// the implementation avoids this where possible to save RAM on the AVRs.
+class _Progmem_wrapper {
+  const uint8_t *base;
+  const uint8_t *current;
+public:
+  inline _Progmem_wrapper(const uint8_t *base) : base(base),current(base) { }
+  inline uint8_t read() { return *current++; }
+  inline void read(void *buf, size_t len) { memcpy(buf, current, len); current += len; }
+  inline boolean seek(uint32_t pos) { current=base+pos; return true; }
+};
+
+#endif
+
+BMP_Status OLED::displayBMP(const uint8_t *pgm_addr, const int x, const int y) {
+  _Progmem_wrapper wrapper(pgm_addr);
+  return _displayBMP(wrapper, x, y);
+}
+
+template<typename SourceType> BMP_Status OLED::_displayBMP(SourceType &source, const int x, const int y)
 {
+  SourceType &f = source;
   f.seek(0);
 
   // File header, check magic number 'BM'
@@ -89,10 +134,10 @@ BMP_Status OLED::displayBMP(File &f, const int x, const int y)
   // but don't have much choice as seeking back and forth on SD is painfully slow
   Colour *palette;
   if(bpp != 16) {
-    uint8_t palette_size = 1<<bpp;
+    uint16_t palette_size = 1<<bpp;
     palette = (Colour *)malloc(sizeof(Colour)*palette_size);
     f.seek(OFFS_DIB_HEADER + dib_headersize);
-    for(int i = 0; i < palette_size; i++) {
+    for(uint16_t i = 0; i < palette_size; i++) {
       uint8_t pal[3];
       f.read(pal, 3);
       palette[i].blue = pal[0] >> 3;
@@ -104,7 +149,7 @@ BMP_Status OLED::displayBMP(File &f, const int x, const int y)
   for(byte row = 0; row < height; row++) {
     f.seek(data_offs + row*row_bytes);
     if(bpp == 16) {
-      // TODO
+      // TODO: 16bpp support
       /*
       Colour data[out_width];
       uint16_t bgr555  = readShort(f);

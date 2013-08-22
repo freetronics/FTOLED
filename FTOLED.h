@@ -150,6 +150,10 @@ public:
   // Given 'File' containing a BMP image, show it onscreen with bottom left corner at (x,y)
   BMP_Status displayBMP(File &source, const int x, const int y);
 
+  // Given 'pgm_addr', a pointer to a PROGMEM buffer (or const buffer on ARM) containing a BMP,
+  // show it onscreen with bottom left corner at (x,y)
+  BMP_Status displayBMP(const uint8_t *pgm_addr, const int x, const int y);
+
   /* Set the grayscale table for pixel brightness to one of these precanned defaults */
   void setDefaultGrayscaleTable();
   void setBrightGrayscaleTable();
@@ -373,6 +377,10 @@ public:
   inline void setLockBits(byte lock_bits) {
     writeCommand(0xFD, lock_bits);
   }
+
+  // Internal templated displayBMP method, allows us to treat SD card files and PROGMEM buffers
+  // via the same code paths
+  template<typename SourceType> BMP_Status _displayBMP(SourceType &source, const int x, const int y);
 };
 
 class OLED_TextBox : public Print {
