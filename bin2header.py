@@ -46,9 +46,23 @@ TEMPLATE = """
 #define _PGM_
 #endif
 
+%WARNING%
+
 static const uint8_t %ITEMNAME%[] _PGM_ = {
 %CONTENT%
 };
+
+%WARNING_FOOTER%
+"""
+
+WARNING_TEMPLATE = """
+#ifdef __AVR__
+#error The binary content is too large (>=32kb) to hold in a single array when targeting an AVR-based Arduino. This header will work on ARM-based Arduinos (Arduino Due), though.
+#else
+"""
+
+WARNING_FOOTER = """
+#endif
 """
 
 parser = argparse.ArgumentParser(description="Process a binary file")
@@ -57,6 +71,7 @@ parser.add_argument('output', type=argparse.FileType('wb'), help="Output binary 
 
 def bin2header(source, destination):
     content = source.read()
+    source_len = len(content)
     as_hex = [ ("0x%02x" % b) for b in content ]
     content = ""
     offset = 0
@@ -68,6 +83,14 @@ def bin2header(source, destination):
     output = TEMPLATE
     output = output.replace("%CONTENT%", content)
     output = output.replace("%SOURCE%", sys.argv[1])
+    if source_len < 32768:
+        output = output.replace("%WARNING%", "")
+        output = output.replace("%WARNING_FOOTER%", "")
+    else:
+        output = output.replace("%WARNING%", WARNING_TEMPLATE)
+        output = output.replace("%WARNING_FOOTER%", WARNING_FOOTER)
+        print("WARNING: The binary file is too large (%dkb >= 32kb) to be compiled in this way on an AVR-based platform. It will still work on an ARM-based platforms (ie Arduino Due), though."
+              % (source_len/1024,))
     itemname = re.sub(r'[^a-zA-Z0-9]', '_',  os.path.splitext(os.path.basename(destination.name))[0])
     output = output.replace("%ITEMNAME%", itemname)
     destination.write(bytes(output, 'UTF-8'))
