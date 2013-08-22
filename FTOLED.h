@@ -90,6 +90,7 @@ enum BMP_Status {
   BMP_UNSUPPORTED_HEADER = 2,
   BMP_TOO_MANY_COLOURS = 3,
   BMP_COMPRESSION_NOT_SUPPORTED = 4,
+  BMP_ORIGIN_OUTSIDE_IMAGE = 5
 };
 
 class OLED_TextBox;
@@ -149,10 +150,12 @@ public:
 
   // Given 'File' containing a BMP image, show it onscreen with bottom left corner at (x,y)
   BMP_Status displayBMP(File &source, const int x, const int y);
+  BMP_Status displayBMP(File &source, const int from_x, const int from_y, const int to_x, const int to_y);
 
   // Given 'pgm_addr', a pointer to a PROGMEM buffer (or const buffer on ARM) containing a BMP,
   // show it onscreen with bottom left corner at (x,y)
   BMP_Status displayBMP(const uint8_t *pgm_addr, const int x, const int y);
+  BMP_Status displayBMP(const uint8_t *pgm_addr, const int from_x, const int from_y, const int to_x, const int to_y);
 
   /* Set the grayscale table for pixel brightness to one of these precanned defaults */
   void setDefaultGrayscaleTable();
@@ -380,7 +383,7 @@ public:
 
   // Internal templated displayBMP method, allows us to treat SD card files and PROGMEM buffers
   // via the same code paths
-  template<typename SourceType> BMP_Status _displayBMP(SourceType &source, const int x, const int y);
+  template<typename SourceType> BMP_Status _displayBMP(SourceType &source, const int from_x, const int from_y, const int to_x, const int to_y);
 };
 
 class OLED_TextBox : public Print {

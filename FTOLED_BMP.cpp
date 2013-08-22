@@ -1,4 +1,4 @@
-* FTOLED BMP parsing and bitmap display routines for BMP files */
+/* FTOLED BMP parsing and bitmap display routines for BMP files */
 
 #include <stdint.h>
 #include <FTOLED.h>
@@ -19,6 +19,7 @@ enum BMP_Compression {
   BMP_NoCompression = 0,
   BMP_RLE8bpp = 1,
   BMP_RLE4bpp = 2,
+  BMP_BITFIELDS = 3,
   // ... lots more methods that aren't supported :)
 };
 
@@ -26,8 +27,13 @@ const uint8_t OFFS_DIB_HEADER = 0x0e;
 
 // Simple use of _displayBMP uses the SD File object directly
 BMP_Status OLED::displayBMP(File &source, const int x, const int y) {
-    return _displayBMP(source, x, y);
+  return _displayBMP(source, 0, 0, x, y);
 }
+
+BMP_Status OLED::displayBMP(File &source, const int from_x, const int from_y, const int to_x, const int to_y) {
+  return _displayBMP(source, from_x, from_y, to_x, to_y);
+}
+
 
 // In order to support Progmem we have a wrapper class that implements the seek()
 // and read() methods as inline. This allows the _displayBMP template to compile
@@ -66,10 +72,16 @@ public:
 
 BMP_Status OLED::displayBMP(const uint8_t *pgm_addr, const int x, const int y) {
   _Progmem_wrapper wrapper(pgm_addr);
-  return _displayBMP(wrapper, x, y);
+  return _displayBMP(wrapper, 0, 0, x, y);
 }
 
-template<typename SourceType> BMP_Status OLED::_displayBMP(SourceType &source, const int x, const int y)
+BMP_Status OLED::displayBMP(const uint8_t *pgm_addr, const int from_x, const int from_y, const int to_x, const int to_y) {
+  _Progmem_wrapper wrapper(pgm_addr);
+  return _displayBMP(wrapper, from_x, from_y, to_x, to_y);
+}
+
+
+template<typename SourceType> BMP_Status OLED::_displayBMP(SourceType &source, const int from_x, const int from_y, const int to_x, const int to_y)
 {
   SourceType &f = source;
   f.seek(0);
@@ -83,28 +95,45 @@ template<typename SourceType> BMP_Status OLED::_displayBMP(SourceType &source, c
   uint16_t dib_headersize = readLong(f);
   uint16_t width, height, bpp, compression;
 
-  if(dib_headersize == 12) { // OS/2 BITMAPCOREHEADER format (aka BMPv2)
+
+  bool v2header = (dib_headersize == 12); // BMPv2 header, no compression, no additional options
+  if(dib_headersize == 12) {
     width = readShort(f);
     height = readShort(f);
     if(readShort(f) != 1)
       return BMP_UNSUPPORTED_HEADER;
     bpp = readShort(f);
     compression = BMP_NoCompression;
-  } else {
-    return BMP_UNSUPPORTED_HEADER; // TODO: Support 40-byte modern BMP headers
+  }
+  else {
+    width = readLong(f);
+    height = readLong(f);
+    if(readShort(f) != 1)
+      return BMP_UNSUPPORTED_HEADER;
+    bpp = readShort(f);
+    compression = readLong(f);
   }
 
   // Verify image properties from header
-  if(bpp > 16)
+  if(bpp > 24)
     return BMP_TOO_MANY_COLOURS;
-  if(bpp != 1 && bpp != 4 && bpp != 8 && bpp != 16)
+  if(bpp != 1 && bpp != 4 && bpp != 8 && bpp != 16 && bpp != 24)
     return BMP_INVALID_FORMAT;
 
-  if(compression != (int)BMP_NoCompression) {
-    //     && !(compression == BMP_RLE8bpp && bpp == 8)
-    //     && !(compression == BMP_RLE4bpp && bpp == 4)) {
+  if(!(compression == BMP_NoCompression
+       || (compression == BMP_BITFIELDS && bpp == 16))) {
     return BMP_COMPRESSION_NOT_SUPPORTED;
   }
+
+  // In case of the bitfields option, determine the pixel format. We support RGB565 & RGB555 only
+  bool rgb565 = 0;
+  if(compression == BMP_BITFIELDS) {
+    f.seek(0x36);
+    rgb565 = readLong(f) == 0xf800 && readLong(f) == 0x07e0 && readLong(f) == 0x1f;
+  }
+
+  if (width < from_x || height < from_y)
+    return BMP_ORIGIN_OUTSIDE_IMAGE; // source in BMP is offscreen
 
   // Find the starting offset for the data in the first row
   f.seek(0x0a);
@@ -112,14 +141,15 @@ template<typename SourceType> BMP_Status OLED::_displayBMP(SourceType &source, c
 
   assertCS();
   // Trim height to 128, anything bigger gets cut off, then set up row span in memory
-  if(y + height > 128)
-    height = 128-y;
-  setRow(y,y+height-1);
+  height = height - from_y;
+  if(to_y + height > 128)
+    height = 128-to_y;
+  setRow(to_y,to_y+height-1);
   // Calculate outputtable width and set up column span in memory
-  uint16_t out_width = width;
-  if(x + out_width > 128)
-    out_width = 128-x;
-  setColumn(x,x+out_width-1);
+  uint16_t out_width = width - from_x;
+  if(to_x + out_width > 128)
+    out_width = 128-to_x;
+  setColumn(to_x,to_x+out_width-1);
 
   // Calculate the width in bits of each row (rounded up to nearest byte)
   uint16_t row_bits = (width*bpp + 7) & ~7;
@@ -133,13 +163,13 @@ template<typename SourceType> BMP_Status OLED::_displayBMP(SourceType &source, c
   // Read colour palette to RAM. It's quite hefty to hold in RAM (512 bytes for a full 8-bit palette)
   // but don't have much choice as seeking back and forth on SD is painfully slow
   Colour *palette;
-  if(bpp != 16) {
+  if(bpp < 16) {
     uint16_t palette_size = 1<<bpp;
     palette = (Colour *)malloc(sizeof(Colour)*palette_size);
     f.seek(OFFS_DIB_HEADER + dib_headersize);
     for(uint16_t i = 0; i < palette_size; i++) {
-      uint8_t pal[3];
-      f.read(pal, 3);
+      uint8_t pal[4];
+      f.read(pal, v2header ? 3 : 4);
       palette[i].blue = pal[0] >> 3;
       palette[i].green = pal[1] >> 2;
       palette[i].red = pal[2] >> 3;
@@ -147,16 +177,36 @@ template<typename SourceType> BMP_Status OLED::_displayBMP(SourceType &source, c
   }
 
   for(byte row = 0; row < height; row++) {
-    f.seek(data_offs + row*row_bytes);
-    if(bpp == 16) {
-      // TODO: 16bpp support
-      /*
-      Colour data[out_width];
-      uint16_t bgr555  = readShort(f);
-      data[col].blue = bgr555 & 0x3F;
-      data[col].green = ((bgr555 << 5) & 0x3F) << 1;
-      data[col].red = (bgr555 << 10) & 0x3F;
-      */
+    f.seek(data_offs + (row+from_y)*row_bytes + from_x*bpp/8);
+    if(bpp > 15) {
+      Colour buf[out_width];
+      if(bpp == 24) {
+        for(uint16_t col = 0; col < out_width; col++) {
+          buf[col].blue = f.read() >> 3;
+          buf[col].green = f.read() >> 2;
+          buf[col].red = f.read() >> 3;
+        }
+      }
+      else if(rgb565)
+        for(uint16_t col = 0; col < out_width; col++) {
+          uint16_t bgr565  = readShort(f);
+          buf[col].blue = bgr565 & 0x1f;
+          buf[col].green = (bgr565 >> 5) & 0x3f;
+          buf[col].red = (bgr565 >> 11);
+        }
+      else { // RGB555
+        for(uint16_t col = 0; col < out_width; col++) {
+          uint16_t bgr555  = readShort(f);
+          buf[col].blue = bgr555 & 0x1f;
+          buf[col].green = ((bgr555 >> 5) & 0x1f) << 1;
+          buf[col].red = (bgr555 >> 10);
+        }
+      }
+      assertCS();
+      for(uint16_t col = 0; col < out_width; col++) {
+        writeData(buf[col]);
+      }
+      releaseCS();
     }
     else if(bpp == 8) {
       uint8_t buf[out_width];
