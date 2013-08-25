@@ -97,7 +97,7 @@ template<typename SourceType> BMP_Status OLED::_displayBMP(SourceType &source, c
 
 
   bool v2header = (dib_headersize == 12); // BMPv2 header, no compression, no additional options
-  if(dib_headersize == 12) {
+  if(v2header) {
     width = readShort(f);
     height = readShort(f);
     if(readShort(f) != 1)
@@ -126,10 +126,16 @@ template<typename SourceType> BMP_Status OLED::_displayBMP(SourceType &source, c
   }
 
   // In case of the bitfields option, determine the pixel format. We support RGB565 & RGB555 only
-  bool rgb565 = 0;
+  bool rgb565 = true;
   if(compression == BMP_BITFIELDS) {
     f.seek(0x36);
-    rgb565 = readLong(f) == 0xf800 && readLong(f) == 0x07e0 && readLong(f) == 0x1f;
+    uint16_t b = readLong(f);
+    uint16_t g = readLong(f);
+    uint16_t r = readLong(f);
+    if(r == 0x001f && g == 0x07e0 && b == 0xf800)
+      rgb565 = true;
+    else if(r != 0x001f && g != 0x03e0 && b != 0x7c00)
+      return BMP_INVALID_FORMAT; // Not RGB555 either
   }
 
   if (width < from_x || height < from_y)
