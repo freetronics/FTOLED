@@ -67,10 +67,10 @@ int OLED::drawChar(const int x, const int y, const char letter, const Colour col
    * bottom-to-top for each column, so striding backwards instead of forwards...
    */
 
-  for(int8_t ox = 0; ox < width; ox++) {
+  for(int16_t ox = 0; ox < width; ox++) {
     if(ox+x >= COLUMNS)
       break;
-    int8_t oy = 0;
+    int16_t oy = 0;
     for(int8_t byte_y = bytes-1; byte_y >= 0; byte_y--) {
       uint8_t data = pgm_read_byte(this->font + index + ox + byte_y * width);
       int8_t start_bit;
@@ -137,7 +137,7 @@ void OLED::drawString(int x, int y, const char *bChars, Colour foreground, Colou
 
     int strWidth = 0;
     if(x >= 0)
-      this->drawLine(x-1 , y, x-1 , y + header.height, background);
+      this->drawLine(x-1 , y, x-1 , y + header.height - 1, background);
 
     while(*bChars) {
       if(*bChars == '\n') { // Newline
@@ -148,7 +148,7 @@ void OLED::drawString(int x, int y, const char *bChars, Colour foreground, Colou
         int charWide = this->drawChar(x+strWidth, y, *bChars, foreground, background);
         if (charWide > 0) {
           strWidth += charWide ;
-          this->drawLine(x + strWidth , y, y + strWidth , y + header.height, background);
+          this->drawLine(x + strWidth , y, x + strWidth , y + header.height-1, background);
           strWidth++;
         } else if (charWide < 0) {
           return;
