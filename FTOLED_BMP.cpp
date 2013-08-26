@@ -49,7 +49,10 @@ class _Progmem_wrapper {
 public:
   inline _Progmem_wrapper(const uint8_t *base) : base((int)base),current((int)base) { }
   inline uint8_t read() { return pgm_read_byte(current++); }
-  inline void read(void *buf, size_t len) { memcpy_PF(buf, current, len); current += len; }
+  inline void read(void *buf, size_t len) {
+    for(size_t i = 0; i < len; i++) // memcpy_PF not implemented in arduino's version of avrlibc
+      *(uint8_t *)buf = pgm_read_byte(current++);
+  }
   inline boolean seek(uint32_t pos) { current=base+pos; return true; }
 };
 #else
