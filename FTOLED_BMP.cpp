@@ -240,19 +240,21 @@ template<typename SourceType> BMP_Status OLED::_displayBMP(SourceType &source, c
       releaseCS();
     }
     else if(bpp == 1) {
-      uint8_t buf[(out_width+7)/8];
-      f.read(&buf, sizeof(buf));
+      const size_t row_bytes = (out_width+7)/8;
+      uint8_t buf[row_bytes];
+      f.read(&buf, row_bytes);
       assertCS();
       uint8_t bit = 1<<7;
-      uint8_t byte = 0;
+      uint8_t* byte = buf;
       for(uint16_t col = 0; col < out_width; col++) {
-        writeData(byte & bit ? palette[1] : palette[0]);
+        writeData(*byte & bit ? palette[1] : palette[0]);
         bit >>= 1;
         if(bit == 0) {
           bit = 1<<7;
           byte++;
         }
       }
+      releaseCS();
     }
   }
 
