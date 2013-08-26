@@ -5,15 +5,6 @@
  * The numbers shown here before the division sign are the RGB (24-bit)
  * values, divided down to become RGB565.
  *
- *
- * IMPORTANT
- * The names in this file are very common, and may be repeated elsewhere
- * in other header files. If you get errors about redefined names, simply
- * put the line
- * #define _FTOLED_Colours
- * above the line "#include <FTOLED.h>" in your sketch, and this file
- * will be ignored (none of these colours will be available, but the error
- * will go away.)
  */
 #if !defined(_FTOLED_Colours) && !defined(_FTOLED_Colors)
 #define _FTOLED_Colours
