@@ -153,8 +153,6 @@ void OLED::drawString(int x, int y, const char *bChars, Colour foreground, Colou
         } else if (charWide < 0) {
           return;
         }
-        if (x + strWidth >= COLUMNS)
-          return;
       }
       bChars++;
     }
