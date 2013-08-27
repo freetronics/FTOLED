@@ -4,7 +4,7 @@ FTOLED is an Arduino library for easy graphics support using the Arduino IDE wit
 
 # Using this library
 
-See the [OLED128 QuickStart Guide](http://freetronics.com/oled128-quickstart-guide) for information on connecting the OLED128 display, and installing the FTOLED library, 
+See the [OLED128 QuickStart Guide](http://freetronics.com/pages/oled128-quickstart-guide) for information on connecting the OLED128 display, and installing the FTOLED library, 
 
 Once you're ready to start creating your own graphical sketches, see the FTOLED Wiki:
 
