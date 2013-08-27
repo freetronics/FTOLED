@@ -11,9 +11,9 @@
  * 1) Use ImageMagick to split Stephen's sprite sheet into individual 32x32 tiles:
  *      convert "creatures edit_0.png" -crop 32x32 test.png
  * 2) Find the frames you want to use in your sprite, and convert them to BMP2 format with
- *    ImageMagick (see the FTOLED docs.)
+ *    ImageMagick (see https://github.com/freetronics/FTOLED/wiki/Displaying-BMPs)
  * 3) Convert each BMP to a header file using bin2header.py (included with this library.)
- * 4) Combine all the individual header files into one to avoid lots of #include lines (optional step.)
+ * 4) Combine all the individual header files into one file frames.h to avoid lots of #include lines (optional step.)
  *
  */
 #include <SPI.h>

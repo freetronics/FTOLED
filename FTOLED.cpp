@@ -1,9 +1,5 @@
 #include <FTOLED.h>
 
-#ifndef __AVR__
-#define PROGMEM
-#endif
-
 // Clamp a value between two limits
 template<typename T> inline void clamp(T &value, T lower, T upper) {
   if(value < lower)

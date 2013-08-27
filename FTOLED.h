@@ -39,15 +39,7 @@
 #include <SPI.h>
 #include <SD.h>
 #include "Print.h"
-
-#ifdef __AVR__
-#include <avr/pgmspace.h>
-#else
-// Stub out some common progmem definitions for ARM processors
-#define memcpy_P memcpy
-static inline uint8_t pgm_read_byte(const void *addr) { return *((uint8_t *)addr); }
-#endif
-
+#include "progmem_compat.h"
 
 #define ROWS 128
 #define COLUMNS 128

@@ -18,16 +18,9 @@ const byte pin_sd_cs = 4;
 
 OLED oled(pin_cs, pin_dc, pin_reset);
 
-#ifdef __AVR__
-// On AVR, error messages are stored in PROGMEM so they don't take up RAM
 #define MSG_NOSD F("MicroSD card not found")
 #define MSG_FILENOTFOUND F("Label.bmp not found")
 #define MSG_BMPFAIL F("Failed to load BMP: ")
-#else
-#define MSG_NOSD "MicroSD card not found"
-#define MSG_FILENOTFOUND "Label.bmp not found"
-#define MSG_BMPFAIL "Failed to load BMP: "
-#endif
 
 // Text box is used to display error message if something
 // fails to load

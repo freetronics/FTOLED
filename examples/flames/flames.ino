@@ -25,14 +25,8 @@ OLED_TextBox text(oled);
 
 const int FRAME_COUNT = 64;
 
-#ifdef __AVR__
-// On AVR, messages are stored in PROGMEM so don't take up RAM
 #define MSG_NOSD F("MicroSD card not found")
 #define MSG_SKIP F("Skipping missing frame ")
-#else
-#define MSG_NOSD "MicroSD card not found"
-#define MSG_SKIP "Skipping missing frame"
-#endif
 
 void setup()
 {
