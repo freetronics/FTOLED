@@ -85,12 +85,13 @@ enum OLED_GPIO_Mode {
 
 // Status code returned by displayBMP()
 enum BMP_Status {
-  BMP_OK = 0,
-  BMP_INVALID_FORMAT = 1,
-  BMP_UNSUPPORTED_HEADER = 2,
-  BMP_TOO_MANY_COLOURS = 3,
-  BMP_COMPRESSION_NOT_SUPPORTED = 4,
-  BMP_ORIGIN_OUTSIDE_IMAGE = 5
+  BMP_OK = 0,                          // Image Displayed OK
+  BMP_INVALID_FORMAT = 1,              // Not a BMP file
+  BMP_UNSUPPORTED_HEADER = 2,          // Has a rare BMP header format (not v2 or v3)
+  BMP_TOO_MANY_COLOURS = 3,            // Is a 32bpp image (not supported)
+  BMP_COMPRESSION_NOT_SUPPORTED = 4,   // Uses RLE or another unsupported compression format
+  BMP_UNSUPPORTED_COLOURS = 5,         // Uses non-standard colour format
+  BMP_ORIGIN_OUTSIDE_IMAGE = 6         // You've asked to crop a section that doesn't exist in the image
 };
 
 class OLED_TextBox;

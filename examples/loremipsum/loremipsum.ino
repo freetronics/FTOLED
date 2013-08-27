@@ -88,7 +88,7 @@ static const char IPSUM[] PROGMEM  =
 
 void setup() {
   oled.begin();
-  oled.selectFont(System5x7);
+  oled.selectFont(SystemFont5x7);
   box.setForegroundColour(OLDLACE);
 }
 

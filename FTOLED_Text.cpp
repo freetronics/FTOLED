@@ -107,8 +107,6 @@ int OLED::charWidth(const char letter)
   struct FontHeader header;
   memcpy_P(&header, (void*)this->font, sizeof(FontHeader));
 
-  uint16_t index = 0;
-
   if (c < header.firstChar || c >= (header.firstChar + header.charCount)) {
     return 0;
   }

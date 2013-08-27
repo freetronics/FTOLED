@@ -8,6 +8,7 @@
 #include <SPI.h>
 #include <SD.h>
 #include <FTOLED.h>
+#include <fonts/SystemFont5x7.h>
 
 const byte pin_cs = 7;
 const byte pin_dc = 2;
@@ -35,24 +36,27 @@ OLED_TextBox text(oled);
 void setup()
 {
   Serial.begin(115200);
+  oled.begin();
+  oled.selectFont(SystemFont5x7);
+
   while(!SD.begin(pin_sd_cs)) {
     Serial.println(MSG_NOSD);
     text.println(MSG_NOSD);
     delay(500);
   }
-  oled.begin();
+  oled.begin(); // Calling oled.begin() after SD.begin() so we get faster SPI, see https://github.com/freetronics/FTOLED/wiki/Displaying-BMPs
 
   File image = SD.open("Label.bmp");
   if(!image) {
     text.println(MSG_FILENOTFOUND);
     Serial.println(MSG_FILENOTFOUND);
   } else {
-    int r = (int) oled.displayBMP(image, 0, 0);
-    if(r) {
+    BMP_Status result = oled.displayBMP(image, 0, 0);
+    if(result != BMP_OK) {
       Serial.print(MSG_BMPFAIL);
-      Serial.println(r);
+      Serial.println((int) result);
       text.print(MSG_BMPFAIL);
-      text.println(r);
+      text.println((int) result);
     }
   }
 }

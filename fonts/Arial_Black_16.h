@@ -1,5 +1,3 @@
-
-
 /*
  *
  * Arial_Black_16
@@ -10,7 +8,7 @@
  * http://www.apetech.de/fontCreator
  * me@apetech.de
  *
- * File Name           : Arial_black_16.h
+ * File Name           : Arial_Black_16.h
  * Date                : 10.01.2012
  * Font size in bytes  : 12422
  * Font width          : 10

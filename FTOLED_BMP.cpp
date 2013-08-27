@@ -121,7 +121,7 @@ template<typename SourceType> BMP_Status OLED::_displayBMP(SourceType &source, c
   if(bpp > 24)
     return BMP_TOO_MANY_COLOURS;
   if(bpp != 1 && bpp != 4 && bpp != 8 && bpp != 16 && bpp != 24)
-    return BMP_INVALID_FORMAT;
+    return BMP_UNSUPPORTED_COLOURS;
 
   if(!(compression == BMP_NoCompression
        || (compression == BMP_BITFIELDS && bpp == 16))) {
@@ -138,7 +138,7 @@ template<typename SourceType> BMP_Status OLED::_displayBMP(SourceType &source, c
     if(r == 0x001f && g == 0x07e0 && b == 0xf800)
       rgb565 = true;
     else if(r != 0x001f && g != 0x03e0 && b != 0x7c00)
-      return BMP_INVALID_FORMAT; // Not RGB555 either
+      return BMP_UNSUPPORTED_COLOURS; // Not RGB555 either
   }
 
   if (width < from_x || height < from_y)

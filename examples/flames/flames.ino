@@ -36,15 +36,16 @@ const int FRAME_COUNT = 64;
 
 void setup()
 {
-  oled.begin();
-  oled.selectFont(System5x7);
   Serial.begin(115200);
+  oled.begin();
+  oled.selectFont(SystemFont5x7);
   text.setForegroundColour(RED);
   while(!SD.begin(pin_sd_cs)) {
     Serial.println(MSG_NOSD);
     text.println(MSG_NOSD);
     delay(500);
   }
+  oled.begin(); // Calling begin() again so we get faster SPI, see https://github.com/freetronics/FTOLED/wiki/Displaying-BMPs
 }
 
 void loop()
@@ -62,7 +63,7 @@ void loop()
       text.println(filename);
     }
     else {
-      BMP_Status result = oled.displayBMP(frame, 0, 0);
+      oled.displayBMP(frame, 0, 0);
     }
     frame.close();
   }
