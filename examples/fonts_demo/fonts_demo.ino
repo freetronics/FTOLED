@@ -29,16 +29,25 @@ void setup() {
   oled.begin();
 
   oled.selectFont(Arial14);
-  oled.drawString(10,16,ARIAL14,VIOLET,BLACK);
+  oled.drawString(6,20,ARIAL14,VIOLET,BLACK);
 
   oled.selectFont(Arial_Black_16);
-  oled.drawString(10,32,ARIAL_BLACK_16,WHITE,BLACK);
+  oled.drawString(6,38,ARIAL_BLACK_16,WHITE,BLACK);
 
   oled.selectFont(SystemFont5x7);
-  oled.drawString(10,64,SYSTEM_5_7,RED,BLACK);
+  oled.drawString(6,70,SYSTEM_5_7,RED,BLACK);
 
   oled.selectFont(Droid_Sans_36);
-  oled.drawString(10,72,DS_36,GREEN,BLACK);
+  oled.drawString(6,78,DS_36,GREEN,BLACK);
+
+  // Finally, use the String object to build a dynamic string
+  // instead of the previous strings which were all constant
+  // "character arrays" (always the same value)
+  String msg = "Sketch ran in\n";
+  msg += millis();
+  msg += " ms";
+  oled.selectFont(SystemFont5x7);
+  oled.drawString(6,8,msg,WHITE,BLACK);
 }
 
 void loop() {

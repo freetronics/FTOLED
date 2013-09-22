@@ -138,6 +138,7 @@ public:
 
   // Draw a full string
   void drawString(int x, int y, const char *bChars, Colour foreground, Colour background);
+  void drawString(int x, int y, const String &str, Colour foreground, Colour background);
 
   // Bitmap stuff
 

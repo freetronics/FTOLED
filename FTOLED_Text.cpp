@@ -124,34 +124,70 @@ int OLED::charWidth(const char letter)
 
 void OLED::drawString(int x, int y, const char *bChars, Colour foreground, Colour background)
 {
-    if (x > COLUMNS || y > ROWS)
-	return;
+  if (x > COLUMNS || y > ROWS)
+    return;
 
-    struct FontHeader header;
-    memcpy_P(&header, (void*)this->font, sizeof(FontHeader));
+  struct FontHeader header;
+  memcpy_P(&header, (void*)this->font, sizeof(FontHeader));
 
-    if (y+header.height<0)
-      return;
+  if (y+header.height<0)
+    return;
 
-    int strWidth = 0;
-    if(x >= 0)
-      this->drawLine(x-1 , y, x-1 , y + header.height - 1, background);
+  int strWidth = 0;
+  if(x >= 0)
+    this->drawLine(x-1 , y, x-1 , y + header.height - 1, background);
 
-    while(*bChars) {
-      if(*bChars == '\n') { // Newline
-        strWidth = 0;
-        y = y - header.height - 1;
-      }
-      else {
-        int charWide = this->drawChar(x+strWidth, y, *bChars, foreground, background);
-        if (charWide > 0) {
-          strWidth += charWide ;
-          this->drawLine(x + strWidth , y, x + strWidth , y + header.height-1, background);
-          strWidth++;
-        } else if (charWide < 0) {
-          return;
-        }
-      }
-      bChars++;
+  while(*bChars) {
+    if(*bChars == '\n') { // Newline
+      strWidth = 0;
+      y = y - header.height - 1;
     }
+    else {
+      int charWide = this->drawChar(x+strWidth, y, *bChars, foreground, background);
+      if (charWide > 0) {
+        strWidth += charWide ;
+        this->drawLine(x + strWidth , y, x + strWidth , y + header.height-1, background);
+        strWidth++;
+      } else if (charWide < 0) {
+        return;
+      }
+    }
+    bChars++;
+  }
+}
+
+void OLED::drawString(int x, int y, const String &str, Colour foreground, Colour background)
+{
+/* Similar to the simple char array drawString, but supports the Arduino String
+   object. We don't just to toCharArray() as this requires copying all the bytes
+*/
+  if (x > COLUMNS || y > ROWS)
+    return;
+
+  struct FontHeader header;
+  memcpy_P(&header, (void*)this->font, sizeof(FontHeader));
+
+  if (y+header.height<0)
+    return;
+
+  int strWidth = 0;
+  if(x >= 0)
+    this->drawLine(x-1 , y, x-1 , y + header.height - 1, background);
+
+  for(int i = 0; i < str.length(); i++) {
+    if(str[i] == '\n') { // Newline
+      strWidth = 0;
+      y = y - header.height - 1;
+    }
+    else {
+      int charWide = this->drawChar(x+strWidth, y, str[i], foreground, background);
+      if (charWide > 0) {
+        strWidth += charWide ;
+        this->drawLine(x + strWidth , y, x + strWidth , y + header.height-1, background);
+        strWidth++;
+      } else if (charWide < 0) {
+        return;
+      }
+    }
+  }
 }
