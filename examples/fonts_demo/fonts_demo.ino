@@ -18,27 +18,22 @@ const byte pin_reset = 3;
 
 OLED oled(pin_cs, pin_dc, pin_reset);
 
-const char *ARIAL_BLACK_16 = "Arial Black 16";
-const char *ARIAL14 = "Arial 14";
-const char *SYSTEM_5_7 = "System 5x7\nOn Two Lines";
-const char *DS_36 = "DS 36";
-
 void setup() {
   Serial.begin(115200);
   Serial.print("init...");
   oled.begin();
 
   oled.selectFont(Arial14);
-  oled.drawString(6,20,ARIAL14,VIOLET,BLACK);
+  oled.drawString(6,20,F("Arial 14"),VIOLET,BLACK);
 
   oled.selectFont(Arial_Black_16);
-  oled.drawString(6,38,ARIAL_BLACK_16,WHITE,BLACK);
+  oled.drawString(6,38,F("Arial Black 16"),WHITE,BLACK);
 
   oled.selectFont(SystemFont5x7);
-  oled.drawString(6,70,SYSTEM_5_7,RED,BLACK);
+  oled.drawString(6,70,F("System 5x7\nOn Two Lines"),RED,BLACK);
 
   oled.selectFont(Droid_Sans_36);
-  oled.drawString(6,78,DS_36,GREEN,BLACK);
+  oled.drawString(6,78,F("DS 36"),GREEN,BLACK);
 
   // Finally, use the String object to build a dynamic string
   // instead of the previous strings which were all constant

@@ -136,7 +136,13 @@ public:
   //Find the width of a character
   int charWidth(const char letter);
 
-  // Draw a full string
+  // Draw a full string, either from PROGMEM (AVR only) or from normal C-style pointer, or Arduino string object
+#ifdef __AVR__
+  void drawString_P(int x, int y, const char *flashStr, Colour foreground, Colour background);
+  inline void drawString(int x, int y, const __FlashStringHelper *flashStr, Colour foreground, Colour background) {
+    return drawString_P(x,y,(const char*)flashStr,foreground,background);
+  }
+#endif
   void drawString(int x, int y, const char *bChars, Colour foreground, Colour background);
   void drawString(int x, int y, const String &str, Colour foreground, Colour background);
 

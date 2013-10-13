@@ -26,16 +26,16 @@ void setup() {
 
 void loop() {
   Serial.print(counter);
-  Serial.println("...");
+  Serial.println(F("..."));
 
-  box.print("Count ");
+  box.print(F("Count "));
   box.print(counter);
-  box.println(" . . .");
+  box.println(F(" . . ."));
   counter--;
   delay(1000);
 
   if(counter == 0) {
-    box.println("\nAll Done!");
+    box.println(F("\nAll Done!"));
     delay(2000);
     box.clear();
     counter = 12;

@@ -122,72 +122,68 @@ int OLED::charWidth(const char letter)
   return width;
 }
 
-void OLED::drawString(int x, int y, const char *bChars, Colour foreground, Colour background)
+// Generic drawString implementation for various kinds of strings
+template <class StrType> __attribute__((always_inline)) inline void _drawString(OLED *oled, void*font, int x, int y, StrType str, Colour foreground, Colour background)
 {
   if (x > COLUMNS || y > ROWS)
     return;
 
   struct FontHeader header;
-  memcpy_P(&header, (void*)this->font, sizeof(FontHeader));
+  memcpy_P(&header, font, sizeof(FontHeader));
 
   if (y+header.height<0)
     return;
 
   int strWidth = 0;
   if(x >= 0)
-    this->drawLine(x-1 , y, x-1 , y + header.height - 1, background);
+    oled->drawLine(x-1 , y, x-1 , y + header.height - 1, background);
 
-  while(*bChars) {
-    if(*bChars == '\n') { // Newline
+  char c;
+  for(int idx = 0; c = str[idx], c != 0; idx++) {
+    if(c == '\n') { // Newline
       strWidth = 0;
       y = y - header.height - 1;
     }
     else {
-      int charWide = this->drawChar(x+strWidth, y, *bChars, foreground, background);
+      int charWide = oled->drawChar(x+strWidth, y, c, foreground, background);
       if (charWide > 0) {
         strWidth += charWide ;
-        this->drawLine(x + strWidth , y, x + strWidth , y + header.height-1, background);
+        oled->drawLine(x + strWidth , y, x + strWidth , y + header.height-1, background);
         strWidth++;
       } else if (charWide < 0) {
         return;
       }
     }
-    bChars++;
   }
+}
+
+void OLED::drawString(int x, int y, const char *bChars, Colour foreground, Colour background)
+{
+  _drawString(this, (void*)this->font, x, y, bChars, foreground, background);
 }
 
 void OLED::drawString(int x, int y, const String &str, Colour foreground, Colour background)
 {
-/* Similar to the simple char array drawString, but supports the Arduino String
-   object. We don't just to toCharArray() as this requires copying all the bytes
-*/
-  if (x > COLUMNS || y > ROWS)
-    return;
-
-  struct FontHeader header;
-  memcpy_P(&header, (void*)this->font, sizeof(FontHeader));
-
-  if (y+header.height<0)
-    return;
-
-  int strWidth = 0;
-  if(x >= 0)
-    this->drawLine(x-1 , y, x-1 , y + header.height - 1, background);
-
-  for(int i = 0; i < str.length(); i++) {
-    if(str[i] == '\n') { // Newline
-      strWidth = 0;
-      y = y - header.height - 1;
-    }
-    else {
-      int charWide = this->drawChar(x+strWidth, y, str[i], foreground, background);
-      if (charWide > 0) {
-        strWidth += charWide ;
-        this->drawLine(x + strWidth , y, x + strWidth , y + header.height-1, background);
-        strWidth++;
-      } else if (charWide < 0) {
-        return;
-      }
-    }
-  }
+  _drawString(this, (void*)this->font, x, y, str, foreground, background);
 }
+
+#ifdef __AVR__
+
+// Small wrapper class to allow indexing of progmem strings via [] (should be inlined out of the actual implementation)
+class _FlashStringWrapper {
+  const char *str;
+public:
+  _FlashStringWrapper(const char * flstr) : str(flstr) { }
+  inline char operator[](unsigned int index) {
+    return pgm_read_byte(str + index);
+  }
+};
+
+void OLED::drawString_P(int x, int y, const char *str, Colour foreground, Colour background)
+{
+  _FlashStringWrapper wrapper(str);
+  _drawString(this, (void*)this->font, x, y, wrapper, foreground, background);
+}
+
+
+#endif // __AVR__
