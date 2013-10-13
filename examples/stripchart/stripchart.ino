@@ -35,7 +35,7 @@ void setup() {
 
 void loop() {
   if(cur_sample%2 == 0)
-    box.reset();
+    box.reset(); // reset the text box contents, without clearing screen (allows flicker-free redraw)
   box.print(millis());
   box.println(":");
   for(int ch = 0; ch < NUM_CHANNELS; ch++) {
@@ -49,9 +49,7 @@ void loop() {
     box.setForegroundColour(DARKGREEN);
     box.print(samples[ch][cur_sample]);
   }
-  // The extra spaces are to avoid artifacts when updating, the alternative would
-  // be to call box.clear() instead of box.reset(), but then the display flickers.
-  box.println("  ");
+  box.print("\n"); // Draw end of line
 
   for(int ch = 0; ch < NUM_CHANNELS; ch++) {
     uint8_t y = map(samples[ch][cur_sample], 0, 1023, 33, 128);

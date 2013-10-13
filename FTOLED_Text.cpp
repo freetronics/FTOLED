@@ -19,7 +19,7 @@ int OLED::drawChar(const int x, const int y, const char letter, const Colour col
   char c = letter;
   if (c == ' ') {
     int charWide = charWidth(' ');
-    this->drawFilledBox(x, y, x + charWide, y + header.height, background);
+    this->drawFilledBox(x, y-1, x + charWide, y + header.height, background);
     return charWide;
   }
   uint8_t width = 0;

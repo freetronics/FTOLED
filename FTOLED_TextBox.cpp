@@ -37,6 +37,13 @@ size_t OLED_TextBox::write(uint8_t character) {
   }
   pending_newline = (character == '\n');
 
+  if(character == '\n') {
+    pending_newline = true;
+    // clear the rest of the line after the current cursor position,
+    // this allows you to then use reset() and do a flicker-free redraw
+    oled.drawFilledBox(cur_x+left,cur_y+bottom-1,left+width,cur_y+bottom-rowHeight, this->background);
+  }
+
   oled.drawChar(cur_x+left,cur_y+bottom-rowHeight,character,this->foreground,this->background);
   cur_x += char_width;
 
@@ -57,13 +64,18 @@ void OLED_TextBox::scroll(uint8_t rowHeight) {
   while(*eol && *eol != '\n') {
     uint8_t charwidth = oled.charWidth(*eol);
     if(linewidth + charwidth > this->width) {
-      eol--;
+      if(eol != this->buffer)
+        eol--;
       break;
     }
     linewidth += charwidth;
     eol++;
   }
-  if(*eol == 0) return; // shouldn't happen unless textbox is too small
+  if(*eol == 0) {
+    // First line is also the last line in the textbox buffer, so just clear it and return
+    clear();
+    return;
+  }
 
   // Erase the first line from the buffer, move rest of buffer back
   // (NB: we could possibly use a ringbuffer here for a small saving, but I don't know if worth the code complexity.)
