@@ -4,11 +4,15 @@
  *
  * This allows code written to use PROGMEM on AVRs to transparently run on
  * other platforms
+ *
+ * This header is necessary on Arduino 1.5.1 & 1.5.2 betas, from 1.5.3
+ * the Arduino team added their own wrappers so this header file does
+ * nothing.
  */
 #ifndef _PROGMEM_COMPAT_H
 #define _PROGMEM_COMPAT_H
 
-#ifdef __AVR__
+#if defined(__AVR__) || (defined(ARDUINO) && ARDUINO > 152)
 #include <avr/pgmspace.h>
 #else // ARM
 
