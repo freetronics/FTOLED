@@ -55,6 +55,7 @@ size_t OLED_TextBox::write(uint8_t character) {
   }
   this->buffer[old_len] = character;
   this->buffer[old_len+1] = 0;
+  return 1;
 }
 
 void OLED_TextBox::scroll(uint8_t rowHeight) {
