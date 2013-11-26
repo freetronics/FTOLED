@@ -1,5 +1,29 @@
 #include <FTOLED.h>
 
+// Remap format flags
+
+#define REMAP_HORIZONTAL_INCREMENT 0
+#define REMAP_VERTICAL_INCREMENT (1<<0)
+
+#define REMAP_COLUMNS_LEFT_TO_RIGHT 0
+#define REMAP_COLUMNS_RIGHT_TO_LEFT (1<<1)
+
+#define REMAP_ORDER_BGR 0
+#define REMAP_ORDER_RGB (1<<2)
+
+#define REMAP_SCAN_UP_TO_DOWN 0
+#define REMAP_SCAN_DOWN_TO_UP (1<<4)
+
+#define REMAP_COM_SPLIT_ODD_EVEN (1<<5)
+
+#define REMAP_COLOR_8BIT 0
+#define REMAP_COLOR_RGB565 (1<<6)
+#define REMAP_COLOR_18BIT (2<<6)
+
+#define DEFAULT_REMAP_FLAGS ( REMAP_ORDER_RGB                   \
+                              | REMAP_COM_SPLIT_ODD_EVEN        \
+                              | REMAP_COLOR_RGB565 )
+
 // Clamp a value between two limits
 template<typename T> inline void clamp(T &value, T lower, T upper) {
   if(value < lower)
@@ -24,21 +48,6 @@ template<typename T> inline void ensureOrder(T &a, T &b)
 {
   if(b<a) swap(a,b);
 }
-
-#ifdef __AVR__
-// I don't know why, but although spi.transfer() is declared
-// inline it won't inline, but this method will...
-static inline byte _spi_transfer(byte _data) {
-  SPDR = _data;
-  while (!(SPSR & _BV(SPIF)))
-    ;
-  return SPDR;
-}
-#else
-static inline byte _spi_transfer(byte _data) {
-  return SPI.transfer(_data);
-}
-#endif
 
 void OLED::begin() {
   SPI.begin();
@@ -73,13 +82,6 @@ void OLED::begin() {
 
   setDisplayClock(DISPLAY_CLOCK_DIV_1, 15); // "approx 90fps" ?
   setStartRow(32);
-  setRemapFormat(REMAP_HORIZONTAL_INCREMENT
-                 | REMAP_COLUMNS_LEFT_TO_RIGHT
-                 | REMAP_ORDER_RGB
-                 | REMAP_SCAN_UP_TO_DOWN
-                 | REMAP_COM_SPLIT_ODD_EVEN
-                 | REMAP_COLOR_RGB565);
-
   setColorContrasts(0xE8,0xA0,0xC8);
   setMasterContrast(0x0F);
   setResetPrechargePeriods(5,6);
@@ -108,14 +110,6 @@ void OLED::setPixel(const byte x, const byte y, const Colour colour)
   releaseCS();
 }
 
-inline void OLED::_setPixel(const byte x, const byte y, const Colour colour)
-{
-  setColumn(x,x);
-  setRow(y,y);
-  setWriteRam();
-  writeData(colour);
-}
-
 void OLED::setDisplayOn(bool on)
 {
   // GPIO0 drives OLED_VCC, driving it high turns on the boost converter
@@ -138,13 +132,9 @@ void OLED::setDisplayOn(bool on)
 void OLED::fillScreen(const Colour colour)
 {
   assertCS();
-  setColumn(0,COLUMN_MASK);
-  setRow(0, ROW_MASK);
-  setWriteRam();
-
+  startWrite(0,0,COLUMN_MASK,ROW_MASK,false);
   for(int p = 0; p < ROWS*COLUMNS; p++) {
-    _spi_transfer((colour.green>>3)|(colour.red<<3));
-    _spi_transfer((colour.green<<5)|(colour.blue));
+    writeData(colour);
   }
   releaseCS();
 }
@@ -160,11 +150,8 @@ void OLED::drawLine( int x1, int y1, int x2, int y2, Colour colour )
   // Shortcuts for horizontal and vertical lines, many fewer writes
   assertCS();
   if(x1==x2) {
-    setColumn(x1,x2);
     ensureOrder(y1,y2);
-    setRow(y1,y2);
-    setIncrementDirection(REMAP_VERTICAL_INCREMENT);
-    setWriteRam();
+    startWrite(x1,y1,x2,y2,true);
     while(y1 <= y2) {
       writeData(colour);
       y1++;
@@ -172,10 +159,7 @@ void OLED::drawLine( int x1, int y1, int x2, int y2, Colour colour )
   }
   else if(y1==y2) {
     ensureOrder(x1,x2);
-    setColumn(x1,x2);
-    setRow(y1,y2);
-    setIncrementDirection(REMAP_HORIZONTAL_INCREMENT);
-    setWriteRam();
+    startWrite(x1,y1,x2,y2,false);
     while(x1 <= x2) {
       writeData(colour);
       x1++;
@@ -241,33 +225,25 @@ void OLED::drawBox( int x1, int y1, int x2, int y2, int edgeWidth, Colour colour
   assertCS();
 
   // Left side
-  setColumn(x1,x1+edgeWidth-1);
-  setRow(y1,y2);
-  setWriteRam();
+  startWrite(x1,y1,x1+edgeWidth-1,y2,false);
   for(int n=0;n<(1+y2-y1)*edgeWidth;n++) {
     writeData(colour);
   }
 
   // Top side
-  setColumn(x1,x2);
-  setRow(y1,y1+edgeWidth-1);
-  setWriteRam();
+  startWrite(x1,y1,x2,y1+edgeWidth-1,false);
   for(int n=0;n<(1+x2-x1)*edgeWidth;n++) {
     writeData(colour);
   }
-
+  
   // Right side
-  setColumn(x2-(edgeWidth-1),x2);
-  setRow(y1,y2);
-  setWriteRam();
+  startWrite(x2-(edgeWidth-1),y1,x2,y2,false);
   for(int n=0;n<(1+y2-y1)*edgeWidth;n++) {
     writeData(colour);
   }
 
   // Bottom side
-  setColumn(x1,x2);
-  setRow(y2-(edgeWidth-1),y2);
-  setWriteRam();
+  startWrite(x1,y2-(edgeWidth-1),x2,y2,false);
   for(int n=0;n<(1+y2-y1)*edgeWidth;n++) {
     writeData(colour);
   }
@@ -286,10 +262,7 @@ void OLED::drawFilledBox( int x1, int y1, int x2, int y2, Colour fillColour, int
 
   assertCS();
 
-  setColumn(x1,x2);
-  setRow(y1,y2);
-  setIncrementDirection(REMAP_VERTICAL_INCREMENT);
-  setWriteRam();
+  startWrite(x1,y1,x2,y2,true);
 
   for(int x = x1; x <= x2; x++) {
     for(int y = y1; y <= y2; y++) {
@@ -397,4 +370,57 @@ void OLED::setGPIO1(OLED_GPIO_Mode gpio1)
   gpio_status = (gpio_status & ~0x0C) | (uint8_t)gpio1 << 2;
   writeCommand(0xB5, gpio_status);
   releaseCS();
+}
+
+  /* Start a pixel data write. This function also accounts for remapping coordinates based
+     on current orientation. 
+
+     from_y, to_y are inclusive coordinates
+  */
+void OLED::startWrite(byte from_x, byte from_y, byte to_x, byte to_y, bool fill_vertical) {
+  byte remap;
+  bool swap_xy;
+
+  // Use the hardware where possible to remap the coordinate system,
+  // although also need to swap X & Y where appropriate
+  switch(orientation) {
+  case NORMAL:
+    remap = DEFAULT_REMAP_FLAGS | REMAP_COLUMNS_LEFT_TO_RIGHT | REMAP_SCAN_UP_TO_DOWN;
+    swap_xy = false;
+    break;
+  case ROTATE_180:
+    remap = DEFAULT_REMAP_FLAGS | REMAP_COLUMNS_RIGHT_TO_LEFT | REMAP_SCAN_DOWN_TO_UP;
+    swap_xy = false;
+    break;
+  case ROTATE_90:
+    remap = DEFAULT_REMAP_FLAGS | REMAP_COLUMNS_RIGHT_TO_LEFT | REMAP_SCAN_UP_TO_DOWN;
+    swap_xy = true;
+    break;
+  case ROTATE_270:
+    remap = DEFAULT_REMAP_FLAGS | REMAP_COLUMNS_LEFT_TO_RIGHT | REMAP_SCAN_DOWN_TO_UP;
+    swap_xy = true;
+    break;
+  }
+
+  if(fill_vertical != swap_xy)
+    remap |= REMAP_VERTICAL_INCREMENT;
+  else
+    remap |= REMAP_HORIZONTAL_INCREMENT;
+  writeCommand(0xA0, remap);
+
+  const byte CMD_COLS = 0x15;
+  const byte CMD_ROWS = 0x75;
+
+  // set columns (normal) or rows (swapped)
+  writeCommand(swap_xy ? CMD_ROWS : CMD_COLS);
+  writeData(from_x);
+  writeData(to_x);
+
+  // set rows
+  writeCommand(swap_xy ? CMD_COLS : CMD_ROWS);
+  writeData(from_y);
+  writeData(to_y);
+
+  // setWriteRam command
+  writeCommand(0x5C);
 }

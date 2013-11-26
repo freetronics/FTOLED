@@ -46,11 +46,9 @@ int OLED::drawChar(const int x, const int y, const char letter, const Colour col
     return width;
 
   assertCS();
-  setColumn(x > 0 ? x : 0,x+width > 127 ? 127 : x+width-1);
-  setRow(y > 0 ? y : 0,y+header.height > 127 ? 127 : y+header.height-1);
-  setIncrementDirection(REMAP_VERTICAL_INCREMENT);
-  setWriteRam();
-
+  startWrite(x > 0 ? x : 0, y > 0 ? y : 0, 
+             x+width > 127 ? 127 : x+width-1, y+header.height > 127 ? 127 : y+header.height-1,
+             true);
 
   /* Characters are stored as follows:
    *

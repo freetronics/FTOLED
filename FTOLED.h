@@ -86,6 +86,13 @@ enum BMP_Status {
   BMP_ORIGIN_OUTSIDE_IMAGE = 6         // You've asked to crop a section that doesn't exist in the image
 };
 
+enum OLED_Orientation {
+  NORMAL = 0,
+  ROTATE_90 = 1,
+  ROTATE_180 = 2,
+  ROTATE_270 = 3
+};
+
 class OLED_TextBox;
 
 class OLED
@@ -93,10 +100,11 @@ class OLED
   friend class OLED_TextBox;
 public:
   OLED(byte pin_ncs, byte pin_dc, byte pin_reset) :
-  pin_ncs(pin_ncs),
-  pin_dc(pin_dc),
-  pin_reset(pin_reset),
-  gpio_status(OLED_HIZ | OLED_HIZ<<2)
+    pin_ncs(pin_ncs),
+    pin_dc(pin_dc),
+    pin_reset(pin_reset),
+    gpio_status(OLED_HIZ | OLED_HIZ<<2),
+    orientation(NORMAL)
   {}
 
   void begin();
@@ -178,12 +186,16 @@ public:
     releaseCS();
   }
 
+  inline void setOrientation(OLED_Orientation orientation) {
+    this->orientation = orientation;
+  }
+
  protected:
   byte pin_ncs;
   byte pin_dc;
   byte pin_reset;
-  byte remap_flags;
   byte gpio_status;
+  OLED_Orientation orientation;
 
   uint8_t *font;
 
@@ -226,23 +238,11 @@ public:
     }
   }
 
-  inline void setColumn(byte start, byte end) {
-    writeCommand(0x15);
-    writeData(start);
-    writeData(end);
+  inline void _setPixel(const byte x, const byte y, const Colour colour)
+  {
+    startWrite(x,y,x,y,false);
+    writeData(colour);
   }
-
-  inline void setRow(byte start, byte end) {
-    writeCommand(0x75);
-    writeData(start);
-    writeData(end);
-  }
-
-  inline void setWriteRam() {
-    writeCommand(0x5C);
-  }
-
-  inline void _setPixel(const byte x, const byte y, const Colour);
 
   enum OLED_Command_Lock {
     DISPLAY_COMMAND_UNLOCK = 0x12,        // Allow commands (default state)
@@ -300,48 +300,11 @@ public:
     writeCommand(0xA1, row & ROW_MASK);
   }
 
-  // Flags for setRemapFormat & setIncrementDirection, defined below
-#define REMAP_HORIZONTAL_INCREMENT 0
-#define REMAP_VERTICAL_INCREMENT (1<<0)
+  /* Start a pixel data write. This function also accounts for remapping coordinates based
+     on current orientation. */
+  void startWrite(byte start_x, byte start_y, byte to_x, byte to_y, bool fill_vertical);
 
-#define REMAP_COLUMNS_LEFT_TO_RIGHT 0
-#define REMAP_COLUMNS_RIGHT_TO_LEFT (1<<1)
-
-#define REMAP_ORDER_BGR 0
-#define REMAP_ORDER_RGB (1<<2)
-
-#define REMAP_SCAN_UP_TO_DOWN 0
-#define REMAP_SCAN_DOWN_TO_UP (1<<4)
-
-#define REMAP_COM_SPLIT_ODD_EVEN (1<<5)
-
-#define REMAP_COLOR_8BIT 0
-#define REMAP_COLOR_RGB565 (1<<6)
-#define REMAP_COLOR_18BIT (2<<6)
-
-  /* set up address/pixel remap format, see flags REMAP_xxxx_xxxx above */
-  inline void setRemapFormat(byte remap_flags)
-  {
-    writeCommand(0xA0, remap_flags);
-    this->remap_flags = remap_flags;
-  }
-
-  /* Set the direction to increment when filling in pixel data (horizontal or vertical)
-   *
-   * This is the most commonly set part of the 'remap' format, so this function
-   * sets it without disturbing the other flags.
-   */
-  inline void setIncrementDirection(byte direction)
-  {
-    byte remap = this->remap_flags & ~(REMAP_HORIZONTAL_INCREMENT|REMAP_VERTICAL_INCREMENT);
-    remap = remap | (direction & (REMAP_VERTICAL_INCREMENT|REMAP_HORIZONTAL_INCREMENT));
-    writeCommand(0xA0, remap);
-    this->remap_flags = remap;
-  }
-
-
-
-  /* set color channel contrasts. A,B,C are R,G,B values unless REMAP_ORDER_BGR is set */
+ /* set color channel contrasts. A,B,C are R,G,B values unless REMAP_ORDER_BGR is set */
   inline void setColorContrasts(byte a, byte b, byte c)
   {
     writeCommand(0xC1);

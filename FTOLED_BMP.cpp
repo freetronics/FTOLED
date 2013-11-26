@@ -154,20 +154,19 @@ template<typename SourceType> BMP_Status OLED::_displayBMP(SourceType &source, c
   height = height - from_y;
   if(to_y + height > 128)
     height = 128-to_y;
-  setRow(to_y,to_y+height-1);
+
   // Calculate outputtable width and set up column span in memory
   uint16_t out_width = width - from_x;
   if(to_x + out_width > 128)
     out_width = 128-to_x;
-  setColumn(to_x,to_x+out_width-1);
 
   // Calculate the width in bits of each row (rounded up to nearest byte)
   uint16_t row_bits = (width*bpp + 7) & ~7;
   // Calculate width in bytes (4-byte boundary aligned)
   uint16_t row_bytes = (row_bits/8 + 3) & ~3;
 
-  setIncrementDirection(REMAP_HORIZONTAL_INCREMENT);
-  setWriteRam();
+  startWrite(to_x,to_y,to_x+out_width-1,to_y+height-1,false);
+
   releaseCS();
 
   // Read colour palette to RAM. It's quite hefty to hold in RAM (512 bytes for a full 8-bit palette)
