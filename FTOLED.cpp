@@ -384,7 +384,7 @@ void OLED::startWrite(byte from_x, byte from_y, byte to_x, byte to_y, bool fill_
   // Use the hardware where possible to remap the coordinate system,
   // although also need to swap X & Y where appropriate
   switch(orientation) {
-  case NORMAL:
+  case ROTATE_0:
     remap = DEFAULT_REMAP_FLAGS | REMAP_COLUMNS_LEFT_TO_RIGHT | REMAP_SCAN_UP_TO_DOWN;
     swap_xy = false;
     break;

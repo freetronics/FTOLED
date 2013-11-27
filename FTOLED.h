@@ -87,7 +87,7 @@ enum BMP_Status {
 };
 
 enum OLED_Orientation {
-  NORMAL = 0,
+  ROTATE_0 = 0,
   ROTATE_90 = 1,
   ROTATE_180 = 2,
   ROTATE_270 = 3
@@ -104,7 +104,7 @@ public:
     pin_dc(pin_dc),
     pin_reset(pin_reset),
     gpio_status(OLED_HIZ | OLED_HIZ<<2),
-    orientation(NORMAL)
+    orientation(ROTATE_0)
   {}
 
   void begin();
