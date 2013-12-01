@@ -12,7 +12,7 @@
 #ifndef _PROGMEM_COMPAT_H
 #define _PROGMEM_COMPAT_H
 
-#if defined(__AVR__) || (defined(ARDUINO) && ARDUINO > 152)
+#if defined(__AVR__) || (defined(ARDUINO) && ARDUINO > 152) || defined(CORE_TEENSY)
 #include <avr/pgmspace.h>
 #else // ARM
 
