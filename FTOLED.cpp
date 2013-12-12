@@ -244,7 +244,7 @@ void OLED::drawBox( int x1, int y1, int x2, int y2, int edgeWidth, Colour colour
 
   // Bottom side
   startWrite(x1,y2-(edgeWidth-1),x2,y2,false);
-  for(int n=0;n<(1+y2-y1)*edgeWidth;n++) {
+  for(int n=0;n<(1+x2-x1)*edgeWidth;n++) {
     writeData(colour);
   }
 
