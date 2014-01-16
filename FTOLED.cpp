@@ -383,23 +383,23 @@ void OLED::startWrite(byte from_x, byte from_y, byte to_x, byte to_y, bool fill_
 
   // Use the hardware where possible to remap the coordinate system,
   // although also need to swap X & Y where appropriate
-  switch(orientation) {
-  case ROTATE_0:
-    remap = DEFAULT_REMAP_FLAGS | REMAP_COLUMNS_LEFT_TO_RIGHT | REMAP_SCAN_UP_TO_DOWN;
-    swap_xy = false;
-    break;
-  case ROTATE_180:
+  //
+  // (NB: this is a list of ifs not a switch statement due to a gcc 4.4.1 compiler bug)
+  if(orientation == ROTATE_180)    {
     remap = DEFAULT_REMAP_FLAGS | REMAP_COLUMNS_RIGHT_TO_LEFT | REMAP_SCAN_DOWN_TO_UP;
     swap_xy = false;
-    break;
-  case ROTATE_90:
+  }
+  else if(orientation == ROTATE_90) {
     remap = DEFAULT_REMAP_FLAGS | REMAP_COLUMNS_RIGHT_TO_LEFT | REMAP_SCAN_UP_TO_DOWN;
     swap_xy = true;
-    break;
-  case ROTATE_270:
+  }
+  else if(orientation == ROTATE_270) {
     remap = DEFAULT_REMAP_FLAGS | REMAP_COLUMNS_LEFT_TO_RIGHT | REMAP_SCAN_DOWN_TO_UP;
     swap_xy = true;
-    break;
+  }
+  else { // ROTATE_0
+    remap = DEFAULT_REMAP_FLAGS | REMAP_COLUMNS_LEFT_TO_RIGHT | REMAP_SCAN_UP_TO_DOWN;
+    swap_xy = false;
   }
 
   if(fill_vertical != swap_xy)
