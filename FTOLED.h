@@ -137,6 +137,7 @@ public:
 
   //Select a text font
   void selectFont(const uint8_t* font);
+  const inline uint8_t *getFont(void) { return font; }
 
   //Draw a single character
   int drawChar(const int x, const int y, const char letter, const Colour colour, const Colour background);
