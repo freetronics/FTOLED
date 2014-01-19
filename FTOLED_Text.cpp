@@ -183,5 +183,40 @@ void OLED::drawString_P(int x, int y, const char *str, Colour foreground, Colour
   _drawString(this, (void*)this->font, x, y, wrapper, foreground, background);
 }
 
+#endif // __AVR__
+
+
+// Generic stringWidth implementation for various kinds of strings
+template <class StrType> __attribute__((always_inline)) inline unsigned int _stringWidth(OLED *oled, void*font, StrType str)
+{
+  unsigned int width = 0;
+  char c;
+  int idx;
+  for(idx = 0; c = str[idx], c != 0; idx++) {
+    width += oled->charWidth(c);
+  }
+  if(idx) {
+    width += idx-1; // one pixel "kerning" between characters
+  }
+  return width;
+}
+
+unsigned int OLED::stringWidth(const char *bChars)
+{
+  _stringWidth(this, (unsigned int*)this->font, bChars);
+}
+
+unsigned int OLED::stringWidth(const String &str)
+{
+  _stringWidth(this, (unsigned int*)this->font, str);
+}
+
+#ifdef __AVR__
+
+unsigned int OLED::stringWidth_P(const char *str)
+{
+  _FlashStringWrapper wrapper(str);
+  _stringWidth(this, (unsigned int*)this->font, wrapper);
+}
 
 #endif // __AVR__

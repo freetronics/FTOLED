@@ -142,9 +142,6 @@ public:
   //Draw a single character
   int drawChar(const int x, const int y, const char letter, const Colour colour, const Colour background);
 
-  //Find the width of a character
-  int charWidth(const char letter);
-
   // Draw a full string, either from PROGMEM (AVR only) or from normal C-style pointer, or Arduino string object
 #ifdef __AVR__
   void drawString_P(int x, int y, const char *flashStr, Colour foreground, Colour background);
@@ -154,6 +151,19 @@ public:
 #endif
   void drawString(int x, int y, const char *bChars, Colour foreground, Colour background);
   void drawString(int x, int y, const String &str, Colour foreground, Colour background);
+
+  //Find the width of a character
+  int charWidth(const char letter);
+
+  //Find the width of a string (width of all characters plus 1 pixel "kerning" between each character)
+#ifdef __AVR__
+  unsigned int stringWidth_P(const char *flashStr);
+  inline unsigned int stringWidth(const __FlashStringHelper *flashStr) {
+    return stringWidth_P((const char*)flashStr);
+  }
+#endif
+  unsigned int stringWidth(const char *bChars);
+  unsigned int stringWidth(const String &str);
 
   // Bitmap stuff
 
