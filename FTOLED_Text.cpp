@@ -214,12 +214,12 @@ template <class StrType> __attribute__((always_inline)) inline unsigned int _str
 
 unsigned int OLED::stringWidth(const char *bChars)
 {
-  _stringWidth(this, (unsigned int*)this->font, bChars);
+  return _stringWidth(this, (unsigned int*)this->font, bChars);
 }
 
 unsigned int OLED::stringWidth(const String &str)
 {
-  _stringWidth(this, (unsigned int*)this->font, str);
+  return _stringWidth(this, (unsigned int*)this->font, str);
 }
 
 #ifdef __AVR__
@@ -227,7 +227,7 @@ unsigned int OLED::stringWidth(const String &str)
 unsigned int OLED::stringWidth_P(const char *str)
 {
   _FlashStringWrapper wrapper(str);
-  _stringWidth(this, (unsigned int*)this->font, wrapper);
+  return _stringWidth(this, (unsigned int*)this->font, wrapper);
 }
 
 #endif // __AVR__
