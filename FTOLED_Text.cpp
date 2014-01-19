@@ -193,10 +193,12 @@ template <class StrType> __attribute__((always_inline)) inline unsigned int _str
   char c;
   int idx;
   for(idx = 0; c = str[idx], c != 0; idx++) {
-    width += oled->charWidth(c);
+    int cwidth = oled->charWidth(c);
+    if(cwidth > 0)
+      width += cwidth + 1;
   }
-  if(idx) {
-    width += idx-1; // one pixel "kerning" between characters
+  if(width) {
+    width--;
   }
   return width;
 }
