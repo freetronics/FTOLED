@@ -98,14 +98,18 @@ int OLED::drawChar(const int x, const int y, const char letter, const Colour col
 int OLED::charWidth(const char letter)
 {
   char c = letter;
-  // Space is often not included in font so use width of 'n'
-  if (c == ' ') c = 'n';
   uint8_t width = 0;
 
   struct FontHeader header;
   memcpy_P(&header, (void*)this->font, sizeof(FontHeader));
 
+ trychar:
+
   if (c < header.firstChar || c >= (header.firstChar + header.charCount)) {
+    if(c == ' ') {
+      c = 'n'; // if ' ' not included, try using 'n'
+      goto trychar;
+    }
     return 0;
   }
   c -= header.firstChar;
@@ -116,6 +120,11 @@ int OLED::charWidth(const char letter)
   } else {
     // variable width font, read width data for character
     width = pgm_read_byte(this->font + sizeof(FontHeader) + c);
+  }
+
+  if(width == 0 && c == ' ') {
+    c = 'n'; // if ' ' not included, try using 'n'
+    goto trychar;
   }
   return width;
 }
