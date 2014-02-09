@@ -52,7 +52,6 @@ template<typename T> inline void ensureOrder(T &a, T &b)
 void OLED::begin() {
   SPI.begin();
   SPI.setBitOrder(MSBFIRST);
-  SPI.setDataMode(SPI_MODE3);
 #ifdef __AVR__
   SPI.setClockDivider(SPI_CLOCK_DIV2); // 8MHz on standard Arduino models
 #else
