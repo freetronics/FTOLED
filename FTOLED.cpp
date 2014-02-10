@@ -62,15 +62,16 @@ void OLED::begin() {
   digitalWrite(pin_ncs, HIGH);
   pinMode(pin_dc, OUTPUT);
   digitalWrite(pin_dc, HIGH);
-  pinMode(pin_reset, OUTPUT);
-  digitalWrite(pin_reset, HIGH);
-
-  digitalWrite(pin_reset, HIGH);
-  delay(1);
-  digitalWrite(pin_reset, LOW);
-  delay(1);
-  digitalWrite(pin_reset, HIGH);
-  delay(1);
+  if(pin_reset >= 0) {
+    pinMode(pin_reset, OUTPUT);
+    digitalWrite(pin_reset, HIGH);
+    digitalWrite(pin_reset, HIGH);
+    delay(1);
+    digitalWrite(pin_reset, LOW);
+    delay(1);
+    digitalWrite(pin_reset, HIGH);
+    delay(1);
+  }
 
   setDisplayOn(false);
 
