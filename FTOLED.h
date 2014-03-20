@@ -37,7 +37,6 @@
 
 #include "pins_arduino.h"
 #include <SPI.h>
-#include <SD.h>
 #include "Print.h"
 #include "progmem_compat.h"
 
@@ -45,6 +44,8 @@
 #define COLUMNS 128
 #define ROW_MASK (ROWS-1)
 #define COLUMN_MASK (COLUMNS-1)
+
+class File; /* Provided by SD library except sometimes on Yun, see comment at top of FTOLED_BMP.cpp */
 
 struct Colour
 {

@@ -1,7 +1,21 @@
 /* FTOLED BMP parsing and bitmap display routines for BMP files */
-
 #include <stdint.h>
 #include <FTOLED.h>
+
+#include <SD.h>
+#ifdef ARDUINO_AVR_YUN
+/*
+   On Arduino Yun, the Bridge library provides a conflicting
+   implementation of File. Therefore the sketch chooses one or
+   the other library via including SD.h or Bridge.h. FileIO header
+   (referenced here below) comes from the Bridge library. Whichever
+   header is missing as it's not in the include path generates a warning
+   but warning output is suppressed on Arduino 1.5.6.
+
+   See also https://github.com/arduino/Arduino/issues/1942
+*/
+#include <FileIO.h>
+#endif
 
 // Read a little-endian short word from a stream
 template<typename T> inline uint16_t readShort(T &s)
