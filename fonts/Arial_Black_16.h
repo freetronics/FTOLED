@@ -11,7 +11,7 @@
  * File Name           : Arial_Black_16.h
  * Date                : 10.01.2012
  * Font size in bytes  : 12422
- * Font width          : 10
+ * Font width          : 9
  * Font height         : 16
  * Font first char     : 32
  * Font last char      : 128
@@ -44,12 +44,12 @@
 #ifndef ARIAL_BLACK_16_H
 #define ARIAL_BLACK_16_H
 
-#define ARIAL_BLACK_16_WIDTH 10
+#define ARIAL_BLACK_16_WIDTH 9
 #define ARIAL_BLACK_16_HEIGHT 16
 
 static const uint8_t Arial_Black_16[] PROGMEM = {
     0x30, 0x86, // size
-    0x0A, // width
+    0x09, // width
     0x10, // height
     0x20, // first char
     0x60, // char count

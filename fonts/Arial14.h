@@ -13,7 +13,7 @@
  * File Name           : Arial14.h
  * Date                : 02.05.2008
  * Font size in bytes  : 7788
- * Font width          : 10
+ * Font width          : 6
  * Font height         : 14
  * Font first char     : 32
  * Font last char      : 128
@@ -46,12 +46,12 @@
 #ifndef ARIAL_14_H
 #define ARIAL_14_H
 
-#define ARIAL_14_WIDTH 10
+#define ARIAL_14_WIDTH 6
 #define ARIAL_14_HEIGHT 14
 
 static const uint8_t Arial14[] PROGMEM = {
     0x1E, 0x6C, // size
-    0x0A, // width
+    0x06, // width
     0x0E, // height
     0x20, // first char
     0x60, // char count

@@ -11,7 +11,7 @@
  * File Name           : Droid_Sans_64.h
  * Date                : 06.03.2013
  * Font size in bytes  : 160550
- * Font width          : 10
+ * Font width          : 30
  * Font height         : 64
  * Font first char     : 32
  * Font last char      : 128
@@ -44,12 +44,12 @@
 #ifndef DROID_SANS_64_H
 #define DROID_SANS_64_H
 
-#define DROID_SANS_64_WIDTH 10
+#define DROID_SANS_64_WIDTH 30
 #define DROID_SANS_64_HEIGHT 64
 
 static const uint8_t Droid_Sans_64[] PROGMEM = {
     0x73, 0x26, // size
-    0x0A, // width
+    0x1E, // width
     0x40, // height
     0x20, // first char
     0x60, // char count

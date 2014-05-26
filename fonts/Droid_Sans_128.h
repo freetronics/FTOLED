@@ -13,7 +13,7 @@
  * File Name           : Droid_Sans_128.h
  * Date                : 06.03.2013
  * Font size in bytes  : 644586
- * Font width          : 10
+ * Font width          : 60
  * Font height         : 129
  * Font first char     : 32
  * Font last char      : 128
@@ -46,12 +46,12 @@
 #ifndef DROID_SANS_128_H
 #define DROID_SANS_128_H
 
-#define DROID_SANS_128_WIDTH 10
+#define DROID_SANS_128_WIDTH 60
 #define DROID_SANS_128_HEIGHT 129
 
 static const uint8_t Droid_Sans_128[] PROGMEM = {
     0xD5, 0xEA, // size
-    0x0A, // width
+    0x3C, // width
     0x81, // height
     0x20, // first char
     0x60, // char count
