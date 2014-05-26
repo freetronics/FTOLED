@@ -16,7 +16,7 @@ int OLED::drawChar(const int x, const int y, const char letter, const Colour col
   struct FontHeader header;
   memcpy_P(&header, (void*)this->font, sizeof(FontHeader));
 
-  char c = letter;
+  uint8_t c = letter;
   if (c == ' ') {
     int charWide = charWidth(' ');
     this->drawFilledBox(x, y-1, x + charWide, y + header.height, background);
@@ -106,7 +106,7 @@ int OLED::charWidth(const char letter)
     return header.fixedWidth;
   }
 
-  if(letter < header.firstChar || letter >= (header.firstChar + header.charCount)) {
+  if((uint8_t)letter < header.firstChar || (uint8_t)letter >= (header.firstChar + header.charCount)) {
     return 0;
   }
 
