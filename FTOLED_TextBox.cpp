@@ -43,9 +43,13 @@ size_t OLED_TextBox::write(uint8_t character) {
     // this allows you to then use reset() and do a flicker-free redraw
     oled.drawFilledBox(cur_x+left,cur_y+bottom-1,left+width,cur_y+bottom-rowHeight, this->background);
   }
-
-  oled.drawChar(cur_x+left,cur_y+bottom-rowHeight,character,this->foreground,this->background);
-  cur_x += char_width;
+  else if(char_width > 0) {
+    oled.drawChar(cur_x+left,cur_y+bottom-rowHeight,character,this->foreground,this->background);
+    cur_x += char_width;
+    if(cur_x < this->width)
+      oled.drawLine(cur_x+left , cur_y+bottom-rowHeight, cur_x+left , cur_y+bottom, background);
+    cur_x++;
+  }
 
   // Check the buffer has enough space for this new character, grow it if not
   uint16_t old_len = this->buffer ? strlen(this->buffer) : 0;
@@ -106,6 +110,9 @@ void OLED_TextBox::scroll(uint8_t rowHeight) {
 
     oled.drawChar(cur_x+left,cur_y+bottom-rowHeight,*replay,this->foreground,this->background);
     cur_x += char_width;
+    if(cur_x < this->width)
+      oled.drawLine(cur_x+left , cur_y+bottom-rowHeight, cur_x+left , cur_y+bottom, background);
+    cur_x++;
     replay++;
   }
 
