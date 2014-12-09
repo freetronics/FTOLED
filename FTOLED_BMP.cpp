@@ -272,7 +272,7 @@ template<typename SourceType> BMP_Status OLED::_displayBMP(SourceType &source, c
     }
   }
 
-  if(bpp != 16)
+  if(bpp < 16)
     free(palette);
 
   return BMP_OK;
