@@ -57,7 +57,14 @@ struct OLED_Colour
 /* Allow use of both AU/UK spelling OLED_Colour and US spelling OLED_Color */
 typedef OLED_Colour OLED_Color;
 
+#if !defined(FTOLED_NO_COLOUR_PRESETS) && !defined(FTOLED_NO_COLOR_PRESETS)
 #include "FTOLED_Colours.h"
+#endif
+
+/* Add an internal-use-only preset colours for BLACK, in case the preset
+ colours aren't loaded */
+const OLED_Colour OLED_BLACK = {   0,   0,   0 };
+
 
 const byte MAX_RED = 31;
 const byte MAX_GREEN = 63;
@@ -117,7 +124,7 @@ public:
 
   // Fill the screen with a single solid colour
   void fillScreen(const OLED_Colour);
-  void clearScreen() { fillScreen(BLACK); }
+  void clearScreen() { fillScreen(OLED_BLACK); }
 
   // Turn the display on or off
   void setDisplayOn(bool on);
@@ -130,7 +137,7 @@ public:
 
   //Draw a filled box(rectangle) from (x1,y1) to (y1,y2), optionally with sides edgeWidth pixels wide
   void drawFilledBox( int x1, int y1, int x2, int y2, OLED_Colour fillColour, int edgeWidth, OLED_Colour edgeColour);
-  void drawFilledBox( int x1, int y1, int x2, int y2, OLED_Colour fillColour) { drawFilledBox(x1,y1,x2,y2,fillColour,0,BLACK); }
+  void drawFilledBox( int x1, int y1, int x2, int y2, OLED_Colour fillColour) { drawFilledBox(x1,y1,x2,y2,fillColour,0,OLED_BLACK); }
 
   // Draw an outline of a circle of radius r centred at x,y
   void drawCircle( int xCenter, int yCenter, int radius, OLED_Colour colour);
