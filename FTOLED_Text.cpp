@@ -9,7 +9,7 @@ void OLED::selectFont(const uint8_t * font)
   this->font = (uint8_t *)font;
 }
 
-int OLED::drawChar(const int x, const int y, const char letter, const Colour colour, const Colour background)
+int OLED::drawChar(const int x, const int y, const char letter, const OLED_Colour colour, const OLED_Colour background)
 {
   if (x <0 || y < 0 || x >= COLUMNS || y >= ROWS) return -1;
 
@@ -120,7 +120,7 @@ int OLED::charWidth(const char letter)
 }
 
 // Generic drawString implementation for various kinds of strings
-template <class StrType> __attribute__((always_inline)) inline void _drawString(OLED *oled, void*font, int x, int y, StrType str, Colour foreground, Colour background)
+template <class StrType> __attribute__((always_inline)) inline void _drawString(OLED *oled, void*font, int x, int y, StrType str, OLED_Colour foreground, OLED_Colour background)
 {
   if (x > COLUMNS || y > ROWS)
     return;
@@ -154,12 +154,12 @@ template <class StrType> __attribute__((always_inline)) inline void _drawString(
   }
 }
 
-void OLED::drawString(int x, int y, const char *bChars, Colour foreground, Colour background)
+void OLED::drawString(int x, int y, const char *bChars, OLED_Colour foreground, OLED_Colour background)
 {
   _drawString(this, (void*)this->font, x, y, bChars, foreground, background);
 }
 
-void OLED::drawString(int x, int y, const String &str, Colour foreground, Colour background)
+void OLED::drawString(int x, int y, const String &str, OLED_Colour foreground, OLED_Colour background)
 {
   _drawString(this, (void*)this->font, x, y, str, foreground, background);
 }
@@ -176,7 +176,7 @@ public:
   }
 };
 
-void OLED::drawString_P(int x, int y, const char *str, Colour foreground, Colour background)
+void OLED::drawString_P(int x, int y, const char *str, OLED_Colour foreground, OLED_Colour background)
 {
   _FlashStringWrapper wrapper(str);
   _drawString(this, (void*)this->font, x, y, wrapper, foreground, background);

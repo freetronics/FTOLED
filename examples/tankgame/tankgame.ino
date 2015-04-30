@@ -51,7 +51,7 @@ void setup()
 class Tank
 {
 public:
-  Tank(Colour colour, const uint8_t **left_frames, const uint8_t **right_frames, int x, int y, byte facing);
+  Tank(OLED_Colour colour, const uint8_t **left_frames, const uint8_t **right_frames, int x, int y, byte facing);
   void drawTank();
   void moveTankBy(int dx, int dy);
   void fire();
@@ -65,7 +65,7 @@ public:
   int bullet_x;
   int bullet_y;
   int bullet_dx ; // if 0, no bullet currently fired
-  Colour colour;
+  OLED_Colour colour;
   /* The tank can be in one of these 4 states, each with their own display sprite */
   enum { NORMAL, FIRING1, FIRING2, DEAD, RESPAWNING } state;
   /* Timestamp (in millis() milliseconds) of next automatic state change, for automatic animation or respawn events */
@@ -117,7 +117,7 @@ const uint8_t *browntank_rightframes[] = {
 
 Tank brown_tank(BROWN, browntank_leftframes, browntank_rightframes, 90, 32, 0);
 
-Tank::Tank(Colour colour, const uint8_t **left_frames, const uint8_t **right_frames, int x, int y, byte facing)
+Tank::Tank(OLED_Colour colour, const uint8_t **left_frames, const uint8_t **right_frames, int x, int y, byte facing)
 {
     this->colour = colour;
     this->left_frames = left_frames;

@@ -18,7 +18,7 @@ OLED_TextBox box(oled, 0, 0, 128, 32);
 
 const int NUM_CHANNELS = 3;
 
-const Colour COLOURS[NUM_CHANNELS] = { RED, GREEN, BLUE };
+const OLED_Colour COLOURS[NUM_CHANNELS] = { RED, GREEN, BLUE };
 
 // How many ms between each sample (the sample rate will be a bit slower than this, due to overhead of actually drawing things.)
 const int DELAY = 50;

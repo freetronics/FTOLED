@@ -16,7 +16,7 @@ void setup()
   oled.begin();
 
   // Fill the background with dark red (the values in the curly braces are {RED,GREEN,BLUE} )
-  Colour background = {10,0,0};
+  OLED_Colour background = {10,0,0};
   oled.fillScreen(background);
 
   // Horizontal blue line from (30,30) to (90,30)

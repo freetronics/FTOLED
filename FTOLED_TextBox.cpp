@@ -134,12 +134,12 @@ void OLED_TextBox::reset() {
   pending_newline = false;
 }
 
-void OLED_TextBox::setForegroundColour(Colour colour)
+void OLED_TextBox::setForegroundColour(OLED_Colour colour)
 {
   this->foreground = colour;
 }
 
-void OLED_TextBox::setBackgroundColour(Colour colour)
+void OLED_TextBox::setBackgroundColour(OLED_Colour colour)
 {
   this->background = colour;
 }

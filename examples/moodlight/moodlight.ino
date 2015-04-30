@@ -34,7 +34,7 @@ inline int angle_to_channel(float a) {
 }
 
 void loop() {
-  Colour c;
+  OLED_Colour c;
   c.red = angle_to_channel(angle)>>1;
   c.green = angle_to_channel(angle-2*PI/3);
   c.blue = angle_to_channel(angle-4*PI/3)>>1;

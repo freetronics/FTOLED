@@ -47,13 +47,15 @@
 
 class File; /* Provided by SD library except sometimes on Yun, see comment at top of FTOLED_BMP.cpp */
 
-struct Colour
+struct OLED_Colour
 {
   byte red   : 5;
   byte green : 6;
   byte blue  : 5;
 };
-#define Color Colour
+
+/* Allow use of both AU/UK spelling OLED_Colour and US spelling OLED_Color */
+typedef OLED_Colour OLED_Color;
 
 #include "FTOLED_Colours.h"
 
@@ -111,47 +113,47 @@ public:
   void begin();
 
   // Set the colour of a single pixel
-  void setPixel(const byte x, const byte y, const Colour colour);
+  void setPixel(const byte x, const byte y, const OLED_Colour colour);
 
   // Fill the screen with a single solid colour
-  void fillScreen(const Colour);
+  void fillScreen(const OLED_Colour);
   void clearScreen() { fillScreen(BLACK); }
 
   // Turn the display on or off
   void setDisplayOn(bool on);
 
   //Draw a line from x1,y1 to x2,y2
-  void drawLine( int x1, int y1, int x2, int y2, Colour colour );
+  void drawLine( int x1, int y1, int x2, int y2, OLED_Colour colour );
 
   //Draw a box(rectangle) from (x1,y1) to (x2,y2), with sides edgeWidth pixels wide
-  void drawBox( int x1, int y1, int x2, int y2, int edgeWidth, Colour colour);
+  void drawBox( int x1, int y1, int x2, int y2, int edgeWidth, OLED_Colour colour);
 
   //Draw a filled box(rectangle) from (x1,y1) to (y1,y2), optionally with sides edgeWidth pixels wide
-  void drawFilledBox( int x1, int y1, int x2, int y2, Colour fillColour, int edgeWidth, Colour edgeColour);
-  void drawFilledBox( int x1, int y1, int x2, int y2, Colour fillColour) { drawFilledBox(x1,y1,x2,y2,fillColour,0,BLACK); }
+  void drawFilledBox( int x1, int y1, int x2, int y2, OLED_Colour fillColour, int edgeWidth, OLED_Colour edgeColour);
+  void drawFilledBox( int x1, int y1, int x2, int y2, OLED_Colour fillColour) { drawFilledBox(x1,y1,x2,y2,fillColour,0,BLACK); }
 
   // Draw an outline of a circle of radius r centred at x,y
-  void drawCircle( int xCenter, int yCenter, int radius, Colour colour);
+  void drawCircle( int xCenter, int yCenter, int radius, OLED_Colour colour);
 
   // Draw an filled circle of radius r at x,y centre
-  void drawFilledCircle( int xCenter, int yCenter, int radius, Colour fillColour);
+  void drawFilledCircle( int xCenter, int yCenter, int radius, OLED_Colour colour);
 
   //Select a text font
   void selectFont(const uint8_t* font);
   const inline uint8_t *getFont(void) { return font; }
 
   //Draw a single character
-  int drawChar(const int x, const int y, const char letter, const Colour colour, const Colour background);
+  int drawChar(const int x, const int y, const char letter, const OLED_Colour colour, const OLED_Colour background);
 
   // Draw a full string, either from PROGMEM (AVR only) or from normal C-style pointer, or Arduino string object
 #ifdef __AVR__
-  void drawString_P(int x, int y, const char *flashStr, Colour foreground, Colour background);
-  inline void drawString(int x, int y, const __FlashStringHelper *flashStr, Colour foreground, Colour background) {
+  void drawString_P(int x, int y, const char *flashStr, OLED_Colour foreground, OLED_Colour background);
+  inline void drawString(int x, int y, const __FlashStringHelper *flashStr, OLED_Colour foreground, OLED_Colour background) {
     return drawString_P(x,y,(const char*)flashStr,foreground,background);
   }
 #endif
-  void drawString(int x, int y, const char *bChars, Colour foreground, Colour background);
-  void drawString(int x, int y, const String &str, Colour foreground, Colour background);
+  void drawString(int x, int y, const char *bChars, OLED_Colour foreground, OLED_Colour background);
+  void drawString(int x, int y, const String &str, OLED_Colour foreground, OLED_Colour background);
 
   //Find the width of a character
   int charWidth(const char letter);
@@ -232,7 +234,7 @@ public:
     SPI.transfer(data);
   }
 
-  inline void writeData(Colour colour)
+  inline void writeData(OLED_Colour colour)
   {
     writeData((colour.green>>3)|(colour.red<<3));
     writeData((colour.green<<5)|(colour.blue));
@@ -250,7 +252,7 @@ public:
     }
   }
 
-  inline void _setPixel(const byte x, const byte y, const Colour colour)
+  inline void _setPixel(const byte x, const byte y, const OLED_Colour colour)
   {
     startWrite(x,y,x,y,false);
     writeData(colour);
@@ -367,10 +369,10 @@ public:
   virtual size_t write(uint8_t);
   void clear();
   void reset();
-  void setForegroundColour(Colour colour);
-  void setBackgroundColour(Colour colour);
-  inline void setForegroundColor(Colour color) { setForegroundColour(color); }
-  inline void setBackgroundColor(Colour color) { setBackgroundColour(color); }
+  void setForegroundColour(OLED_Colour colour);
+  void setBackgroundColour(OLED_Colour colour);
+  inline void setForegroundColor(OLED_Colour color) { setForegroundColour(color); }
+  inline void setBackgroundColor(OLED_Colour color) { setBackgroundColour(color); }
 
 private:
   OLED &oled;
@@ -383,8 +385,8 @@ private:
   uint8_t max_rows;
   uint16_t buf_sz;
   char *buffer;
-  Colour foreground;
-  Colour background;
+  OLED_Colour foreground;
+  OLED_Colour background;
   bool pending_newline;
 
   void scroll(uint8_t fontHeight);

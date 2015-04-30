@@ -185,10 +185,10 @@ template<typename SourceType> BMP_Status OLED::_displayBMP(SourceType &source, c
 
   // Read colour palette to RAM. It's quite hefty to hold in RAM (512 bytes for a full 8-bit palette)
   // but don't have much choice as seeking back and forth on SD is painfully slow
-  Colour *palette;
+  OLED_Colour *palette;
   if(bpp < 16) {
     uint16_t palette_size = 1<<bpp;
-    palette = (Colour *)malloc(sizeof(Colour)*palette_size);
+    palette = (OLED_Colour *)malloc(sizeof(OLED_Colour)*palette_size);
     f.seek(OFFS_DIB_HEADER + dib_headersize);
     for(uint16_t i = 0; i < palette_size; i++) {
       uint8_t pal[4];
@@ -202,7 +202,7 @@ template<typename SourceType> BMP_Status OLED::_displayBMP(SourceType &source, c
   for(byte row = 0; row < height; row++) {
     f.seek(data_offs + (row+from_y)*row_bytes + from_x*bpp/8);
     if(bpp > 15) {
-      Colour buf[out_width];
+      OLED_Colour buf[out_width];
       if(bpp == 24) {
         for(uint16_t col = 0; col < out_width; col++) {
           buf[col].blue = f.read() >> 3;

@@ -103,7 +103,7 @@ void OLED::begin() {
 }
 
 // setPixel has two methods, public method asserts/deasserts CS protected method doesn't
-void OLED::setPixel(const byte x, const byte y, const Colour colour)
+void OLED::setPixel(const byte x, const byte y, const OLED_Colour colour)
 {
   assertCS();
   _setPixel(x,y,colour);
@@ -129,7 +129,7 @@ void OLED::setDisplayOn(bool on)
   }
 }
 
-void OLED::fillScreen(const Colour colour)
+void OLED::fillScreen(const OLED_Colour colour)
 {
   assertCS();
   startWrite(0,0,COLUMN_MASK,ROW_MASK,false);
@@ -139,7 +139,7 @@ void OLED::fillScreen(const Colour colour)
   releaseCS();
 }
 
-void OLED::drawLine( int x1, int y1, int x2, int y2, Colour colour )
+void OLED::drawLine( int x1, int y1, int x2, int y2, OLED_Colour colour )
 {
   // Note: hard clamping here means that diagonal lines that exceed the
   // limits of the display will be drawn with different angles to if they
@@ -213,7 +213,7 @@ void OLED::drawLine( int x1, int y1, int x2, int y2, Colour colour )
   releaseCS();
 }
 
-void OLED::drawBox( int x1, int y1, int x2, int y2, int edgeWidth, Colour colour)
+void OLED::drawBox( int x1, int y1, int x2, int y2, int edgeWidth, OLED_Colour colour)
 {
   clampXY(x1, y1);
   clampXY(x2, y2);
@@ -251,7 +251,7 @@ void OLED::drawBox( int x1, int y1, int x2, int y2, int edgeWidth, Colour colour
   releaseCS();
 }
 
-void OLED::drawFilledBox( int x1, int y1, int x2, int y2, Colour fillColour, int edgeWidth, Colour edgeColour)
+void OLED::drawFilledBox( int x1, int y1, int x2, int y2, OLED_Colour fillColour, int edgeWidth, OLED_Colour edgeColour)
 {
   clampXY(x1, y1);
   clampXY(x2, y2);
@@ -276,7 +276,7 @@ void OLED::drawFilledBox( int x1, int y1, int x2, int y2, Colour fillColour, int
   releaseCS();
 }
 
-void OLED::drawCircle( int xCenter, int yCenter, int radius, Colour colour)
+void OLED::drawCircle( int xCenter, int yCenter, int radius, OLED_Colour colour)
 {
   // Bresenham's circle drawing algorithm
   int x = -radius;
@@ -295,7 +295,7 @@ void OLED::drawCircle( int xCenter, int yCenter, int radius, Colour colour)
   releaseCS();
 }
 
-void OLED::drawFilledCircle( int xCenter, int yCenter, int radius, Colour fillColour)
+void OLED::drawFilledCircle( int xCenter, int yCenter, int radius, OLED_Colour fillColour)
 {
   // Bresenham's circle drawing algorithm, filling with vertical line segments to/from origin
   int x = -radius;
