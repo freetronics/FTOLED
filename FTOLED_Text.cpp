@@ -136,6 +136,7 @@ template <class StrType> __attribute__((always_inline)) inline void _drawString(
   char c;
   for(int idx = 0; c = str[idx], c != 0; idx++) {
     if(c == '\n') { // Newline
+      oled->drawLine(x, y-1, x + strWidth - 1, y-1, background);
       strWidth = 0;
       y = y - header.height - 1;
     }
