@@ -28,6 +28,7 @@ size_t OLED_TextBox::write(uint8_t character) {
   uint8_t char_width = oled.charWidth(character);
   while((cur_x > 0 && cur_x + char_width > this->width) || pending_newline) { // Need to wrap to new line
     if(cur_y >= rowHeight*2) { // No need to scroll
+      oled.drawLine(left, cur_y+bottom-rowHeight-1, left+width, cur_y+bottom-rowHeight-1, background);
       cur_y -= rowHeight;
       cur_x = 0;
     } else { // Need to scroll
@@ -47,7 +48,7 @@ size_t OLED_TextBox::write(uint8_t character) {
     oled.drawChar(cur_x+left,cur_y+bottom-rowHeight,character,this->foreground,this->background);
     cur_x += char_width;
     if(cur_x < this->width)
-      oled.drawLine(cur_x+left , cur_y+bottom-rowHeight, cur_x+left , cur_y+bottom, background);
+      oled.drawLine(cur_x+left , cur_y+bottom-rowHeight, cur_x+left , cur_y+bottom-1, background);
     cur_x++;
   }
 
@@ -100,18 +101,20 @@ void OLED_TextBox::scroll(uint8_t rowHeight) {
     if(cur_x + char_width > this->width || *replay == '\n') { // EOL
       if(linewidth > cur_x) {
         // Clear any remnant of the line that was here, that we haven't drawn text over
-        oled.drawFilledBox(cur_x+left,cur_y+bottom-1,linewidth+left,cur_y+bottom-rowHeight, this->background);
+        oled.drawFilledBox(cur_x+left,cur_y+bottom-1,linewidth+left,cur_y+bottom-rowHeight, background);
       }
       linewidth = cur_x;
       // Move down
+      oled.drawLine(left, cur_y+bottom-rowHeight-1, left+width, cur_y+bottom-rowHeight-1, background);
       cur_y -= rowHeight;
       cur_x = 0;
     }
 
     oled.drawChar(cur_x+left,cur_y+bottom-rowHeight,*replay,this->foreground,this->background);
     cur_x += char_width;
-    if(cur_x < this->width)
-      oled.drawLine(cur_x+left , cur_y+bottom-rowHeight, cur_x+left , cur_y+bottom, background);
+    if(cur_x < this->width) {
+      oled.drawLine(cur_x+left , cur_y+bottom-rowHeight, cur_x+left , cur_y+bottom-2, background);
+    }
     cur_x++;
     replay++;
   }
