@@ -8,6 +8,7 @@
  */
 #include <SPI.h>
 #include <SD.h>
+/* Important: Make sure to include SPI.h and SD.h above FTOLED.h if you want to load BMPs from SD */
 #include <FTOLED.h>
 #include <fonts/SystemFont5x7.h>
 

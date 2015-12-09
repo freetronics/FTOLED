@@ -45,7 +45,9 @@
 #define ROW_MASK (ROWS-1)
 #define COLUMN_MASK (COLUMNS-1)
 
+#ifndef __SD_H__
 class File; /* Provided by SD library except sometimes on Yun, see comment at top of FTOLED_BMP.cpp */
+#endif
 
 struct OLED_Colour
 {

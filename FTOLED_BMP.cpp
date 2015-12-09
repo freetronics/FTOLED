@@ -1,8 +1,8 @@
 /* FTOLED BMP parsing and bitmap display routines for BMP files */
 #include <stdint.h>
+#include <SD.h>
 #include <FTOLED.h>
 
-#include <SD.h>
 #ifdef ARDUINO_AVR_YUN
 /*
    On Arduino Yun, the Bridge library provides a conflicting

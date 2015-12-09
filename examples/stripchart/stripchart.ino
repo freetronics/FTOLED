@@ -8,7 +8,6 @@ const byte pin_dc = 2;
 const byte pin_reset = 3;
 
 #include <SPI.h>
-#include <SD.h>
 #include "FTOLED.h"
 #include "fonts/SystemFont5x7.h"
 

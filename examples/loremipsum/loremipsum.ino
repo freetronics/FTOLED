@@ -1,5 +1,4 @@
 #include <SPI.h>
-#include <SD.h>
 #include <FTOLED.h>
 #include <fonts/SystemFont5x7.h>
 
